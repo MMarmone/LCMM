@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo nothing to test for the moment"
+    "test": "jshint index.js"
   },
   "author": "",
   "license": "ISC"
