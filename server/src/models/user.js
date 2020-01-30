@@ -71,6 +71,16 @@ userSchema.statics.findByCredentials = async (email, password) => {
     }
     return user
 };
+
+userSchema.statics.findByEmail = async (email) => {
+    // Search for a user by email.
+    const user = await User.findOne({ email} )
+    if (!user) {
+        throw new Error({ error: 'Invalid email' })
+    }
+    return user
+};
+
 //Define the model for User
 const User = mongoose.model('User', userSchema);
 

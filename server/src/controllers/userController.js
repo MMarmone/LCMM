@@ -19,14 +19,43 @@ var UserController = {
     },
 
     //Create a User
-    register: async(req, res)=>{
+    register : async(req, res)=>{
         try {
-            const user = new User(req.body);
+            const email = req.body.email
+            const user = await User.findByEmail(email)
+            if (user) {
+                return res.status(403).send({error: 'Email already use'})
+            }
+            user = new User(req.body);
             user.save();
             const token = await user.generateAuthToken();
             res.status(201).send({ user, token });
         } catch (error) {
             res.status(400).send(error);
+        }
+    },
+
+    logout : async(req,res)=>{
+        // Log user out of the application
+        try {
+            req.user.tokens = req.user.tokens.filter((token) => {
+                return token.token != req.token
+            })
+            await req.user.save()
+            res.send()
+        } catch (error) {
+            res.status(500).send(error)
+        }
+    },
+
+    logoutall : async(req, res) => {
+        // Log user out of all devices
+        try {
+            req.user.tokens.splice(0, req.user.tokens.length)
+            await req.user.save()
+            res.send()
+        } catch (error) {
+            res.status(500).send(error)
         }
     }
 
