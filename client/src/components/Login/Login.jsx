@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import { FormControl, FormGroup, InputLabel, Input, Grid, Button } from '@material-ui/core';
 
 function Login(props) {
-    const SUBMIT_URL = "http://localhost:3001/users/login";
+    const SUBMIT_URL = "http://localhost:3001/api/users/login";
 
     let formRef = React.createRef();
     const [username, setUsername] = useState('');
@@ -13,12 +13,13 @@ function Login(props) {
 
         fetch(SUBMIT_URL, {
             method: 'post',
+            mode: 'no-cors',
             headers: {
                 "Content-type": "application/json"
             },
             body: JSON.stringify({
-                email: username,
-                password: password
+                "email": username,
+                "password": password
             })
         })
             .then((response) => response.json())
