@@ -1,4 +1,6 @@
 var User = require('../models/user');
+var Plugin = require('../models/plugin');
+const upload = require("../middleware/upload");
 var crypto = require('crypto');
 
 //Controller for User
@@ -54,6 +56,18 @@ var UserController = {
             req.user.tokens.splice(0, req.user.tokens.length)
             await req.user.save()
             res.send()
+        } catch (error) {
+            res.status(500).send(error)
+        }
+    },
+
+    submissionForm : async(req, res) => {
+        // save a the plugin form in db
+        try {
+
+            plugin = new Plugin(req.body);
+            plugin.save();
+            res.send();
         } catch (error) {
             res.status(500).send(error)
         }

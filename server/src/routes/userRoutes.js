@@ -16,6 +16,10 @@ var UserRoutes = function(app)
     router.get('/users/me', auth, async(req, res) => {
         res.send(req.user)
     });
+    
+    router.post('/users/me/submissionForm',
+                auth,
+                UserController.submissionForm)
 
     router.post('/users/me/logout',
                 auth,
