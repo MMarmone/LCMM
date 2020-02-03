@@ -1,34 +1,19 @@
 import React, {useState} from "react";
-import { FormControl, FormGroup, InputLabel, Input, Grid, Button } from '@material-ui/core';
+import { Button, Form } from 'semantic-ui-react';
+import * as APIHandler from '../../api/apiHandler'
 
-function Login(props) {
-    const SUBMIT_URL = "http://localhost:3001/api/users/login";
-
-    let formRef = React.createRef();
+export default function Login(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
     let onSubmitHandler = function(e) {
         e.preventDefault();
+        APIHandler.tryLogin({
+            email: username,
+            password: password
+        });
 
-        fetch(SUBMIT_URL, {
-            method: 'post',
-            mode: 'no-cors',
-            headers: {
-                "Content-type": "application/json"
-            },
-            body: JSON.stringify({
-                "email": username,
-                "password": password
-            })
-        })
-            .then((response) => response.json())
-            .then(function (data) {
-                console.log('Login request succeeded with JSON response', data);
-            })
-            .catch(function (error) {
-                console.error('Login request failed', error);
-            });
+        // todo widget "login successful, you'll be redirected'
     };
 
     function handleEmailChange(event) {
@@ -40,31 +25,12 @@ function Login(props) {
     }
 
     return (
-        <Grid container>
-            <form ref={formRef} onSubmit={onSubmitHandler}>
-                <FormGroup>
-                    <FormControl>
-                        <InputLabel htmlFor="username">Email</InputLabel>
-                        <Input id="username" type="email" value={username} onChange={handleEmailChange} />
-                    </FormControl>
+        <Form onSubmit={onSubmitHandler}>
+            <Form.Input label='Email' type='email' onChange={handleEmailChange} />
 
-                    <FormControl>
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                        <Input id="password" type="password" value={password} onChange={handlePasswordChange} />
-                    </FormControl>
-                </FormGroup>
+            <Form.Input label='Password' type='password' onChange={handlePasswordChange} />
 
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                >
-                    Login In
-                </Button>
-            </form>
-        </Grid>
+            <Button type='submit' onClick={onSubmitHandler}>Submit</Button>
+        </Form>
     )
 }
-
-export default Login;
