@@ -1,5 +1,6 @@
 var User = require('../models/user');
 var Plugin = require('../models/plugin');
+const jwt = require('jsonwebtoken');
 
 
 //Controller for User
@@ -63,14 +64,21 @@ var UserController = {
     submissionForm : async(req, res) => {
         // save a the plugin form in db
         try {
-            const plugin = new Plugin({
+            const token = req.header('authorization').split(' ')[1];
+            const data = jwt.verify(token, process.env.JWT_KEY)
+            const user = await User.findOne({ _id: data._id, 'tokens.token': token })
+            /*if (plugin) {
+                return res.status(403).send({error: 'Name and version already use'})
+            }*/
+            plugin = new Plugin({
                 name : req.body.name,
                 version : req.body.version,
                 description : req.body.description,
                 isOpenSource : req.body.isOpenSource,
                 tags : req.body.tags,
                 urls : req.body.urls,
-                pluginImage : req.file.path
+                pluginImage : req.file.path,
+                user : user.name
             });
             plugin.save();
             res.send();

@@ -30,8 +30,12 @@ var pluginSchema = new Schema({
     pluginImage:{
         type : String, 
         require : true
-
+    },
+    user : {
+        type : String,
+        require : true
     }
+
 });
 
 pluginSchema.pre('save', async function (next) {
