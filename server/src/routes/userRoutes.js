@@ -1,6 +1,9 @@
 var express = require('express');
 var UserController = require('../controllers/userController');
-var auth = require('../middleware/auth')
+var auth = require('../middleware/auth');
+
+const multer = require('multer');
+const upload = multer({dest : 'uploads/'});
 
 //Routes for User
 var UserRoutes = function(app)
@@ -19,7 +22,8 @@ var UserRoutes = function(app)
     
     router.post('/users/me/submissionForm',
                 auth,
-                UserController.submissionForm)
+                upload.single('pluginImage'),
+                UserController.submissionForm);
 
     router.post('/users/me/logout',
                 auth,

@@ -25,13 +25,16 @@ var pluginSchema = new Schema({
         type : String
     }],
     urls: [{
-        type : String,
+        type : String
+    }],
+    pluginImage:{
+        type : String, 
         require : true
-    }]
+
+    }
 });
 
 pluginSchema.pre('save', async function (next) {
-    
     const plugin = this;
     next();
 });
@@ -46,7 +49,7 @@ pluginSchema.statics.findByName = async (name) => {
 };
 
 //Define the model for plugin
-const Plugin = mongoose.model('plugin', pluginSchema);
+const Plugin = mongoose.model('Plugin', pluginSchema);
 
 //Export the plugin Model
 module.exports = Plugin;
