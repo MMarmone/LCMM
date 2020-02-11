@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import { Button, Form } from 'semantic-ui-react'
+import {Button, Form, Segment, Select} from 'semantic-ui-react'
 import * as APIHandler from '../../api/apiHandler'
 
 export default function Register(props) {
     const [name, setName] = useState('');
-    const [email, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [gender, setGender] = useState('Apache');
+    const [gender, setGender] = useState('male');
 
     let onSubmitHandler = function(e) {
         e.preventDefault();
@@ -19,31 +19,91 @@ export default function Register(props) {
         })
     };
 
-    function handleNameChange(event) {
-        setName(event.target.value);
-    }
+    const handleChange = (e, data) => {
+        let {name, value} = e;
+        // cas du select
+        if (!e.name) {
+            name = data.name;
+            value = data.value;
+        }
 
-    function handleEmailChange(event) {
-        setUsername(event.target.value);
-    }
-
-    function handlePasswordChange(event) {
-        setPassword(event.target.value);
-    }
+        switch (name) {
+            case 'name':
+                setName(value);
+                break;
+            case 'email':
+                setEmail(value);
+                break;
+            case 'password':
+                setPassword(value);
+                break;
+            case 'gender':
+                setGender(value);
+                break;
+            default:
+                break;
+        }
+    };
 
     return (
-        <Form onSubmit={onSubmitHandler}>
-            <Form.Input label='Name' type='text' onChange={handleNameChange} />
+        <Form size='large' onSubmit={onSubmitHandler}>
+            <Segment stacked>
+                <Form.Input
+                    fluid
+                    icon='user'
+                    iconPosition='left'
+                    placeholder='Full name'
+                    name='name'
+                    type='text'
+                    onChange={handleChange} />
 
-            <Form.Input label='Email' type='email' onChange={handleEmailChange} />
 
-            <Form.Input label='Password' type='password' onChange={handlePasswordChange} />
+                <Form.Input
+                    fluid
+                    icon='mail'
+                    iconPosition='left'
+                    placeholder='Email'
+                    name='email'
+                    type='email'
+                    onChange={handleChange} />
 
-            <Form.Field label='Gender' control='select'>
-                <option value='male'>Male</option>
-                <option value='female'>Female</option>
-            </Form.Field>
-            <Button type='submit' onClick={onSubmitHandler}>Submit</Button>
+
+                <Form.Input
+                    fluid
+                    icon='key'
+                    iconPosition='left'
+                    placeholder='Password'
+                    name='password'
+                    type='password'
+                    onChange={handleChange} />
+
+                <Select
+                    className='field'
+                    name='gender'
+                    fluid
+                    placeholder='Gender'
+                    options={[
+                        {
+                            key: 'male',
+                            value: 'male',
+                            text: 'Male'
+                        },
+                        {
+                            key: 'female',
+                            value: 'female',
+                            text: 'Female'
+                        },
+                    ]}
+                    onChange={handleChange} />
+
+                <Button
+                    color='orange'
+                    type='submit'
+                    fluid
+                    size='large'
+                    onClick={onSubmitHandler}
+                >Submit</Button>
+            </Segment>
         </Form>
     )
 }
