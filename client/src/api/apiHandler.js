@@ -11,14 +11,14 @@ import * as API from './api';
 const handleFetch = (resolve, reject) => {
     return {
         UwU_Then: (response) => {
-            if (!response.ok) {
+            if (response.ok) {
                 if (/(application|text)\/json/.test(response.headers.get('content-type')))
                     resolve(response.json());
 
                 resolve(response);
             }
             else
-                throw new Error("Request did not return OK (got: " + response.status + " - " + response.statusText);
+                throw new Error("Request did not return OK (got: " + response.status + " - " + response.statusText + ")");
         },
         UwU_Catch: (errorResponse) => {
             return reject(errorResponse);

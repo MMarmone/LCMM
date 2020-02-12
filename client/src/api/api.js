@@ -13,9 +13,10 @@ import config from "../config";
  * @returns {Promise<Response>} Promise resolvant le succès ou non de la requête (cf. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
  */
 export function login({email, password}) {
+
     return fetch(config.URL_LOGIN,{
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
             'Content-Type': 'application/json'
         },
@@ -43,9 +44,10 @@ export function login({email, password}) {
  * @returns {Promise<Response>} Promise resolvant le succès ou non de la requête (cf. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
  */
 export function register({name, email, password, gender}) {
+
     return fetch(config.URL_REGISTER, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'cors',
         headers: {
             'Content-Type': 'application/json'
         },
