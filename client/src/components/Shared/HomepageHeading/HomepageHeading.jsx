@@ -1,36 +1,55 @@
 import {Button, Container, Header, Icon} from "semantic-ui-react";
 import PropTypes from "prop-types";
-import React from "react";
+import React, {useContext, useState} from "react";
+import App, {AppDispatch} from "../../../App";
 
-const HomepageHeading = ({ mobile, inverted }) => (
-    <Container inverted={inverted} text textAlign='center'>
-        <Header
-            as='h1'
-            content='Imagine-a-Company'
-            inverted
-            style={{
-                fontSize: mobile ? '2em' : '4em',
-                fontWeight: 'normal',
-                marginBottom: 0,
-                marginTop: mobile ? '1.5em' : '3em',
-            }}
-        />
-        <Header
-            as='h2'
-            content='Do whatever you want when you want to.'
-            inverted
-            style={{
-                fontSize: mobile ? '1.5em' : '1.7em',
-                fontWeight: 'normal',
-                marginTop: mobile ? '0.5em' : '1.5em',
-            }}
-        />
-        <Button primary color='orange' size='huge'>
-            Get Started
-            <Icon name='right arrow' />
-        </Button>
+const HomepageHeading = (props) => {
+  // If we want to perform an action, we can get dispatch from context.
+  const { state, dispatch } = useContext(AppDispatch);
+
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(props.isUserLoggedIn);
+
+  return (
+    <Container inverted={props.inverted} text textAlign='center'>
+      <Header
+        as='h1'
+        content='Imagine-a-Company'
+        inverted
+        style={{
+          fontSize: props.mobile ? '2em' : '4em',
+          fontWeight: 'normal',
+          marginBottom: 0,
+          marginTop: props.mobile ? '1.5em' : '3em',
+        }}
+      />
+      <Header
+        as='h2'
+        content='Do whatever you want when you want to.'
+        inverted
+        style={{
+          fontSize: props.mobile ? '1.5em' : '1.7em',
+          fontWeight: 'normal',
+          marginTop: props.mobile ? '0.5em' : '1.5em',
+        }}
+      />
+      <Button
+        color={isUserLoggedIn ? 'orange' : 'teal'}
+        size='huge'
+        onClick={() => {
+          console.log("state", state);
+          console.log("dispatch", dispatch);
+          console.log("props", props);
+
+          dispatch({type: 'login', token: "AZE"})
+          /*setIsUserLoggedIn(!isUserLoggedIn) */
+        }}>
+        isUserLoggedIn = {isUserLoggedIn ? "true":"false"}
+        <Icon name='right arrow' />
+        state= "{JSON.stringify(state)}"
+      </Button>
     </Container>
-);
+  );
+};
 
 HomepageHeading.propTypes = {
     mobile: PropTypes.bool
