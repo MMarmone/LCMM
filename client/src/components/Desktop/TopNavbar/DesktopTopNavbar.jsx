@@ -1,5 +1,6 @@
 import {Button, Container, Icon, Input, Menu} from "semantic-ui-react";
 import React from "react";
+import {Link} from "react-router-dom";
 
 const DesktopTopNavbar = function (props) {
 
@@ -11,10 +12,11 @@ const DesktopTopNavbar = function (props) {
                 borderRadius: 0
             }}>
             <Container>
+                {/* todo useHistory ou useLocation pour définir "active" dynamiquement et tej la propriété*/}
                 <Menu.Item
-                    as='a'
+                    as={Link}
                     active={props.home}
-                    href='/'>
+                    to='/'>
                     <Icon name='home' className="floated left"/>
                     Home
                 </Menu.Item>
@@ -25,13 +27,13 @@ const DesktopTopNavbar = function (props) {
 
                 <Menu.Item position='right'>
                     <Button
-                        as='a'
+                        as={Link}
                         color='orange'
-                        href="/login">
+                        to="/login">
                         Log in
                     </Button>
                     <Button
-                        as='a'
+                        as={Link}
                         color='orange'
                         style={{ marginLeft: '0.5em' }}
                         href="/register">

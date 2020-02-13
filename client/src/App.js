@@ -1,65 +1,30 @@
-import React, {useReducer, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import './App.css';
-import {Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import HomeLayout from "./pages/HomeLayout";
 import LoginLayout from "./pages/LoginLayout";
 import RegisterLayout from "./pages/RegisterLayout";
 import PageNotFoundLayout from "./pages/PageNotFountLayout";
-
-const initialState = {
-  isLoggedIn: null,
-  userToken: null
-};
-
-function reducer(state = initialState, action) {
-  switch (action.type) {
-    case 'login':
-      return {
-        isLoggedIn: true,
-        userToken: action.userToken,
-        ...initialState
-      };
-
-    case 'logout':
-      return {
-        isLoggedIn: false,
-        userToken:null,
-        ...initialState
-      };
-
-    default:
-      throw new Error("Unknown dispatch action called (" + action.type + ")");
-  }
-}
-
-/*
-function AppContextProvider(props) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  return
-} // */
-
-export const AppDispatch = React.createContext(null);
+import {store} from "./components/StateProvider/StateProvider";
+import LogoutLayout from "./pages/LogoutLayout";
 
 function App() {
   // todo darkmode configurable
   //  via https://reactjs.org/docs/hooks-reference.html#usecontext
   //  peut également servir pour l'état isLoggedIn nan ? Ou alors on stock le token en cookie/localstorage
 
-  const [inverted, setInverted] = useState(true);
-  // const [isUserLoggedIn, setIsUserLoggedIn] = useState(false); // initialiser avec la valeur du cookie / locastorage
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const {state, dispatch} = useContext(store);
+  const inverted = state.darkMode;
 
-
+  console.log("App.state", state);
 
   return (
-    <AppDispatch.Provider value={dispatch}>
-      <p>isLoggedIn = {state.isLoggedIn ? "true":"false"}</p>
-      <p>initialState = {JSON.stringify(initialState)}</p>
+    <BrowserRouter>
+      <p>state.isLoggedIn={state.isLoggedIn ? "true" : "false"}</p>
       <br />
       <Switch>
         <Route exact path="/">
-          <HomeLayout isLoggedIn={state.isLoggedIn} inverted={inverted} />
+          <HomeLayout inverted={inverted} />
         </Route>
 
         <Route path="/login">
@@ -70,11 +35,23 @@ function App() {
           <RegisterLayout inverted={inverted} />
         </Route>
 
+        <Route path="/logout">
+          <LogoutLayout inverted={inverted} />
+        </Route>
+
+        <Route path="/me">
+          {(state.isLoggedIn ?
+            <PageNotFoundLayout inverted={inverted} />
+            : <LoginLayout inverted={inverted} />)
+          }
+        </Route>
+
+        {/* Toujours mettre à la fin, c'est un SWITCH donc s'il est positionné avant, il va match avant */}
         <Route path="*">
           <PageNotFoundLayout inverted={inverted} />
         </Route>
       </Switch>
-    </AppDispatch.Provider>
+    </BrowserRouter>
   );
 }
 
