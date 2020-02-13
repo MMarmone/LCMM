@@ -33,6 +33,18 @@ var userSchema = new Schema({
         type: String, // Male/Female
     //    required: true
     },
+    pluginsUpload:[{
+        pluginId: {
+            type: String,
+            required: true
+        }
+    }],
+    pluginLiked: [{
+        pluginId: {
+            type: String,
+            required: true
+        }
+    }],
     tokens: [{
         token: {
             type: String,
@@ -72,6 +84,15 @@ userSchema.statics.findByCredentials = async (email, password) => {
     return user
 };
 
+userSchema.statics.findById = async (id) => {
+    // Search for a user by email.
+    const user = await User.findOne({ id} )
+    if (!user) {
+        throw new Error({ error: 'Invalid id' })
+    }
+    return user
+};
+
 userSchema.statics.findByEmail = async (email) => {
     // Search for a user by email.
     const user = await User.findOne({ email} )
@@ -80,7 +101,14 @@ userSchema.statics.findByEmail = async (email) => {
     }
     return user
 };
-
+userSchema.statics.verifyEmailNotUsed = async (email) => {
+    // Search for a user by email.
+    const user = await User.findOne({ email} )
+    if (user) {
+        throw new Error({ error: 'email already in use' })
+    }
+    return user
+};
 //Define the model for User
 const User = mongoose.model('User', userSchema);
 
