@@ -27,11 +27,13 @@ Routes where the user must be login :
     /users/me                 #Get user info 
     /users/me/logout          #Post logout the current user 
     /users/me/logoutall       #Post logout all sessions
-    /users/me/submissionForm  #Post submit a plugin  
+    /users/me/submissionForm  #Post submit a plugin
+    /users/me/commentPlugin   #Post add a comment to a plugin
+    /users/me/likePlugin      #Post add a like to a plugin
 
 Plugins routes : 
     
     /pluginInfo?name=XXX    #Get the info for the plugin with name XXX
-
+    /plugins                #Get all plugin from database
 
 ## Client Side
