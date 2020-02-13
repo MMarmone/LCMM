@@ -1,13 +1,11 @@
 import {Button, Container, Header, Icon} from "semantic-ui-react";
 import PropTypes from "prop-types";
-import React, {useContext, useState} from "react";
-import App, {AppDispatch} from "../../../App";
+import React, {useContext} from "react";
+import {store} from "../../StateProvider/StateProvider";
 
 const HomepageHeading = (props) => {
   // If we want to perform an action, we can get dispatch from context.
-  const { state, dispatch } = useContext(AppDispatch);
-
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(props.isUserLoggedIn);
+  const { state, dispatch } = useContext(store);
 
   return (
     <Container inverted={props.inverted} text textAlign='center'>
@@ -33,7 +31,7 @@ const HomepageHeading = (props) => {
         }}
       />
       <Button
-        color={isUserLoggedIn ? 'orange' : 'teal'}
+        color={state.isLoggedIn ? 'orange' : 'teal'}
         size='huge'
         onClick={() => {
           console.log("state", state);
@@ -43,7 +41,7 @@ const HomepageHeading = (props) => {
           dispatch({type: 'login', token: "AZE"})
           /*setIsUserLoggedIn(!isUserLoggedIn) */
         }}>
-        isUserLoggedIn = {isUserLoggedIn ? "true":"false"}
+        isUserLoggedIn = {state.isLoggedIn ? "true":"false"}
         <Icon name='right arrow' />
         state= "{JSON.stringify(state)}"
       </Button>
