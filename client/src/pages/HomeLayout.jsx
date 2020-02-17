@@ -15,24 +15,14 @@ import {getWidth} from "../utils/utils";
 import {store} from "../components/StateProvider/StateProvider";
 
 const HomeLayout = (props) => {
-  // Obliger de transférer
+  // Accès à l'état global (contexte)
   const { state, dispatch } = useContext(store);
-
-  console.log("state", state);
 
   return (
     <ResponsiveContainer
       home
       inverted={props.inverted}
     >
-      <p>state.isLoggedIn= {"'"+state.isLoggedIn+"'"}</p>
-      <Button onClick={() =>
-        dispatch({
-          type: "login",
-          userToken: "MOUAAJJAJA"
-        })}>
-        OLA
-      </Button>
       <HomepageHeading
         inverted={props.inverted}
         mobile={getWidth > Responsive.onlyMobile.maxWidth}
@@ -164,6 +154,6 @@ const HomeLayout = (props) => {
       </Segment>
     </ResponsiveContainer>
   );
-}
+};
 
 export default HomeLayout;
