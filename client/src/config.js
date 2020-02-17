@@ -6,6 +6,7 @@ const HOST = HOSTNAME + ":" + PORT;
 const BACKEND_CONFIG = {
     URL_REGISTER: `${HOST}/api/users/register`,
     URL_LOGIN: `${HOST}/api/users/login`,
+    URL_SUBMIT_PLUGIN: `${HOST}/api/users/me/submissionForm`,
 };
 
 const FRONTEND_CONFIG = {
@@ -15,6 +16,7 @@ const FRONTEND_CONFIG = {
     URL_REGISTER: '/register',
     URL_LOGOUT: '/logout',
     URL_USER_PROFILE: '/profile',
+    URL_ADD_PLUGIN: '/addPlugin',
     URL_404: '*'
 };
 

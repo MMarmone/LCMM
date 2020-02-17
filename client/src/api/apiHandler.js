@@ -41,7 +41,6 @@ export const tryLogin = ({email, password}) => {
     });
 };
 
-
 export const tryRegister = ({name, email, password, gender}) => {
     return new Promise((resolve, reject) => {
         API.register({name, email, password, gender})
@@ -49,3 +48,11 @@ export const tryRegister = ({name, email, password, gender}) => {
             .catch(handleFetch(resolve, reject).UwU_Catch);
     });
 };
+
+export const trySubmitPlugin = ({name, version, description, isOpenSource, category, tags, urls, pluginImage, user}) => {
+    return new Promise((resolve, reject) => {
+        API.submitPlugin({name, version, description, isOpenSource, category, tags, urls, pluginImage, user})
+            .then(handleFetch(resolve, reject).UwU_Then)
+            .catch(handleFetch(resolve, reject).UwU_Catch);
+    });
+}
