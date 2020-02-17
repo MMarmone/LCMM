@@ -60,3 +60,19 @@ export function register({name, email, password, gender}) {
     })
 }
 
+
+export function submitPlugin({name, version, description, isOpenSource, category, tags, urls, pluginImage, user}) {
+    const fd = new FormData();
+    fd.append('avatar', pluginImage);
+    return fetch(config.URL_SUBMIT_PLUGIN, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ1NmM3MjVmYzgzMzUxOTBjODg0OWIiLCJpYXQiOjE1ODE2MDgwNTB9.dM74cceBMvVbUi_Z2vRuX2zw9WCSWAmnCzHa990AUWA'
+        },
+        body: /*JSON.stringify({
+            name, version, description, isOpenSource, category, tags, urls, user
+        }),*/fd
+    })
+}
