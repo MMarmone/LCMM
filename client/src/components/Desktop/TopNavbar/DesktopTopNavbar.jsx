@@ -1,8 +1,11 @@
 import {Button, Container, Icon, Input, Menu} from "semantic-ui-react";
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useRouteMatch} from "react-router-dom";
 
 const DesktopTopNavbar = function (props) {
+    let match = useRouteMatch("/");
+
+    console.log("match", match);
 
     return (
         <Menu
@@ -15,7 +18,7 @@ const DesktopTopNavbar = function (props) {
                 {/* todo useHistory ou useLocation pour définir "active" dynamiquement et tej la propriété*/}
                 <Menu.Item
                     as={Link}
-                    active={props.home}
+                    active={match.isExact}
                     to='/'>
                     <Icon name='home' className="floated left"/>
                     Home
@@ -36,7 +39,7 @@ const DesktopTopNavbar = function (props) {
                         as={Link}
                         color='orange'
                         style={{ marginLeft: '0.5em' }}
-                        href="/register">
+                        to="/register">
                         Register
                     </Button>
                 </Menu.Item>

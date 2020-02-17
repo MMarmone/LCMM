@@ -1,11 +1,13 @@
-import {Button, Container, Icon, Input, Menu, Responsive, Segment, Sidebar} from "semantic-ui-react";
+import {Button, Container, Icon, Input, Menu, Sidebar} from "semantic-ui-react";
 import React, {useContext, useState} from "react";
 import {store} from "../../StateProvider/StateProvider";
-import {Link} from "react-router-dom";
+import {Link, useRouteMatch} from "react-router-dom";
+import {FRONTEND_CONFIG as config} from "../../../config";
 
 const MobileTopNavbar = function (props) {
     const [sidebarOpened, setSidebarOpened] = useState(props.sidebarOpened);
     const {state, dispatch} = useContext(store);
+  let matchHomeUrl = useRouteMatch(config.URL_HOME).isExact;
 
     return (
 
@@ -20,21 +22,23 @@ const MobileTopNavbar = function (props) {
           >
               <Menu.Item
                 as={Link}
-                active={props.home}
-                to='/'>
+                active={matchHomeUrl}
+                to={config.URL_HOME}>
                   <Icon name='home' className="floated left"/>
                   Home
               </Menu.Item>
               {
                   state.isLoggedIn &&
-                  <Menu.Item as={Link} to="/logout">
+                  <Menu.Item
+                    as={Link}
+                    to={config.URL_LOGOUT}>
                       <Icon name='log out' className="floated left"/>
                       Log out
                   </Menu.Item>
               }
               {
                   state.isLoggedIn &&
-                  <Menu.Item as={Link} to="/me">
+                  <Menu.Item as={Link} to={config.URL_USER_PROFILE}>
                       <Icon name='spy' className="floated left"/>
                       Profile
                   </Menu.Item>

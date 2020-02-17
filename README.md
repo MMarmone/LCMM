@@ -11,7 +11,7 @@
 
 #### Serveur side
     cd server
-    yarn start
+    npm start
 #### Client Side
 
 ## Serveur Side API
@@ -37,3 +37,25 @@ Plugins routes :
     /plugins                #Get all plugin from database
 
 ## Client Side
+    cd client
+    npm start
+    
+L'application est alors disponible à l'adresse http://localhost:3000/
+
+## Pages
+Routes accessibles sans être connecté
+
+    /                   # page d'accueil, affichant un message (todo: ou  les meilleures ventes)
+    /login              # formulaire de connexion
+    /register           # formulaire de création du compte
+    /logout             # déconnecte l'utilisateur, si nécessaire, puis redirige sur la page d'accueil ("/")
+    todo: /articles?q=<search query>  # liste des plugin (query résultats optionel)  
+    todo: /articles/{id-article} # page de détail d'un article (possibilité de like/comment/ajouter au panier/tester le plug-in)
+    todo: /articles/{id-article}/playground         # tester le plug-in
+    todo: /cart                                     # visualiser son panier
+    
+Routes accessibles seulement en étant connecté
+    
+    todo: /profile              # accède au profile de l'utilisateur connecté 
+    todo: /submit               # accès au formulaire de soumission de plug-in
+    todo: /cart/checkout        # payer les articles dans son panier

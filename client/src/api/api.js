@@ -1,4 +1,4 @@
-import config from "../config";
+import {BACKEND_CONFIG as config} from "../config";
 
 /**
  * Fetch l'API pour se connecter en tant qu'utilisateur
@@ -59,3 +59,4 @@ export function register({name, email, password, gender}) {
         })
     })
 }
+
