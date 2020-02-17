@@ -49,17 +49,17 @@ var UserController = {
   },
 
   logoutall : async(req, res) => {
-    // Log user out of all devices
-    try {
-      req.user.tokens.splice(0, req.user.tokens.length)
-      await req.user.save()
-      res.send()
-    } catch (error) {
-      res.status(500).send({error: error.message})
-    }
+      // Log user out of all devices
+      try {
+        req.user.tokens.splice(0, req.user.tokens.length)
+        await req.user.save()
+        res.send()
+      } catch (error) {
+        res.status(500).send({error: error.message})
+      }
   },
 
-    submissionForm : async(req, res) => {
+  submissionForm : async(req, res) => {
         // save a the plugin form in db
         try {
             const token = req.header('authorization').split(' ')[1];
@@ -83,9 +83,72 @@ var UserController = {
         } catch (error) {
             res.status(500).send(error)
         }
-    }
-  }
+    },
 
+    commentPlugin : async(req, res) => {
+      try {
+          const pluginId = req.body.pluginId;
+
+          const token = req.header('authorization').split(' ')[1];
+          const data = jwt.verify(token, process.env.JWT_KEY)
+          const user = await User.findOne({ _id: data._id, 'tokens.token': token })
+          const date = new Date()
+          const comment = {   
+              author : user.name,  
+              value : req.body.value ,
+              posted : date.toString()}
+          await Plugin.findByIdAndUpdate(
+              pluginId, 
+              {$addToSet : {"comments" : comment}},
+              {  safe: true, upsert: true},
+                function(err, model) {
+                  if(err){
+                     console.log(err);
+                     return res.send("bad plugin id");
+                  }
+                   return res.json(model);
+               });
+      }catch (error){
+          res.status(501).send(error)
+      }
+  },
+
+  likePlugin : async(req, res) => {
+      try {
+          const pluginId = req.body.pluginId;
+          const token = req.header('authorization').split(' ')[1];
+          const data = jwt.verify(token, process.env.JWT_KEY);
+
+          const user = await User.findByIdAndUpdate(
+              data._id, 
+              {$addToSet : {"pluginLiked" : {pluginId : pluginId}}},
+              {  safe: true, upsert: true},
+              function(err, model) {
+                  if(err){
+                     console.log(err);
+                     return res.send(err);
+                  }
+
+              }
+          );
+
+          await Plugin.findByIdAndUpdate(
+              pluginId, 
+              {$inc:{likes:1}},
+              { new: true},
+                  function(err, model) {
+                  if(err){
+                      console.log(err);
+                      return res.send(err);
+                  }
+
+                  }
+              );
+          res.send(user);
+      }catch (error){
+          res.status(500).send(error)
+      }
+  }
 }
 
 module.exports = UserController;
