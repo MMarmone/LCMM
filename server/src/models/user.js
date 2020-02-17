@@ -10,7 +10,7 @@ var userSchema = new Schema({
         type: String,
         required: true,
         trim: true
-    //    required: true
+        //    required: true
     },
     email: {
         type: String,
@@ -19,7 +19,7 @@ var userSchema = new Schema({
         lowercase: true,
         validate: value => {
             if (!validator.isEmail(value)) {
-                throw new Error({error: 'Invalid Email address'})
+                throw new Error('Invalid Email address')
             }
         }
     },
@@ -31,7 +31,7 @@ var userSchema = new Schema({
     },
     gender: {
         type: String, // Male/Female
-    //    required: true
+        //    required: true
     },
     pluginsUpload:[{
         pluginId: {
@@ -73,13 +73,14 @@ userSchema.methods.generateAuthToken = async function() {
 
 userSchema.statics.findByCredentials = async (email, password) => {
     // Search for a user by email and password.
-    const user = await User.findOne({ email} )
+    const user = await User.findOne({ email } )
+
     if (!user) {
-        throw new Error({ error: 'Invalid login credentials' })
+        throw new Error('Invalid login credentials')
     }
     const isPasswordMatch = await bcrypt.compare(password, user.password)
     if (!isPasswordMatch) {
-        throw new Error({ error: 'Invalid login credentials' })
+        throw new Error('Invalid login credentials')
     }
     return user
 };
@@ -97,7 +98,7 @@ userSchema.statics.findByEmail = async (email) => {
     // Search for a user by email.
     const user = await User.findOne({ email} )
     if (!user) {
-        throw new Error({ error: 'Invalid email' })
+        throw new Error('Invalid email')
     }
     return user
 };
