@@ -42,6 +42,13 @@ const DesktopTopNavbar = function (props) {
                         to="/register">
                         Register
                     </Button>
+                    <Button
+                        as={Link}
+                        color='orange'
+                        style={{ marginLeft: '0.5em' }}
+                        to="/addPlugin">
+                        add Plugin
+                    </Button>
                 </Menu.Item>
             </Container>
         </Menu>

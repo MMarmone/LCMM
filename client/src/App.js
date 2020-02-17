@@ -9,6 +9,7 @@ import {store} from "./components/StateProvider/StateProvider";
 import LogoutLayout from "./pages/LogoutLayout";
 import {FRONTEND_CONFIG as config} from './config';
 import {Dimmer, Loader} from "semantic-ui-react";
+import SubmitPluginLayout from "./pages/SubmitPluginLayout";
 
 function App() {
   // todo darkmode configurable
@@ -43,6 +44,10 @@ function App() {
 
         <Route path={config.URL_LOGOUT}>
           <LogoutLayout inverted={inverted} />
+        </Route>
+
+        <Route path={config.URL_ADD_PLUGIN}>
+          <SubmitPluginLayout inverted={inverted} />
         </Route>
 
         <Route path={config.URL_USER_PROFILE}>
