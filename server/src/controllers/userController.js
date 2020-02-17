@@ -22,7 +22,7 @@ var UserController = {
 
     //Create a User
     register : async(req, res)=>{
-        try { 
+        try {
             const email = req.body.email;
             await User.verifyEmailNotUsed(email);
             const user = new User(req.body);
@@ -73,6 +73,7 @@ var UserController = {
                 version : req.body.version,
                 description : req.body.description,
                 isOpenSource : req.body.isOpenSource,
+                category : req.body.category,
                 tags : req.body.tags,
                 urls : req.body.urls,
                 pluginImage : req.file.path,
@@ -93,12 +94,12 @@ var UserController = {
           const data = jwt.verify(token, process.env.JWT_KEY)
           const user = await User.findOne({ _id: data._id, 'tokens.token': token })
           const date = new Date()
-          const comment = {   
-              author : user.name,  
+          const comment = {
+              author : user.name,
               value : req.body.value ,
               posted : date.toString()}
           await Plugin.findByIdAndUpdate(
-              pluginId, 
+              pluginId,
               {$addToSet : {"comments" : comment}},
               {  safe: true, upsert: true},
                 function(err, model) {
@@ -120,7 +121,7 @@ var UserController = {
           const data = jwt.verify(token, process.env.JWT_KEY);
 
           const user = await User.findByIdAndUpdate(
-              data._id, 
+              data._id,
               {$addToSet : {"pluginLiked" : {pluginId : pluginId}}},
               {  safe: true, upsert: true},
               function(err, model) {
@@ -133,7 +134,7 @@ var UserController = {
           );
 
           await Plugin.findByIdAndUpdate(
-              pluginId, 
+              pluginId,
               {$inc:{likes:1}},
               { new: true},
                   function(err, model) {

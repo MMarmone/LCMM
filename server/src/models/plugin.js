@@ -18,7 +18,10 @@ var pluginSchema = new Schema({
         type : String,
     },
     isOpensource: {
-        type: Boolean,     
+        type: Boolean,
+    },
+    category:{
+        type : String,
     },
     tags: [{
         type : String
@@ -27,7 +30,7 @@ var pluginSchema = new Schema({
         type : String
     }],
     pluginImage:{
-        type : String, 
+        type : String,
         require : true
     },
     user : {
@@ -37,7 +40,7 @@ var pluginSchema = new Schema({
     comments : [{
         author : { type : String},
         value : { type : String},
-        posted: {  type :Date}  
+        posted: {  type :Date}
     }],
     likes : {
         type : Number
