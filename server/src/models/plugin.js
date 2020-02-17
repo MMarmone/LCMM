@@ -10,7 +10,6 @@ var pluginSchema = new Schema({
         type: String,
         required: true,
         trim: true
-    //    required: true
     },
     version : {
         type :String,
@@ -34,6 +33,14 @@ var pluginSchema = new Schema({
     user : {
         type : String,
         require : true
+    },
+    comments : [{
+        author : { type : String},
+        value : { type : String},
+        posted: {  type :Date}  
+    }],
+    likes : {
+        type : Number
     }
 
 });
@@ -50,6 +57,10 @@ pluginSchema.statics.findByName = async (name) => {
         throw new Error({ error: 'Invalid name' })
     }
     return plugin
+};
+
+pluginSchema.statics.findAll = async () => {
+    return Plugin.find({});
 };
 
 //Define the model for plugin

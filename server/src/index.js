@@ -27,6 +27,7 @@ app.use(function(req, res, next) {
 
 //Configure Routes
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended : false}));
 app.use(config.API_PATH, userRoutes());
 app.use(config.API_PATH, pluginRoutes());
 

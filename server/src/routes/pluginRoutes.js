@@ -11,6 +11,11 @@ var PluginRoutes = function(app)
         const plugin = await Plugin.findByName(req.query.name);
         res.send(plugin)
     });
+
+    router.get('/plugins',async(req, res) => {
+        const plugins = await Plugin.findAll();
+        res.send(plugins)
+    });
     /*
     router.get('/pluginInfo',async(req, res) => {
         const plugin = await Plugin.findByName(req.query.name);
