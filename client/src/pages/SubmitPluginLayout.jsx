@@ -1,10 +1,8 @@
 import React, {useContext, useState} from "react";
 import {Button, Form, Grid, Header, Image, Message, Segment, Select} from "semantic-ui-react";
-import RegisterForm from "../components/Register/RegisterForm";
-import {Link} from "react-router-dom";
 import ResponsiveContainer from "../components/Shared/ResponsiveContainer/ResponsiveContainer";
 import {store} from "../components/StateProvider/StateProvider";
-import {DISPATCH_ACTIONS as ACTIONS, DISPATCH_ACTIONS, REGEX_EXPRESSIONS} from "../config";
+import {CONFIG_DISPATCH_ACTIONS, REGEX_EXPRESSIONS} from "../config";
 import * as APIHandler from "../api/apiHandler";
 
 const SubmitPluginLayout = function (props) {
@@ -28,7 +26,7 @@ const SubmitPluginLayout = function (props) {
 
     let onSubmitHandler = function (e) {
         dispatch({
-            type: ACTIONS.DISPLAY_LOADING,
+            type: CONFIG_DISPATCH_ACTIONS.DISPLAY_LOADING,
             loadingMessage: 'Trying to submit your plugin...'
         });
         e.preventDefault();
@@ -73,7 +71,7 @@ const SubmitPluginLayout = function (props) {
                     messageContent: error.message
                 });
             })
-            .finally(() => dispatch({type: ACTIONS.HIDE_LOADING}));
+            .finally(() => dispatch({type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING}));
     };
     const handleChange = (e, data) => {
         let {name, value} = e;

@@ -3,9 +3,7 @@ import React from "react";
 import {Link, useRouteMatch} from "react-router-dom";
 
 const DesktopTopNavbar = function (props) {
-    let match = useRouteMatch("/");
-
-    console.log("match", match);
+    let match = useRouteMatch("/home");
 
     return (
         <Menu
@@ -15,10 +13,9 @@ const DesktopTopNavbar = function (props) {
                 borderRadius: 0
             }}>
             <Container>
-                {/* todo useHistory ou useLocation pour définir "active" dynamiquement et tej la propriété*/}
                 <Menu.Item
                     as={Link}
-                    active={match.isExact}
+                    active={match && match.isExact}
                     to='/'>
                     <Icon name='home' className="floated left"/>
                     Home

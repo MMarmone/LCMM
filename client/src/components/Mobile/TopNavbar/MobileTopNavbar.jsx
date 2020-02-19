@@ -2,7 +2,7 @@ import {Button, Container, Icon, Input, Menu, Sidebar} from "semantic-ui-react";
 import React, {useContext, useState} from "react";
 import {store} from "../../StateProvider/StateProvider";
 import {Link, useRouteMatch} from "react-router-dom";
-import {FRONTEND_CONFIG as config} from "../../../config";
+import {CONFIG_FRONTEND as config} from "../../../config";
 
 const MobileTopNavbar = function (props) {
     const [sidebarOpened, setSidebarOpened] = useState(props.sidebarOpened);
