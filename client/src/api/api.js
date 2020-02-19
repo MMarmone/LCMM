@@ -1,4 +1,5 @@
 import {CONFIG_BACKEND as config} from "../config";
+import axios from "axios";
 
 /**
  * Fetch l'API pour se connecter en tant qu'utilisateur
@@ -61,18 +62,23 @@ export function register({name, email, password, gender}) {
 }
 
 
-export function submitPlugin({name, version, description, isOpenSource, category, tags, urls, pluginImage, user}) {
+export function submitPlugin({name, version, description, isOpenSource, category, tags, urls, pluginImage}) {
+
     const fd = new FormData();
-    fd.append('avatar', pluginImage);
-    return fetch(config.URL_SUBMIT_PLUGIN, {
-        method: 'POST',
-        mode: 'cors',
+    fd.append('name',name)
+    fd.append('version',version)
+    fd.append('description',description)
+    fd.append('isOpenSource',isOpenSource)
+    fd.append('category',category)
+    fd.append('tags',tags)
+    fd.append('urls',urls)
+    fd.append('pluginImage', pluginImage);
+    console.log(pluginImage)
+    return axios.post(config.URL_SUBMIT_PLUGIN, fd ,{
+
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'multipart/form-data',
             'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ1NmM3MjVmYzgzMzUxOTBjODg0OWIiLCJpYXQiOjE1ODE2MDgwNTB9.dM74cceBMvVbUi_Z2vRuX2zw9WCSWAmnCzHa990AUWA'
-        },
-        body: /*JSON.stringify({
-            name, version, description, isOpenSource, category, tags, urls, user
-        }),*/fd
+        }
     })
 }
