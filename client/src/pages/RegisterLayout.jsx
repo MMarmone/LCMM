@@ -9,7 +9,7 @@ const RegisterLayout = function (props) {
     return (
         <ResponsiveContainer inverted={props.inverted}>
             <Grid textAlign='center' style={{ paddingTop: '5vh' }} verticalAlign='middle'>
-                <Grid.Column style={{ maxWidth: 450 }}>
+                <Grid.Column style={{ maxWidth: 600 }}>
                     <Header as='h2' color='orange' textAlign='center'>
                         <Image src={process.env.PUBLIC_URL + '/logo192.png'} />&nbsp;Register for free
                     </Header>
