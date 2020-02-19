@@ -7,7 +7,7 @@ import RegisterLayout from "./pages/RegisterLayout";
 import PageNotFoundLayout from "./pages/PageNotFountLayout";
 import {store} from "./components/StateProvider/StateProvider";
 import LogoutLayout from "./pages/LogoutLayout";
-import {FRONTEND_CONFIG as config} from './config';
+import {CONFIG_FRONTEND as config} from './config';
 import {Dimmer, Loader} from "semantic-ui-react";
 import SubmitPluginLayout from "./pages/SubmitPluginLayout";
 

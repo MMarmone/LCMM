@@ -1,4 +1,4 @@
-import {BACKEND_CONFIG as config} from "../config";
+import {CONFIG_BACKEND as config} from "../config";
 
 /**
  * Fetch l'API pour se connecter en tant qu'utilisateur

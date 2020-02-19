@@ -1,5 +1,5 @@
 import React, {createContext, useReducer} from 'react';
-import {DISPATCH_ACTIONS as ACTIONS} from "../../config";
+import {CONFIG_DISPATCH_ACTIONS as ACTIONS} from "../../config";
 
 /**
  * État global de l'Application
@@ -26,15 +26,12 @@ const { Provider } = store;
 
 const StateProvider = ( { children } ) => {
   const [state, dispatch] = useReducer((state /* = initialState // déconseillé par la doc */, action) => {
-    console.log("pre-switch state", state);
-    console.log("action", action);
-
     switch (action.type) {
       case ACTIONS.LOGIN:
         return {
           ...state,
           isLoggedIn: true,
-          userToken: action.userToken
+          userToken: action.payload
         };
 
       case ACTIONS.LOGOUT:

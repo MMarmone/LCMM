@@ -1,14 +1,14 @@
 import React, {useContext, useState} from "react";
 import {Button, Form, Message, Segment, Select} from 'semantic-ui-react'
 import * as APIHandler from '../../api/apiHandler'
-import {DISPATCH_ACTIONS as ACTIONS, REGEX_EXPRESSIONS} from "../../config";
+import {CONFIG_DISPATCH_ACTIONS as ACTIONS, REGEX_EXPRESSIONS} from "../../config";
 import {store} from "../StateProvider/StateProvider";
 
 // todo refactorer pour ne pas avoir le C/C du code LoginForm
 //  je pense que form.valid existe, donc avec un React.CreatRef() dans Login/Register Layout,
 //  on pourrait accéder à la validité du form, et afficher le message d'erreur etc...
 export default function RegisterForm(props) {
-    const {state, dispatch} = useContext(store);
+    const {dispatch} = useContext(store);
 
     const [formState, setFormState] = useState({
         // form info
@@ -26,7 +26,7 @@ export default function RegisterForm(props) {
     let onSubmitHandler = function(e) {
         dispatch({
             type: ACTIONS.DISPLAY_LOADING,
-            loadingMessage: 'Trying to log you in...'
+            loadingMessage: 'Trying to create account...'
         });
 
 
