@@ -75,7 +75,6 @@ export function submitPlugin({name, version, description, isOpenSource, category
     fd.append('pluginImage', pluginImage);
     console.log(pluginImage)
     return axios.post(config.URL_SUBMIT_PLUGIN, fd ,{
-
         headers: {
             'Content-Type': 'multipart/form-data',
             'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ1NmM3MjVmYzgzMzUxOTBjODg0OWIiLCJpYXQiOjE1ODE2MDgwNTB9.dM74cceBMvVbUi_Z2vRuX2zw9WCSWAmnCzHa990AUWA'
