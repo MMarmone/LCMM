@@ -18,7 +18,7 @@ class MobileContainer extends Component {
             >
                 <MobileTopNavbar
                     home={home}
-                    inverted={inverted}
+
                 >
                     {children}
                 </MobileTopNavbar>

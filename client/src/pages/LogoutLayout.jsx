@@ -26,9 +26,7 @@ const HomeLayout = (props) => {
   }, []); // ne l'appeler qu'une seule fois
 
   return (
-    <ResponsiveContainer
-      inverted={props.inverted}
-    >
+    <ResponsiveContainer>
       <Segment style={{padding: '8em 0em'}} vertical>
         <Container text>
           <Header as='h3' style={{fontSize: '2em'}}>

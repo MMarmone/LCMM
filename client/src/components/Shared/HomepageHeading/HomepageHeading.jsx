@@ -8,7 +8,7 @@ const HomepageHeading = (props) => {
   const { state, dispatch } = useContext(store);
 
   return (
-    <Container inverted={props.inverted} text textAlign='center'>
+    <Container  text textAlign='center'>
       <Header
         as='h1'
         content='Imagine-a-Company'

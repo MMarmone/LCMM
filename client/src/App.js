@@ -31,35 +31,35 @@ function App() {
         </Route>
 
         <Route path={config.URL_HOME}>
-          <HomeLayout inverted={inverted} />
+          <HomeLayout />
         </Route>
 
         <Route path={config.URL_LOGIN}>
-          <LoginLayout inverted={inverted} />
+          <LoginLayout />
         </Route>
 
         <Route path={config.URL_REGISTER}>
-          <RegisterLayout inverted={inverted} />
+          <RegisterLayout />
         </Route>
 
         <Route path={config.URL_LOGOUT}>
-          <LogoutLayout inverted={inverted} />
+          <LogoutLayout />
         </Route>
 
         <Route path={config.URL_ADD_PLUGIN}>
-          <SubmitPluginLayout inverted={inverted} />
+          <SubmitPluginLayout />
         </Route>
 
         <Route path={config.URL_USER_PROFILE}>
           {(state.isLoggedIn ?
-            <PageNotFoundLayout inverted={inverted} />
-            : <LoginLayout inverted={inverted} />)
+            <PageNotFoundLayout />
+            : <LoginLayout />)
           }
         </Route>
 
         {/* Toujours mettre à la fin, c'est un SWITCH donc s'il est positionné avant, il va match avant */}
         <Route path={config.URL_404}>
-          <PageNotFoundLayout inverted={inverted} />
+          <PageNotFoundLayout />
         </Route>
       </Switch>
     </BrowserRouter>

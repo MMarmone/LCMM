@@ -21,10 +21,10 @@ const HomeLayout = (props) => {
   return (
     <ResponsiveContainer
       home
-      inverted={props.inverted}
+
     >
       <HomepageHeading
-        inverted={props.inverted}
+
         mobile={getWidth > Responsive.onlyMobile.maxWidth}
         isUserLoggedIn={state.isLoggedIn} />
 
