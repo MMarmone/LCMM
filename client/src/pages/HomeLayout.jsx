@@ -16,7 +16,7 @@ import {store} from "../components/StateProvider/StateProvider";
 
 const HomeLayout = (props) => {
   // Accès à l'état global (contexte)
-  const { state, dispatch } = useContext(store);
+  const { state } = useContext(store);
 
   return (
     <ResponsiveContainer

@@ -64,8 +64,7 @@ export default function LoginForm(props) {
         history.push(CONFIG_FRONTEND.URL_HOME);
       })
       .catch(error => {
-        console.error("KO - error", error);
-        console.log(error.message);
+        console.error(error);
 
         // Afficher le message d'erreur renvoyé par l'API
         setFormState({
