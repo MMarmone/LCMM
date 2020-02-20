@@ -3,7 +3,7 @@ import ResponsiveContainer from "../components/Shared/ResponsiveContainer/Respon
 
 const PageNotFoundLayout = (props) => (
     <ResponsiveContainer
-        inverted={props.inverted}
+
     >
         <div
             style={{

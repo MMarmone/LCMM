@@ -87,7 +87,7 @@ const SubmitPluginLayout = function (props) {
         });
     };
     return (
-        <ResponsiveContainer inverted={props.inverted}>
+        <ResponsiveContainer >
             <Grid textAlign='center' style={{paddingTop: '5vh'}} verticalAlign='middle'>
                 <Grid.Column style={{maxWidth: 450}}>
                     <React.Fragment>

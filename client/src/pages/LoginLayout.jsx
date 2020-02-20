@@ -7,7 +7,7 @@ import ResponsiveContainer from "../components/Shared/ResponsiveContainer/Respon
 export default function LoginLayout (props) {
 
     return (
-        <ResponsiveContainer inverted={props.inverted}>
+        <ResponsiveContainer >
             <Grid textAlign='center' style={{ paddingTop: '5vh' }} verticalAlign='middle'>
                 <Grid.Column style={{ maxWidth: 600 }}>
                     <Header as='h2' color='orange' textAlign='center'>
