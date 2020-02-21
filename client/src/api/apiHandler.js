@@ -40,6 +40,13 @@ export const tryLogin = ({email, password}) => {
             .catch(handleFetch(resolve, reject).UwU_Catch);
     });
 };
+export const tryGetPluginsList = ()=>{
+    return new Promise((resolve, reject) => {
+        API.pluginsList()
+            .then(handleFetch(resolve, reject).UwU_Then)
+            .catch(handleFetch(resolve, reject).UwU_Catch);
+    });      
+};
 
 export const tryRegister = ({name, email, password, gender}) => {
     return new Promise((resolve, reject) => {

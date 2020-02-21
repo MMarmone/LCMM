@@ -73,6 +73,11 @@ const StateProvider = ( { children } ) => {
           loadingMessage : null
         };
 
+      case ACTIONS.SET_PLUGINS:
+        return {
+          ...state,
+          plugins : action.plugins
+        };
       default:
         console.error(new Error("Unknown dispatch action called ('" + action.type + "')"));
         return state;

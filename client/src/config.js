@@ -8,6 +8,7 @@ const CONFIG_BACKEND = {
     URL_REGISTER: `${HOST}/api/users/register`,
     URL_LOGIN: `${HOST}/api/users/login`,
     URL_SUBMIT_PLUGIN: `${HOST}/api/users/me/submissionForm`,
+    URL_GET_PLUGINS: `${HOST}/api/plugins`
 };
 
 /**
