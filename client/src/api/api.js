@@ -59,6 +59,17 @@ export function register({name, email, password, gender}) {
     })
 }
 
+
+export function pluginsList(){
+    return fetch(config.URL_GET_PLUGINS,{
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
+
 /**
  * Fetch l'API pour enregistrer un nouveau plugin
  *
@@ -108,5 +119,3 @@ export function submitPlugin({token, name, version, description, isOpenSource, c
         }
     })
 }
-
-

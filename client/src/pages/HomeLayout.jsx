@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState,useEffect} from "react";
 import {
   Button,
   Container,
@@ -13,11 +13,34 @@ import ResponsiveContainer from "../components/Shared/ResponsiveContainer/Respon
 import HomepageHeading from "../components/Shared/HomepageHeading/HomepageHeading";
 import {getWidth} from "../utils/utils";
 import {store} from "../components/StateProvider/StateProvider";
+import Plugins from "../components/Plugins/Plugins";
+import {CONFIG_BACKEND as config} from "../config";
+import * as APIHandler from '../api/apiHandler'
 
 const HomeLayout = (props) => {
   // Accès à l'état global (contexte)
-  const { state } = useContext(store);
+  
+  const { state, dispatch } = useContext(store);
+  const [plugins, setPlugins] = useState({
+    plugins :[]
+  });
+  useEffect(() => {APIHandler.tryGetPluginsList()
+    .then(response => dispatch({
+       plugins:response
+    }) 
+    )
+  },[])
+  console.log("tg"+state.plugins)
+  /*const [plugins, setPlugins] = useState({
+    plugins :[]
+  });
+  const getPlugins = async() => {
+    await 
 
+  console.log(state)
+  /*window.addEventListener('load', getPlugins());*/
+
+  console.log(plugins)
   return (
     <ResponsiveContainer home>
 
@@ -29,6 +52,7 @@ const HomeLayout = (props) => {
         <Grid container stackable verticalAlign='middle'>
           <Grid.Row>
             <Grid.Column width={8}>
+              <Plugins plugins />
               <Header as='h3' style={{fontSize: '2em'}}>
                 We Help Companies and Companions
               </Header>
