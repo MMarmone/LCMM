@@ -9,11 +9,43 @@ import {
   Header,
   Image,
   List, Responsive,
-  Segment
+  Segment,
+  Card,
+  Icon
 } from 'semantic-ui-react';
 import * as APIHandler from "../../api/apiHandler";
 import {Link} from "react-router-dom";
 
+
+const card = (name, desciption, like, version,author,nbComments) => (
+  <Card style= {{margin:10}}>
+    <Image src='http://via.placeholder.com/640x360' wrapped ui={false} />
+    <Card.Content>
+      <Card.Header>{name}</Card.Header>
+      <Card.Meta>
+        <span >{version}</span>
+      </Card.Meta>
+      <Card.Description>
+        {desciption}
+      </Card.Description>
+    </Card.Content>
+    <Card.Content>
+    <a>
+        <Icon name='user' />
+        {author}
+      </a>
+    </Card.Content>
+    <Card.Content extra>
+    <span class="right floated">
+      <i class="heart outline like icon"></i>
+      {like}
+    </span>
+    <i class="comment icon"></i>
+    {nbComments}
+      
+    </Card.Content>
+  </Card>
+)
 
  const Plugins = (plugins) => {
   const { state, dispatch } = useContext(store);
@@ -21,25 +53,16 @@ import {Link} from "react-router-dom";
 
      <div>
        <center><h1>Plugins</h1></center>
-       <Grid container stackable verticalAlign='middle'>
-        <div class="row">
+       
+       <Grid columns={3} container stackable verticalAlign='middle'>
+          <Grid.Row>
+        
        {state.plugins.map((plugin) => (
-        <div class="col-sm-4">
-            <div class="card border-secondary mb-3" style={{width: 20 +'em'}}>
-              <img src="http://via.placeholder.com/640x360
-" class="card-img-top" alt="..."></img>
-              <div class="card-body text-secondary" >
-
-                <h5 class="card-title">{plugin.name}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{plugin.version}</h6>
-                <p class="card-text">{plugin.description}</p>
-                <Link to="#" class="btn btn-primary">Go To plugin</Link>
-              </div>
-            </div>
-            </div>
+           <Grid.Column width={5} >
+            {card(plugin.name,plugin.description,plugin.likes,plugin.version,plugin.user,plugin.comments.length)}
+            </Grid.Column>
        ))}
-
-       </div>
+          </Grid.Row>
        </Grid>
      </div>
    )

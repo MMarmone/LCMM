@@ -24,6 +24,7 @@ const HomeLayout = (props) => {
   const [plugins, setPlugins] = useState({
     plugins :[]
   });
+  
   useEffect(() => {APIHandler.tryGetPluginsList()
     .then(response => dispatch({
        plugins:response
@@ -31,7 +32,6 @@ const HomeLayout = (props) => {
     )
   },[])
 
-  console.log(plugins)
   return (
     <ResponsiveContainer home>
 
