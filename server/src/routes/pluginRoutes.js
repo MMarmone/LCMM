@@ -9,6 +9,7 @@ var PluginRoutes = function(app)
     var router = express.Router();
     router.get('/pluginInfo',async(req, res) => {
         const plugin = await Plugin.findByName(req.query.name);
+        res.contentType('json');
         res.send(plugin)
     });
 
