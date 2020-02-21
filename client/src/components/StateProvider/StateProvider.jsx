@@ -25,7 +25,8 @@ const initialState = {
 
   // Session infos
   isLoggedIn: false,
-  [CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]: null
+  [CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]: null,
+  plugins :[]
 };
 
 // Initialiser l'état global à partir des Cookies
@@ -73,7 +74,7 @@ const StateProvider = ( { children } ) => {
           loadingMessage : null
         };
 
-      case ACTIONS.SET_PLUGINS:
+      case CONFIG_DISPATCH_ACTIONS.SET_PLUGINS:
         return {
           ...state,
           plugins : action.plugins
