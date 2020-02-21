@@ -13,6 +13,7 @@ import {getCookieValueByKey, refreshCookieExpirationDate} from "../../utils/cook
  *  [CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]: string,
  *  isLoggedIn: boolean,
  *  darkMode: boolean
+ *  plugins : list
  *  }}
  */
 const initialState = {

@@ -33,7 +33,7 @@ const CONFIG_DISPATCH_ACTIONS = {
     LOGIN: 'login',
     LOGOUT: 'logout',
     DISPLAY_LOADING: 'display-loading',
-    HIDE_LOADING: 'hide-loading'
+    HIDE_LOADING: 'hide-loading',
 };
 
 const REGEX_EXPRESSIONS = {
@@ -53,6 +53,7 @@ const ERRORS = {
 };
 
 export {
+    HOST,
     CONFIG_BACKEND,
     CONFIG_FRONTEND,
     CONFIG_DISPATCH_ACTIONS,
