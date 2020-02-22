@@ -6,7 +6,7 @@ import {CONFIG_DISPATCH_ACTIONS, REGEX_EXPRESSIONS} from "../config";
 import * as APIHandler from "../api/apiHandler";
 
 const SubmitPluginLayout = function (props) {
-    const {state, dispatch} = useContext(store);
+    const {dispatch} = useContext(store);
     const [formState, setFormState] = useState({
         name: null,
         version: null,
@@ -19,21 +19,14 @@ const SubmitPluginLayout = function (props) {
         user: null,
     });
 
-    const onChange = (e, {name, value}) => setFormState({
-        ...formState,
-        [name]: value
-    });
-
     let onSubmitHandler = function (e) {
         dispatch({
             type: CONFIG_DISPATCH_ACTIONS.DISPLAY_LOADING,
             loadingMessage: 'Trying to submit your plugin...'
         });
         e.preventDefault();
-        console.log(formState.pluginImage);
-        console.log("bob");
+
         const input = document.getElementById('image');
-        console.log(input.files[0]);
         APIHandler.trySubmitPlugin({
             name: formState.name,
             version: formState.version,
@@ -46,8 +39,6 @@ const SubmitPluginLayout = function (props) {
             user: formState.user,
         })
             .then(response => {
-                console.log("OK - response", response);
-                console.log("todo widget OK + redirect");
                 setFormState({
                     ...formState,
                     messageHeader: 'Submit process successful',
@@ -59,9 +50,6 @@ const SubmitPluginLayout = function (props) {
                 // TODO stocker userToken + redirect
             })
             .catch(error => {
-                console.error("KO - error", error);
-                console.log(error.message);
-
                 // Afficher le message d'erreur renvoyé par l'API
                 setFormState({
                     ...formState,

@@ -9,7 +9,6 @@ import axios from "axios";
  *  Email de l'utilisateur
  * @param {string} password
  *  Mot de Passe de l'utilisateur
- *  // todo osef de crypter pour le moment, mais ça pourra potentiellement servir lors de la présentation (fleeeeeeeemme)
  *
  * @returns {Promise<Response>} Promise resolvant le succès ou non de la requête (cf. https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
  */
@@ -38,7 +37,6 @@ export function login({email, password}) {
  *  Email de l'utilisateur
  * @param {string} password
  *  Mot de passe du compte
- *  // todo minLength/pattern à faire vérifier dans le Component directement, et une dernière fois dans le backend je pense
  * @param {string} gender
  *  Kek
  *
@@ -65,15 +63,14 @@ export function register({name, email, password, gender}) {
 export function submitPlugin({name, version, description, isOpenSource, category, tags, urls, pluginImage}) {
 
     const fd = new FormData();
-    fd.append('name',name)
-    fd.append('version',version)
-    fd.append('description',description)
-    fd.append('isOpenSource',isOpenSource)
-    fd.append('category',category)
-    fd.append('tags',tags)
-    fd.append('urls',urls)
+    fd.append('name',name);
+    fd.append('version',version);
+    fd.append('description',description);
+    fd.append('isOpenSource',isOpenSource);
+    fd.append('category',category);
+    fd.append('tags',tags);
+    fd.append('urls',urls);
     fd.append('pluginImage', pluginImage);
-    console.log(pluginImage)
     return axios.post(config.URL_SUBMIT_PLUGIN, fd ,{
 
         headers: {

@@ -1,7 +1,5 @@
-import {deleteCookieByKey} from "./cookies";
+import {deleteCookieByKey, setCookie} from "./cookies";
 import {CONFIG_COOKIE} from "../config";
-
-
 
 const disconnectUser = () => {
   // Dans une Promise SSI faut déco sur le serveur
@@ -9,10 +7,16 @@ const disconnectUser = () => {
     deleteCookieByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY);
 
 
-    // todo delete cookie
-    //  update global State
-    //  redirect to /home
+    // update global State - pas possible car pas dans un composant React
+    // redirect to /home   - pas possible car pas dans un composant React
   });
 };
 
-export { disconnectUser };
+const saveUserAuthToken = (token) => {
+  setCookie({
+    key: CONFIG_COOKIE.USER_AUTH_TOKEN_KEY,
+    value: token
+  });
+};
+
+export { disconnectUser, saveUserAuthToken };
