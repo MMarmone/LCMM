@@ -1,4 +1,3 @@
-
 import {store} from "../StateProvider/StateProvider";
 import React, {useContext} from 'react';
 import {
@@ -16,11 +15,12 @@ import {
 import * as APIHandler from "../../api/apiHandler";
 import {Link} from "react-router-dom";
 import {HOST}  from '../../config';
+import MyPlaceholderImage from '../../assets/img/placeholder.png';
 
 
 const card = (name, desciption, like, version,author,nbComments,image) => (
   <Card style= {{margin:10}}>
-    <Image src={HOST+'/'+image} wrapped ui={false} />
+    <Image src={HOST+'/'+image} wrapped ui={false} onError={i => i.target.src=MyPlaceholderImage} />
     <Card.Content>
       <Card.Header>{name}</Card.Header>
       <Card.Meta>
