@@ -29,7 +29,7 @@ export default function SubmitPluginForm(props) {
         e.preventDefault();
         APIHandler.trySubmitPlugin({
             name: formState.name,
-            version: formState.version,
+            version: document.getElementById('version').files[0],
             description: formState.description,
             isOpenSource: true,
             category: formState.category,
@@ -105,7 +105,9 @@ export default function SubmitPluginForm(props) {
                         iconPosition='left'
                         placeholder='Version'
                         name='version'
-                        type='text'
+                        type='file'
+                        id='version'
+                        accept=".zip"
                         onChange={handleChange}/>
                     <Form.TextArea
                         required
@@ -197,6 +199,7 @@ export default function SubmitPluginForm(props) {
                         name='pluginImage'
                         type='file'
                         id='image'
+                        accept=".png, .jpeg"
                         onChange={handleChange}/>
                     <Button
                         color='orange'
