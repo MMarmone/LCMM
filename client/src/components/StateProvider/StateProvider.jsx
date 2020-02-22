@@ -34,12 +34,10 @@ const initialState = {
   if (authCookie) {
     initialState.isLoggedIn = true;
     initialState[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY] = authCookie;
-    // todo refresh les cookies à chaque interaction car ça prouve
+    // todo refresh les cookies à chaque interaction car ça prouve que l'utilisateur est "actif"
     refreshCookieExpirationDate({key: CONFIG_COOKIE.USER_AUTH_TOKEN_KEY});
   }
 })();
-
-console.log("initialState", initialState);
 
 const store = createContext(initialState);
 const { Provider } = store;
@@ -76,8 +74,8 @@ const StateProvider = ( { children } ) => {
         };
 
       default:
-        throw new Error("Unknown dispatch action called ('" + action.type + "')");
-        // or return state; // todo throw va casser l'App, il vaudrait mieux juste console.error et afficher un message genre "something went wrong" (ou 404 avec le message d'erreur)
+        console.error(new Error("Unknown dispatch action called ('" + action.type + "')"));
+        return state;
     }
   }, initialState);
 

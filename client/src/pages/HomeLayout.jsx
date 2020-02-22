@@ -19,12 +19,9 @@ const HomeLayout = (props) => {
   const { state } = useContext(store);
 
   return (
-    <ResponsiveContainer
-      home
+    <ResponsiveContainer home>
 
-    >
       <HomepageHeading
-
         mobile={getWidth > Responsive.onlyMobile.maxWidth}
         isUserLoggedIn={state.isLoggedIn} />
 
