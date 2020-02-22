@@ -16,15 +16,12 @@ import {store} from "../components/StateProvider/StateProvider";
 
 const HomeLayout = (props) => {
   // Accès à l'état global (contexte)
-  const { state, dispatch } = useContext(store);
+  const { state } = useContext(store);
 
   return (
-    <ResponsiveContainer
-      home
-      inverted={props.inverted}
-    >
+    <ResponsiveContainer home>
+
       <HomepageHeading
-        inverted={props.inverted}
         mobile={getWidth > Responsive.onlyMobile.maxWidth}
         isUserLoggedIn={state.isLoggedIn} />
 

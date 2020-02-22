@@ -3,9 +3,9 @@ import React, {useContext, useState} from "react";
 import { Button, Form } from 'semantic-ui-react';
 import * as APIHandler from '../../api/apiHandler'
 import {store} from "../StateProvider/StateProvider";
-import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS, CONFIG_FRONTEND, REGEX_EXPRESSIONS} from "../../config";
-import {setCookie} from "../../utils/cookies";
+import {CONFIG_DISPATCH_ACTIONS, CONFIG_FRONTEND, REGEX_EXPRESSIONS} from "../../config";
 import { useHistory } from "react-router-dom";
+import {saveUserAuthToken} from "../../utils/users";
 
 export default function LoginForm(props) {
   const {dispatch} = useContext(store);
@@ -25,6 +25,17 @@ export default function LoginForm(props) {
   });
 
   let onSubmitHandler = function(e) {
+    if (!formState.username || !formState.password) {
+      setFormState({
+        ...formState,
+        messageHeader: 'Error',
+        success: false,
+        error: true,
+        messageContent: 'All inputs are required'
+      });
+      return false;
+    }
+
     dispatch({
       type: CONFIG_DISPATCH_ACTIONS.DISPLAY_LOADING,
       loadingMessage: 'Trying to log you in...'
@@ -36,37 +47,28 @@ export default function LoginForm(props) {
       password: formState.password
     })
       .then(response => {
-        console.log("OK - response", response);
-
         setFormState({
           ...formState,
           messageHeader: 'Login process successful',
           success: true,
           error: false,
-          messageContent: 'You will be redirected shortly...' // todo link if not
+          messageContent: 'You will be redirected shortly...'
         });
 
         // Pas normal si on a OK mais pas de Token
         if (!response.token)
           throw new Error("Request was OK but returned no Authentication Token. Please contact an administator if the problem persists");
 
-        setCookie({
-          key: CONFIG_COOKIE.USER_AUTH_TOKEN_KEY,
-          value: response.token
-        });
-
+        saveUserAuthToken(response.token);
         dispatch({
           type: CONFIG_DISPATCH_ACTIONS.LOGIN,
           payload: response.token
         });
-
         // Redirection à la page d'accueil
         history.push(CONFIG_FRONTEND.URL_HOME);
+
       })
       .catch(error => {
-        console.error("KO - error", error);
-        console.log(error.message);
-
         // Afficher le message d'erreur renvoyé par l'API
         setFormState({
           ...formState,
@@ -77,8 +79,6 @@ export default function LoginForm(props) {
         });
       })
       .finally( () => dispatch({ type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING }) );
-
-    // todo widget "login successful, you'll be redirected'
   };
 
   return (

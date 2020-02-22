@@ -21,6 +21,7 @@ const CONFIG_FRONTEND = {
     URL_LOGOUT: '/logout',
     URL_USER_PROFILE: '/profile',
     URL_ADD_PLUGIN: '/addPlugin',
+    URL_CART: '/cart',
     URL_404: '*'
 };
 
@@ -35,17 +36,19 @@ const CONFIG_DISPATCH_ACTIONS = {
 };
 
 const REGEX_EXPRESSIONS = {
-  MATCH_EMAIL: '^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$',
-  MATCH_NON_EMPTY_AND_NON_SPACE_ONLY: '^(?!\s*$).+'
+    MATCH_EMAIL: '^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$',
+    MATCH_NON_EMPTY_AND_NON_SPACE_ONLY: '^(?!\s*$).+'
 };
 
 const CONFIG_COOKIE = {
-    DEFAULT_EXPIRATION_TIME_MS: 5 * 60 * 1000,      // 5 minutes par défaut
-    USER_AUTH_TOKEN_KEY: 'userAuthToken',
-    ERRORS: {
-        INVALID_COOKIE_KEY: "Invalid cookie key specified",
-        INVALID_COOKIE_EXPIRATION_DATE: "Invalid cookie expiration date specified"
-    }
+    DEFAULT_EXPIRATION_TIME_MS: 5 * 60 * 1000,  // Les cookies expirent après 5 minutes, par défaut
+    LONG_EXPIRATION_TIME_MS: 30 * 24 * 60 * 60 * 1000,  // 30 jours
+    USER_AUTH_TOKEN_KEY: 'token',               // idéalement, la même que pour le back
+};
+
+const ERRORS = {
+    MISSING_MANDATORY_PARAMETER: "Missing or invalid mandatory function parameter",
+    INVALID_PARAMETER_VALUE: "Invalid function parameter"
 };
 
 export {
@@ -53,5 +56,6 @@ export {
     CONFIG_FRONTEND,
     CONFIG_DISPATCH_ACTIONS,
     REGEX_EXPRESSIONS,
-    CONFIG_COOKIE
-} ;
+    CONFIG_COOKIE,
+    ERRORS
+};

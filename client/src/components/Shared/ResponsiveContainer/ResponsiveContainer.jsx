@@ -7,13 +7,13 @@ const ResponsiveContainer = (props) => (
     <React.Fragment>
         <DesktopContainer
             home={props.home}
-            inverted={props.inverted}>
+            >
             {props.children}
         </DesktopContainer>
 
         <MobileContainer
             home={props.home}
-            inverted={props.inverted}>
+            >
             {props.children}
         </MobileContainer>
     </React.Fragment>

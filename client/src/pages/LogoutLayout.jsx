@@ -11,13 +11,8 @@ import {store} from "../components/StateProvider/StateProvider";
 import { useHistory } from "react-router-dom";
 
 const HomeLayout = (props) => {
-  let history = useHistory();
+  const { dispatch } = useContext(store);
 
-  const { state, dispatch } = useContext(store);
-
-  console.log("state", state);
-
-  // todo setTimeout after render genre useEffect
   useEffect(() => {
     new Promise(resolve => setTimeout(resolve, 750))
       .then(() => dispatch({type: 'logout'}))
@@ -26,9 +21,7 @@ const HomeLayout = (props) => {
   }, []); // ne l'appeler qu'une seule fois
 
   return (
-    <ResponsiveContainer
-      inverted={props.inverted}
-    >
+    <ResponsiveContainer>
       <Segment style={{padding: '8em 0em'}} vertical>
         <Container text>
           <Header as='h3' style={{fontSize: '2em'}}>
