@@ -4,7 +4,7 @@ import React, {useContext, useState} from "react";
 import {store} from "../StateProvider/StateProvider";
 import * as APIHandler from "../../api/apiHandler";
 export default function SubmitPluginForm(props) {
-    const {state, dispatch} = useContext(store);
+    const {dispatch} = useContext(store);
     const [formState, setFormState] = useState({
         name: null,
         version: null,
@@ -16,12 +16,17 @@ export default function SubmitPluginForm(props) {
         pluginImage: null,
     });
 
-    const onChange = (e, {name, value}) => setFormState({
-        ...formState,
-        [name]: value
-    });
-
     let onSubmitHandler = function (e) {
+        if (!formState.name || !formState.version || !formState.description || !formState.isOpenSource || !formState.category || !formState.pluginImage) {
+            setFormState({
+                ...formState,
+                messageHeader: 'Error',
+                success: false,
+                error: true,
+                messageContent: 'All inputs are required'
+            });
+            return false;
+        }
         dispatch({
             type: CONFIG_DISPATCH_ACTIONS.DISPLAY_LOADING,
             loadingMessage: 'Trying to submit your plugin...'
@@ -173,7 +178,6 @@ export default function SubmitPluginForm(props) {
                         ]}
                         onChange={handleChange}/>
                     <Form.Input
-                        required
                         fluid
                         icon='tags'
                         iconPosition='left'
@@ -182,7 +186,6 @@ export default function SubmitPluginForm(props) {
                         type='text'
                         onChange={handleChange}/>
                     <Form.Input
-                        required
                         fluid
                         icon='video icon'
                         iconPosition='left'
