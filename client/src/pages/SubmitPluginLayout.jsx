@@ -1,9 +1,6 @@
-import React, {useContext, useState} from "react";
-import {Button, Form, Grid, Message, Segment, Select} from "semantic-ui-react";
+import React from "react";
+import {Grid, Header} from "semantic-ui-react";
 import ResponsiveContainer from "../components/Shared/ResponsiveContainer/ResponsiveContainer";
-import {store} from "../components/StateProvider/StateProvider";
-import {CONFIG_DISPATCH_ACTIONS, REGEX_EXPRESSIONS} from "../config";
-import * as APIHandler from "../api/apiHandler";
 import SubmitPluginForm from "../components/SubmitPlugin/SubmitPluginForm";
 
 const SubmitPluginLayout = function (props) {
