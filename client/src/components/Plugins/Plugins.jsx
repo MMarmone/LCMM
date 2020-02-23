@@ -12,8 +12,8 @@ import MyPlaceholderImage from '../../assets/img/placeholder.png';
 
 
 const card = (name, desciption, like, version,author,nbComments,image) => (
-    <Card style= {{margin:10}}>
-        <Image src={HOST+'/'+image} wrapped ui={false} onError={i => i.target.src=MyPlaceholderImage} />
+    <Card>
+        <Image src={HOST+'/'+image} height={200} className='no-radius' centered onError={i => i.target.src=MyPlaceholderImage} />
         <Card.Content>
             <Card.Header>{name}</Card.Header>
             <Card.Meta>
@@ -25,19 +25,29 @@ const card = (name, desciption, like, version,author,nbComments,image) => (
           </a>
         </span>
             </Card.Meta>
-            <Card.Description>
+            <Card.Description
+                style={{
+                    textAlign: 'justify',
+                    height: '150px',
+                    overflow: 'auto'
+                }}>
                 {desciption}
 
 
             </Card.Description>
-            <div style={{width : 150}}>
-                <Button className="ui secondary button" color="black">
-                    go to
+        </Card.Content>
+
+        <Card.Content>
+            <div className='ui two buttons'>
+                <Button basic color='orange'>
+                    <Icon name='cart plus' />
+                    Cart
+                </Button>
+                <Button basic color='blue'>
+                    <Icon name='zoom' />
+                    Details
                 </Button>
             </div>
-        </Card.Content>
-        <Card.Content>
-
         </Card.Content>
         <Card.Content extra>
     <span className="right floated">
