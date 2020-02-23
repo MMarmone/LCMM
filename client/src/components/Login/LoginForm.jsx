@@ -64,6 +64,12 @@ export default function LoginForm(props) {
           type: CONFIG_DISPATCH_ACTIONS.LOGIN,
           payload: response.token
         });
+
+        dispatch({
+          type: CONFIG_DISPATCH_ACTIONS.SET_USER_INFO,
+          payload: response.user
+        });
+
         // Redirection à la page d'accueil
         history.push(CONFIG_FRONTEND.URL_HOME);
 

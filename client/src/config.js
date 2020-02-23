@@ -7,6 +7,7 @@ const HOST = HOSTNAME + ":" + PORT;
 const CONFIG_BACKEND = {
     URL_REGISTER: `${HOST}/api/users/register`,
     URL_LOGIN: `${HOST}/api/users/login`,
+    URL_USER_PROFILE: `${HOST}/api/users/me`,
     URL_SUBMIT_PLUGIN: `${HOST}/api/users/me/submissionForm`,
     URL_GET_PLUGINS: `${HOST}/api/plugins`
 };
@@ -34,6 +35,8 @@ const CONFIG_DISPATCH_ACTIONS = {
     LOGOUT: 'logout',
     DISPLAY_LOADING: 'display-loading',
     HIDE_LOADING: 'hide-loading',
+    SET_PLUGINS: 'set-plugins',
+    SET_USER_INFO: 'set-user-infos'
 };
 
 const REGEX_EXPRESSIONS = {
@@ -42,9 +45,10 @@ const REGEX_EXPRESSIONS = {
 };
 
 const CONFIG_COOKIE = {
-    DEFAULT_EXPIRATION_TIME_MS: 5 * 60 * 1000,  // Les cookies expirent après 5 minutes, par défaut
-    LONG_EXPIRATION_TIME_MS: 30 * 24 * 60 * 60 * 1000,  // 30 jours
+    DEFAULT_EXPIRATION_TIME_MS: 12 * 60 * 60 * 1000,  // Les cookies expirent après 12 heures, par défaut
+    LONG_EXPIRATION_TIME_MS: 30 * 24 * 60 * 60 * 1000,  // 30 jours     todo ajouter checkbox dans LoginForm
     USER_AUTH_TOKEN_KEY: 'token',               // idéalement, la même que pour le back
+    USER_INFOS_KEY: 'userInfos'                 // clef contenant les informations de l'utilisateur connecté
 };
 
 const ERRORS = {

@@ -119,3 +119,23 @@ export function submitPlugin({token, name, version, description, isOpenSource, c
         }
     })
 }
+
+/**
+ * Récupère du serveur les informations de l'utilisateur connecté (identifié par son token)
+ *
+ * @param {string} token
+ *  @required
+ *  token d'identification
+ *
+ * @returns {Promise<Response>}
+ */
+export function getUserInfo({ token }) {
+    return fetch(config.URL_USER_PROFILE, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Basic ' + token
+        }
+    });
+}

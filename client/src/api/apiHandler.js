@@ -1,4 +1,5 @@
 import * as API from './api';
+import {ERRORS} from "../config";
 
 /**
  * Opération préliminaire commune de gestion de requêtes.
@@ -62,4 +63,15 @@ export const trySubmitPlugin = ({token, name, version, description, isOpenSource
             .then(handleFetch(resolve, reject).UwU_Then)
             .catch(handleFetch(resolve, reject).UwU_Catch);
     });
-}
+};
+
+export const tryGetUserInfo = ({ token }) => {
+    return new Promise((resolve, reject) => {
+        if (!token)
+            throw new Error(ERRORS.MISSING_MANDATORY_PARAMETER + " (token:  " + token + ")");
+
+        API.getUserInfo({token})
+            .then(handleFetch(resolve, reject).UwU_Then)
+            .catch(handleFetch(resolve, reject).UwU_Catch);
+    });
+};

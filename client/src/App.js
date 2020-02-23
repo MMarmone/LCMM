@@ -7,26 +7,19 @@ import RegisterLayout from "./pages/RegisterLayout";
 import PageNotFoundLayout from "./pages/PageNotFountLayout";
 import {store} from "./components/StateProvider/StateProvider";
 import LogoutLayout from "./pages/LogoutLayout";
-import {CONFIG_COOKIE, CONFIG_FRONTEND as config} from './config';
+import {CONFIG_FRONTEND as config} from './config';
 import {Dimmer, Loader} from "semantic-ui-react";
 import SubmitPluginLayout from "./pages/SubmitPluginLayout";
-import {getCookieByKey, getCookieValueByKey, refreshCookieExpirationDate} from "./utils/cookies";
+import UserProfileLayout from "./pages/UserProfileLayout";
 
 function App() {
   // todo darkmode configurable
   //  via https://reactjs.org/docs/hooks-reference.html#usecontext
   //  peut également servir pour l'état isLoggedIn nan ? Ou alors on stock le token en cookie/localstorage
 
-  const {state, dispatch} = useContext(store);
-  const inverted = state.darkMode;
+  const {state} = useContext(store);
 
-  // Refresh le cookie à chaque interaction (aka, changement de page)
-  useEffect(() => {
-    if (getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY))
-      refreshCookieExpirationDate({
-        key: CONFIG_COOKIE.USER_AUTH_TOKEN_KEY
-      });
-  });
+
 
   return (
       <BrowserRouter>
@@ -34,6 +27,7 @@ function App() {
         <Dimmer active={state.isLoading}>
           <Loader size='massive'>{state.loadingMessage || "Loading..."}</Loader>
         </Dimmer>
+
         <Switch>
           <Route exact path={config.URL_DEFAULT}>
             <Redirect to={config.URL_HOME} />
@@ -61,7 +55,7 @@ function App() {
 
           <Route path={config.URL_USER_PROFILE}>
             {(state.isLoggedIn ?
-                <PageNotFoundLayout />
+                <UserProfileLayout />
                 : <LoginLayout />)
             }
           </Route>

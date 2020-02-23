@@ -90,7 +90,9 @@ const ConnectedUserMenuItems = (props) => {
                         My profile
                     </Dropdown.Item>
 
-                    <Dropdown.Item>
+                    <Dropdown.Item
+                        as={Link}
+                        to={CONFIG_FRONTEND.URL_CART}>
                         <Icon name='cart' />
                         My cart
                     </Dropdown.Item>
@@ -122,8 +124,8 @@ const ConnectedUserMenuItems = (props) => {
 
 const DisconnectedUserMenuItems = (props) => {
 
-    const isLoginPage = useRouteMatch(CONFIG_FRONTEND.URL_LOGIN);
-    const isRegisterPage = useRouteMatch(CONFIG_FRONTEND.URL_REGISTER);
+    const isLoginPage = !!useRouteMatch(CONFIG_FRONTEND.URL_LOGIN);
+    const isRegisterPage = !!useRouteMatch(CONFIG_FRONTEND.URL_REGISTER);
 
     return (
         <React.Fragment>
