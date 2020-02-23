@@ -38,10 +38,7 @@ var userSchema = new Schema({
         //    required: true
     },
     pluginsUpload:[{
-        pluginId: {
-            type: String,
-            required: true
-        }
+        type: String
     }],
     pluginLiked: [{
         pluginId: {

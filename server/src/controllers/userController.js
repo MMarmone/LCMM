@@ -61,16 +61,13 @@ var UserController = {
 
   updateProfile : async(req, res) => {
     try {
-      console.log("test")
       const token = req.header('authorization').split(' ')[1];
       const data = jwt.verify(token, process.env.JWT_KEY)
       const user = await User.findOne({ _id: data._id, 'tokens.token': token })
       user.name = req.body.name
       user.email = req.body.email
       user.gender = req.body.gender
-      console.log("test")
       user.save()
-      console.log("test")
       res.send(user)
     }catch (error) {
 
@@ -85,10 +82,8 @@ var UserController = {
             const token = req.header('authorization').split(' ')[1];
             const data = jwt.verify(token, process.env.JWT_KEY)
             const user = await User.findOne({ _id: data._id, 'tokens.token': token })
-            /*if (plugin) {
-                return res.status(403).send({error: 'Name and version already use'})
-            }*/
-            plugin = new Plugin({
+          
+            let plugin = new Plugin({
                 name : req.body.name,
                 version : req.body.version,
                 description : req.body.description,
@@ -102,7 +97,19 @@ var UserController = {
                 userEmail : user.email
             });
             plugin.save();
-            res.send();
+            await User.findByIdAndUpdate(
+              data._id,
+              {$addToSet : {"pluginsUpload" : plugin._id}},
+              {  safe: true, upsert: true},
+                function(err, model) {
+                  if(err){
+                     console.log(err);
+                     return res.send("bad plugin id");
+                  }
+               });
+
+            res.send(plugin);
+           
         } catch (error) {
             res.status(500).send(error)
         }
