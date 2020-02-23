@@ -24,3 +24,8 @@
 .ui.menu .ui.dropdown .menu>.item.orange {
   color: #f2711c !important;
 }
+
+.no-radius,
+.no-radius > img {
+  border-radius: 0 !important;
+}
