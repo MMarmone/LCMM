@@ -15,6 +15,7 @@ const conn = mongoose.connect(process.env.MONGODB_URL,{
     useNewUrlParser: true,
     useCreateIndex: true,
 });
+mongoose.set('useFindAndModify', false);
 
 //Create a new Express application and Configure it
 var app = express();

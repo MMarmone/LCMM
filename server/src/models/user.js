@@ -29,6 +29,10 @@ var userSchema = new Schema({
         minLength: 7
         //required: true
     },
+    isAdmin: {
+        type : Boolean,
+        require : true
+    },
     gender: {
         type: String, // Male/Female
         //    required: true

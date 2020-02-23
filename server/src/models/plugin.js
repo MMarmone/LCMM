@@ -33,7 +33,16 @@ var pluginSchema = new Schema({
         type : String,
         require : true
     },
+    isVerified:{
+        type :Boolean,
+        require : true
+    },
+
     user : {
+        type : String,
+        require : true
+    },
+    userEmail : {
         type : String,
         require : true
     },
