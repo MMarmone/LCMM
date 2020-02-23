@@ -20,3 +20,7 @@
 #root {
   height: 100%;
 }
+
+.ui.menu .ui.dropdown .menu>.item.orange {
+  color: #f2711c !important;
+}

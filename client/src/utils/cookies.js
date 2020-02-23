@@ -162,7 +162,7 @@ const deleteCookieByKey = ({ key, path = "/" }) => {
   document.cookie = createCookie({
     key: key,
     value: "",
-    date: new Date(0).toUTCString(),
+    date: new Date(0),
     path: path
   });};
 

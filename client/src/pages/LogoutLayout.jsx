@@ -2,20 +2,22 @@ import React, {useContext, useEffect} from 'react';
 import {
   Button,
   Container,
-  Divider,
   Header,
   Segment
 } from 'semantic-ui-react';
 import ResponsiveContainer from "../components/Shared/ResponsiveContainer/ResponsiveContainer";
 import {store} from "../components/StateProvider/StateProvider";
+import {Link, useHistory} from "react-router-dom";
+import {CONFIG_FRONTEND} from "../config";
 
 const HomeLayout = (props) => {
   const { dispatch } = useContext(store);
+  const history = useHistory();
 
   useEffect(() => {
-    new Promise(resolve => setTimeout(resolve, 750))
+    new Promise(resolve => setTimeout(resolve, 350))
       .then(() => dispatch({type: 'logout'}))
-      // .then(() => );
+      .then(() => history.push(CONFIG_FRONTEND.URL_HOME));
 
   }, []); // ne l'appeler qu'une seule fois
 
@@ -29,35 +31,14 @@ const HomeLayout = (props) => {
           <p style={{fontSize: '1.33em'}}>
             You will be redirected shortly
           </p>
-          <Button as='a' size='large'>
-            Read More
-          </Button>
-
-          <Divider
-            as='h4'
-            className='header'
-            horizontal
-            style={{margin: '3em 0em', textTransform: 'uppercase'}}
-          >
-            <a href='#'>Case Studies</a>
-          </Divider>
-
-          <Header as='h3' style={{fontSize: '2em'}}>
-            Did We Tell You About Our Bananas?
-          </Header>
-          <p style={{fontSize: '1.33em'}}>
-            Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
-            it's really true. It took years of gene splicing and combinatory DNA research, but our
-            bananas can really dance.
-          </p>
-          <Button as='a' size='large'>
-            I'm Still Quite Interested
+          <Button as={Link} to={CONFIG_FRONTEND.URL_HOME} size='large'>
+            Click here if not
           </Button>
         </Container>
       </Segment>
 
     </ResponsiveContainer>
   );
-}
+};
 
 export default HomeLayout;

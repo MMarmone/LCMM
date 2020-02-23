@@ -1,6 +1,6 @@
 import React, {createContext, useReducer} from 'react';
 import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS} from "../../config";
-import {getCookieValueByKey, refreshCookieExpirationDate} from "../../utils/cookies";
+import {deleteCookieByKey, getCookieValueByKey, refreshCookieExpirationDate} from "../../utils/cookies";
 import {tryGetUserInfo} from "../../api/apiHandler";
 
 /**
@@ -67,6 +67,8 @@ const StateProvider = ( { children } ) => {
         };
 
       case CONFIG_DISPATCH_ACTIONS.LOGOUT:
+        deleteCookieByKey({key: CONFIG_COOKIE.USER_AUTH_TOKEN_KEY});
+
         return {
           ...state,
           isLoggedIn: false,
