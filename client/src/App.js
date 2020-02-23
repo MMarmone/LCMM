@@ -11,6 +11,7 @@ import {CONFIG_FRONTEND as config} from './config';
 import {Dimmer, Loader} from "semantic-ui-react";
 import SubmitPluginLayout from "./pages/SubmitPluginLayout";
 import UserProfileLayout from "./pages/UserProfileLayout";
+import PluginLayout from "./pages/PluginLayout";
 
 function App() {
   // todo darkmode configurable
@@ -51,6 +52,10 @@ function App() {
 
           <Route path={config.URL_ADD_PLUGIN}>
             <SubmitPluginLayout />
+          </Route>
+
+          <Route path={config.URL_PLUGIN}>
+            <PluginLayout />
           </Route>
 
           <Route path={config.URL_USER_PROFILE}>

@@ -11,7 +11,7 @@ const Product = (name, desciption, like, value, version, author, image) => {
         <Container text textAlign='center'>
             <Header
             as='h1'
-            content='Plugin Name'
+            content='Plugins Name'
             inverted
             style={{
                 fontSize: props.mobile ? '2em' : '4em',
@@ -34,9 +34,9 @@ const Product = (name, desciption, like, value, version, author, image) => {
             {value !== null && <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>}
 
             <Image src={HOST+'/'+'pluginRef'} wrapped ui={false} onError={i => i.target.src=MyPlaceholderImage} />
-            
+
             <Text>{desciption}</Text>
-            
+
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -67,7 +67,7 @@ const Product = (name, desciption, like, value, version, author, image) => {
                     </tr>
                 </tbody>
             </Table>
-            
+
         </Container>
     )
 }

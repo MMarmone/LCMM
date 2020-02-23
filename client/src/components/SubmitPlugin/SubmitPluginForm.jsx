@@ -52,7 +52,7 @@ export default function SubmitPluginForm(props) {
                     messageHeader: 'Submit process successful',
                     success: true,
                     error: false,
-                    messageContent: 'You will be redirected shortly...' 
+                    messageContent: 'You will be redirected shortly...'
                 });
                 // Redirection à la page d'accueil //todo à changer après la création de l'url détail plugin
                 history.push(CONFIG_FRONTEND.URL_HOME);
@@ -104,7 +104,7 @@ export default function SubmitPluginForm(props) {
                         fluid
                         icon='plug'
                         iconPosition='left'
-                        placeholder='Plugin name'
+                        placeholder='Plugins name'
                         name='name'
                         type='text'
                         pattern={REGEX_EXPRESSIONS.MATCH_NON_EMPTY_AND_NON_SPACE_ONLY}
@@ -204,7 +204,7 @@ export default function SubmitPluginForm(props) {
                         fluid
                         icon='image outline icon'
                         iconPosition='left'
-                        placeholder='Plugin Image'
+                        placeholder='Plugins Image'
                         name='pluginImage'
                         type='file'
                         id='image'

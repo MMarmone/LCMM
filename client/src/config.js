@@ -23,6 +23,7 @@ const CONFIG_FRONTEND = {
     URL_LOGOUT: '/logout',
     URL_USER_PROFILE: '/profile',
     URL_ADD_PLUGIN: '/addPlugin',
+    URL_PLUGIN: '/Plugin',
     URL_CART: '/cart',
     URL_404: '*'
 };
