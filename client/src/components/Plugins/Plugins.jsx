@@ -5,7 +5,7 @@ import {
     Grid,
     Image,
     Card,
-    Icon
+    Icon, Header
 } from 'semantic-ui-react';
 import {HOST}  from '../../config';
 import MyPlaceholderImage from '../../assets/img/placeholder.png';
@@ -56,15 +56,22 @@ const Plugins = () => {
     return (
 
         <div>
-            <center><h1>Plugins</h1></center>
-
-            <Grid columns={3} container stackable verticalAlign='middle'>
+            <Grid columns={3} doubling container verticalAlign='middle'>
+                <Grid.Row>
+                    <Grid.Column width={12} >
+                        <Header
+                            as='h1'
+                            color='orange'
+                            icon='plug'
+                            content='Plugins' />
+                    </Grid.Column>
+                </Grid.Row>
                 <Grid.Row>
 
                     {
                         state.plugins.length &&
                         state.plugins.map((plugin) => (
-                            <Grid.Column width={5} >
+                            <Grid.Column width={4} >
                                 {card(plugin.name,plugin.description,plugin.likes,plugin.version,plugin.user,plugin.comments.length,plugin.pluginImage.substring(8))}
                             </Grid.Column>
                         ))}

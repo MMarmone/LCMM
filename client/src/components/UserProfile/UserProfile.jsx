@@ -160,15 +160,15 @@ const UserProfile = () => {
     return (
         <Tab menu={{fluid: true, vertical: true, tabular: true}} panes={[
             {
-                menuItem: 'My infos',
+                menuItem: { key: 'my-infos', icon: 'address card', content: 'My infos' },
                 render: () => <UserInfos {...userInfos} />
             },
             {
-                menuItem: 'My plugins',
+                menuItem: { key: 'my-plugins', icon: 'plug', content: 'My plugins' },
                 render: () => <Tab.Pane>Tab 2 Content</Tab.Pane>
             },
             {
-                menuItem: 'Settings',
+                menuItem: { key: 'settings', icon: 'settings', content: 'Settings' },
                 render: () => <Tab.Pane>Tab 3 Content</Tab.Pane>
             }
         ]}  />

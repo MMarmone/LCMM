@@ -12,16 +12,16 @@ const DesktopTopNavbar = function (props) {
 
     return (
         <Menu
-
             size='large'
             style={{
                 borderRadius: 0
             }}>
             <Container>
                 <Menu.Item
+                    color='orange'
                     as={Link}
                     active={isHomePage}
-                    to='/'>
+                    to={CONFIG_FRONTEND.URL_HOME}>
                     <Icon name='home' className="floated left"/>
                     Home
                 </Menu.Item>
@@ -78,12 +78,21 @@ const ConnectedUserMenuItems = (props) => {
         <React.Fragment>
 
             <Dropdown
+                color='orange'
+                className='orange link item'
+                style={{
+                    color: '#f2711c'
+                }}
                 text='Profile'
                 item
-                simple
-                className='link item'>
+                simple>
                 <Dropdown.Menu>
                     <Dropdown.Item
+                        color='orange'
+                        className='orange'
+                        style={{
+                            color: '#f2711c'
+                        }}
                         as={Link}
                         to={CONFIG_FRONTEND.URL_USER_PROFILE}>
                         <Icon name='user' />
@@ -91,17 +100,24 @@ const ConnectedUserMenuItems = (props) => {
                     </Dropdown.Item>
 
                     <Dropdown.Item
+                        color='orange'
+                        className='orange'
+                        style={{
+                            color: '#f2711c'
+                        }}
                         as={Link}
                         to={CONFIG_FRONTEND.URL_CART}>
                         <Icon name='cart' />
                         My cart
                     </Dropdown.Item>
 
-                    <Dropdown.Divider />
-
                     <Dropdown.Item
-                        inverted
                         color='orange'
+                        className='orange'
+                        style={{
+                            color: '#f2711c'
+                        }}
+                        inverted
                         as={Link}
                         to={CONFIG_FRONTEND.URL_ADD_PLUGIN}>
                         <Icon name='plus' />
@@ -111,6 +127,11 @@ const ConnectedUserMenuItems = (props) => {
                     <Dropdown.Divider />
 
                     <Dropdown.Item
+                        color='orange'
+                        className='orange'
+                        style={{
+                            color: '#f2711c'
+                        }}
                         as={Link}
                         to={CONFIG_FRONTEND.URL_LOGOUT}>
                         <Icon name='log out' />
@@ -130,6 +151,11 @@ const DisconnectedUserMenuItems = (props) => {
     return (
         <React.Fragment>
             <Menu.Item
+                color='orange'
+                className='orange'
+                style={{
+                    color: '#f2711c'
+                }}
                 active={isLoginPage}
                 as={Link}
                 to={CONFIG_FRONTEND.URL_LOGIN}>
@@ -137,6 +163,11 @@ const DisconnectedUserMenuItems = (props) => {
             </Menu.Item>
 
             <Menu.Item
+                color='orange'
+                className='orange'
+                style={{
+                    color: '#f2711c'
+                }}
                 active={isRegisterPage}
                 as={Link}
                 to={CONFIG_FRONTEND.URL_REGISTER}>
