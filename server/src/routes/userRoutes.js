@@ -1,6 +1,6 @@
 var express = require('express');
 var UserController = require('../controllers/userController');
-var auth = require('../middleware/auth');
+var {auth} = require('../middleware/auth');
 
 const multer = require('multer');
 
@@ -35,6 +35,10 @@ var UserRoutes = function(app)
                 auth,
                 upload.single('pluginImage'),
                 UserController.submissionForm);
+                
+    router.post('/users/me/updateProfile',
+                auth,
+                UserController.updateProfile);
 
     router.post('/users/me/logout',
                 auth,

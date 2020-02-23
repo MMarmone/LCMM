@@ -59,6 +59,26 @@ var UserController = {
       }
   },
 
+  updateProfile : async(req, res) => {
+    try {
+      console.log("test")
+      const token = req.header('authorization').split(' ')[1];
+      const data = jwt.verify(token, process.env.JWT_KEY)
+      const user = await User.findOne({ _id: data._id, 'tokens.token': token })
+      user.name = req.body.name
+      user.email = req.body.email
+      user.gender = req.body.gender
+      console.log("test")
+      user.save()
+      console.log("test")
+      res.send(user)
+    }catch (error) {
+
+      res.status(500).send(error)
+    }
+
+  },
+
   submissionForm : async(req, res) => {
         // save a the plugin form in db
         try {
@@ -77,7 +97,9 @@ var UserController = {
                 tags : req.body.tags,
                 urls : req.body.urls,
                 pluginImage : req.file.path,
-                user : user.name
+                isVerified : false,
+                user : user.name,
+                userEmail : user.email
             });
             plugin.save();
             res.send();
