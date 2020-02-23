@@ -1,11 +1,13 @@
 import {Button, Form, Message, Segment, Select} from "semantic-ui-react";
-import {CONFIG_COOKIE,CONFIG_DISPATCH_ACTIONS, REGEX_EXPRESSIONS} from "../../config";
+import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS, CONFIG_FRONTEND, REGEX_EXPRESSIONS} from "../../config";
 import {getCookieValueByKey} from "../../utils/cookies";
 import React, {useContext, useState} from "react";
 import {store} from "../StateProvider/StateProvider";
 import * as APIHandler from "../../api/apiHandler";
+import {useHistory} from "react-router-dom";
 export default function SubmitPluginForm(props) {
     const {dispatch} = useContext(store);
+    const history = useHistory();
     const [formState, setFormState] = useState({
         name: null,
         version: null,
@@ -50,8 +52,10 @@ export default function SubmitPluginForm(props) {
                     messageHeader: 'Submit process successful',
                     success: true,
                     error: false,
-                    messageContent: 'You will be redirected shortly...' // todo link if not
+                    messageContent: 'You will be redirected shortly...' 
                 });
+                // Redirection à la page d'accueil //todo à changer après la création de l'url détail plugin
+                history.push(CONFIG_FRONTEND.URL_HOME);
             })
             .catch(error => {
                 // Afficher le message d'erreur renvoyé par l'API
