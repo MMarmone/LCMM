@@ -49,9 +49,9 @@ export const tryRegister = ({name, email, password, gender}) => {
     });
 };
 
-export const trySubmitPlugin = ({name, version, description, isOpenSource, category, tags, urls, pluginImage}) => {
+export const trySubmitPlugin = ({token, name, version, description, isOpenSource, category, tags, urls, pluginImage}) => {
     return new Promise((resolve, reject) => {
-        API.submitPlugin({name, version, description, isOpenSource, category, tags, urls, pluginImage})
+        API.submitPlugin({token, name, version, description, isOpenSource, category, tags, urls, pluginImage})
             .then(handleFetch(resolve, reject).UwU_Then)
             .catch(handleFetch(resolve, reject).UwU_Catch);
     });

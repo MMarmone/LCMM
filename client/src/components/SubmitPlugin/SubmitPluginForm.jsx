@@ -1,5 +1,6 @@
 import {Button, Form, Message, Segment, Select} from "semantic-ui-react";
-import {CONFIG_DISPATCH_ACTIONS, REGEX_EXPRESSIONS} from "../../config";
+import {CONFIG_COOKIE,CONFIG_DISPATCH_ACTIONS, REGEX_EXPRESSIONS} from "../../config";
+import {getCookieValueByKey} from "../../utils/cookies";
 import React, {useContext, useState} from "react";
 import {store} from "../StateProvider/StateProvider";
 import * as APIHandler from "../../api/apiHandler";
@@ -33,6 +34,7 @@ export default function SubmitPluginForm(props) {
         });
         e.preventDefault();
         APIHandler.trySubmitPlugin({
+            token: getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY),
             name: formState.name,
             version: document.getElementById('version').files[0],
             description: formState.description,

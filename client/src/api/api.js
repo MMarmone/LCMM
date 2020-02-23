@@ -59,8 +59,37 @@ export function register({name, email, password, gender}) {
     })
 }
 
-
-export function submitPlugin({name, version, description, isOpenSource, category, tags, urls, pluginImage}) {
+/**
+ * Fetch l'API pour enregistrer un nouveau plugin
+ *
+ * @param {string} token
+ * @required
+ *  token d'identification
+ * @param {string} name
+ * @required
+ *  Nom du plugin
+ * @param {file} version
+ * @required
+ *  un zip contenant le plugin
+ * @param {string} description
+ * @required
+ *  description du plugin
+ * @param {boolean} isOpenSource
+ * @required
+ *  si le code est open source
+ * @param {string} category
+ * @required
+ *  category du plugin
+ * @param {string} tags
+ * tag décrivant le plugin
+ * @param {string} urls
+ * url menant à un tutoriel
+ * @param {file} pluginImage
+ * @required
+ *  image qui représente le plugin
+ * @returns {Promise<Response>}
+ */
+export function submitPlugin({token, name, version, description, isOpenSource, category, tags, urls, pluginImage}) {
 
     const fd = new FormData();
     fd.append('name',name);
@@ -75,7 +104,7 @@ export function submitPlugin({name, version, description, isOpenSource, category
 
         headers: {
             'Content-Type': 'multipart/form-data',
-            'authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTQ1NmM3MjVmYzgzMzUxOTBjODg0OWIiLCJpYXQiOjE1ODE2MDgwNTB9.dM74cceBMvVbUi_Z2vRuX2zw9WCSWAmnCzHa990AUWA'
+            'authorization': 'Bearer ' + token
         }
     })
 }
