@@ -8,7 +8,6 @@ import {
 } from 'semantic-ui-react';
 import ResponsiveContainer from "../components/Shared/ResponsiveContainer/ResponsiveContainer";
 import {store} from "../components/StateProvider/StateProvider";
-import { useHistory } from "react-router-dom";
 
 const HomeLayout = (props) => {
   const { dispatch } = useContext(store);

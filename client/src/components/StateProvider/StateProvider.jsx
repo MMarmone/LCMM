@@ -1,6 +1,7 @@
 import React, {createContext, useReducer} from 'react';
 import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS} from "../../config";
 import {getCookieValueByKey, refreshCookieExpirationDate} from "../../utils/cookies";
+import {tryGetUserInfo} from "../../api/apiHandler";
 
 /**
  * État global de l'Application
@@ -26,7 +27,13 @@ const initialState = {
 
   // Session infos
   isLoggedIn: false,
-  [CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]: null,
+  [CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]: null,  // user token
+  [CONFIG_COOKIE.USER_INFOS_KEY]: {
+    name: null,
+    email: null,
+    password: null,
+    gender: 'male'    // oui
+  },
   plugins :[]
 };
 
@@ -36,8 +43,13 @@ const initialState = {
   if (authCookie) {
     initialState.isLoggedIn = true;
     initialState[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY] = authCookie;
-    // todo refresh les cookies à chaque interaction car ça prouve que l'utilisateur est "actif"
+
     refreshCookieExpirationDate({key: CONFIG_COOKIE.USER_AUTH_TOKEN_KEY});
+
+    // si l'utilisateur est loggé, on sauvegarde ses userInfos
+    tryGetUserInfo({token: getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY)})
+        .then((_userInfos) => initialState[CONFIG_COOKIE.USER_INFOS_KEY] = _userInfos)
+        .catch(console.error);
   }
 })();
 
@@ -51,14 +63,15 @@ const StateProvider = ( { children } ) => {
         return {
           ...state,
           isLoggedIn: true,
-          userToken: action.payload
+          [CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]: action.payload
         };
 
       case CONFIG_DISPATCH_ACTIONS.LOGOUT:
         return {
           ...state,
           isLoggedIn: false,
-          userToken: null
+          [CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]: null,
+          [CONFIG_COOKIE.USER_INFOS_KEY]: null
         };
 
       case CONFIG_DISPATCH_ACTIONS.DISPLAY_LOADING:
@@ -80,6 +93,13 @@ const StateProvider = ( { children } ) => {
           ...state,
           plugins : action.plugins
         };
+
+      case CONFIG_DISPATCH_ACTIONS.SET_USER_INFO:
+        return {
+          ...state,
+          [CONFIG_COOKIE.USER_INFOS_KEY]: action.payload
+        };
+
       default:
         console.error(new Error("Unknown dispatch action called ('" + action.type + "')"));
         return state;

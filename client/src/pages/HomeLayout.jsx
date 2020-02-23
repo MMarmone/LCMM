@@ -1,33 +1,26 @@
-import React, {useContext, useState,useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {
   Button,
   Container,
   Divider,
-  Grid,
   Header,
-  Image,
-  List, Responsive,
   Segment
 } from 'semantic-ui-react';
 import ResponsiveContainer from "../components/Shared/ResponsiveContainer/ResponsiveContainer";
-import HomepageHeading from "../components/Shared/HomepageHeading/HomepageHeading";
-import {getWidth} from "../utils/utils";
 import {store} from "../components/StateProvider/StateProvider";
 import Plugins from "../components/Plugins/Plugins";
-import {CONFIG_BACKEND as config} from "../config";
+import {CONFIG_DISPATCH_ACTIONS} from "../config";
 import * as APIHandler from '../api/apiHandler'
 
 const HomeLayout = (props) => {
   // Accès à l'état global (contexte)
 
-  const { state, dispatch } = useContext(store);
-  const [plugins, setPlugins] = useState({
-    plugins :[]
-  });
+  const { dispatch } = useContext(store);
 
   useEffect(() => {APIHandler.tryGetPluginsList()
       .then(response => dispatch({
-            plugins:response
+            type: CONFIG_DISPATCH_ACTIONS.SET_PLUGINS,
+            plugins: response
           })
       )
   },[]);

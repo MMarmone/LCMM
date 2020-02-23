@@ -7,7 +7,6 @@ import MobileTopNavbar from "../../Mobile/TopNavbar/MobileTopNavbar";
 class MobileContainer extends Component {
     render() {
         const { children } = this.props;
-        const { inverted } = this.props;
         const { home } = this.props;
 
         return (

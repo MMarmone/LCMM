@@ -1,5 +1,5 @@
 import React, {useContext, useState} from "react";
-import {Button, Form, Grid, Header, Image, Message, Segment, Select} from "semantic-ui-react";
+import {Button, Form, Grid, Message, Segment, Select} from "semantic-ui-react";
 import ResponsiveContainer from "../components/Shared/ResponsiveContainer/ResponsiveContainer";
 import {store} from "../components/StateProvider/StateProvider";
 import {CONFIG_DISPATCH_ACTIONS, REGEX_EXPRESSIONS} from "../config";
