@@ -78,7 +78,9 @@ const StateProvider = ( { children } ) => {
       case CONFIG_DISPATCH_ACTIONS.SET_PLUGINS:
         return {
           ...state,
-          plugins : action.plugins
+          plugins : action.plugins,
+          verifiedPlugins: action.plugins.filter(plugin => plugin.isVerified),
+          unverifiedPlugins: action.plugins.filter(plugin => !plugin.isVerified)
         };
 
       case CONFIG_DISPATCH_ACTIONS.SET_USER_INFO:

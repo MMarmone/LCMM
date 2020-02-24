@@ -168,8 +168,8 @@ const UserPlugins = (props) => {
                       </Header>
                   </Grid.Column>
               </Grid.Row>
-              <Grid.Row>
 
+              <Grid.Row>
                   {
                       // liste de plugins vérifiés
                       (!!state.plugins && !!state.plugins.length) &&
@@ -179,7 +179,6 @@ const UserPlugins = (props) => {
                                   {PluginCard(plugin.name, plugin.description, plugin.likes, plugin.version, plugin.user, plugin.comments.length, plugin.pluginImage.substring(8))}
                               </Grid.Column>)
                       })
-                      // todo ceux non-vérifiés
                   }
               </Grid.Row>
 
@@ -197,8 +196,8 @@ const UserPlugins = (props) => {
                       </Header>
                   </Grid.Column>
               </Grid.Row>
-              <Grid.Row>
 
+              <Grid.Row>
                   {
                       // liste de plugins vérifiés
                       (!!state.plugins && !!state.plugins.length) &&
@@ -208,7 +207,6 @@ const UserPlugins = (props) => {
                                   {PluginCard(plugin.name, plugin.description, plugin.likes, plugin.version, plugin.user, plugin.comments.length, plugin.pluginImage.substring(8))}
                               </Grid.Column>)
                       })
-                      // todo ceux non-vérifiés
                   }
               </Grid.Row>
           </Grid>
