@@ -38,7 +38,7 @@ const card = (plugin, image) => (
                 </Button>
                 <Button basic color='blue'
                     as={Link}
-                    to={CONFIG_FRONTEND.URL_PLUGIN+"?plugin="+plugin._id}>
+                    to={CONFIG_FRONTEND.URL_PLUGIN + "?plugin=" + plugin._id}>
                     <Icon name='zoom'/>
                     Details
                 </Button>

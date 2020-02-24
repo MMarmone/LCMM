@@ -144,14 +144,3 @@ export function getUserInfo({ token }) {
     });
 }
 
-export function pluginWithId({ id }) {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-    return fetch(config.URL_GET_PLUGIN_BY_ID+"?id="+id, {
-        method: 'GET',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-            
-        }
-    });
-}

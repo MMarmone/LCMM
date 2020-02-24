@@ -46,16 +46,7 @@ export const tryGetPluginsList = ()=>{
         API.pluginsList()
             .then(handleFetch(resolve, reject).UwU_Then)
             .catch(handleFetch(resolve, reject).UwU_Catch);
-    });      
-};
-
-export const tryGetPluginWithId = (id)=>{
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-    return new Promise((resolve, reject) => {
-        API.pluginWithId(id)
-            .then(handleFetch(resolve, reject).UwU_Then)
-            .catch(handleFetch(resolve, reject).UwU_Catch);
-    });      
+    });
 };
 
 export const tryRegister = ({name, email, password, gender}) => {

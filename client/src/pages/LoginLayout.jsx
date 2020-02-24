@@ -4,17 +4,17 @@ import LoginForm from "../components/Login/LoginForm";
 import {Link} from "react-router-dom";
 import ResponsiveContainer from "../components/Shared/ResponsiveContainer/ResponsiveContainer";
 
-export default function LoginLayout (props) {
+export default function LoginLayout(props) {
 
     return (
-        <ResponsiveContainer >
-            <Grid textAlign='center' style={{ paddingTop: '5vh' }} verticalAlign='middle'>
-                <Grid.Column style={{ maxWidth: 600 }}>
+        <ResponsiveContainer>
+            <Grid textAlign='center' style={{paddingTop: '5vh'}} verticalAlign='middle'>
+                <Grid.Column style={{maxWidth: 600}}>
                     <Header as='h2' color='orange' textAlign='center'>
-                        <Image src={process.env.PUBLIC_URL + '/logo192.png'} /> Log-in to your account
+                        <Image src={process.env.PUBLIC_URL + '/logo192.png'}/> Log-in to your account
                     </Header>
 
-                    <LoginForm />
+                    <LoginForm/>
 
                     <Message>
                         No account ?&nbsp;<Link to='/register'>Register</Link>
