@@ -19,8 +19,7 @@ var PluginRoutes = function(app)
 
     router.get('/pluginById',async(req, res) => {
         try {
-            console.log("test")
-            const plugin = await Plugin.findByName(req.query.id);
+            const plugin = await Plugin.find({_id:req.query.pluginId});
             res.contentType('json');
             res.send(plugin)
         } catch (error) {
