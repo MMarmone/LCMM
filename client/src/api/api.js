@@ -148,6 +148,39 @@ export function getUserInfo({ token }) {
     });
 }
 
+function somethingFyPlugin({token, pluginId, isVerify}) {
+    return fetch(isVerify ? config.URL_VERIFY_PLUGIN : config.URL_UNVERIFY_PLUGIN, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer ' + token
+        },
+        body: {
+            pluginId
+        }
+    });
+}
+
+/**
+ * Confirme la vérification d'un plugin, pour qu'il soit disponible à la vente
+ * @param token
+ * @param pluginId
+ */
+export function verifyPlugin({token, pluginId}) {
+    return somethingFyPlugin({token, pluginId, isVerify: true});
+}
+
+/**
+ * Retire/dé-vérifie un plugin, le rendant indisponible à la vente
+ * @param token
+ * @param pluginId
+ * @returns {Promise<Response>}
+ */
+export function unverifyPlugin({token, pluginId}) {
+    return somethingFyPlugin({token, pluginId, isVerify: false});
+}
+
 export function addToCart({ token,pluginId }) {
     return fetch(config.URL_ADD_TO_CART, {
         method: 'POST',
