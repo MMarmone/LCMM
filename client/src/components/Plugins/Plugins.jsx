@@ -5,7 +5,7 @@ import {CONFIG_FRONTEND, HOST} from '../../config';
 import MyPlaceholderImage from '../../assets/img/placeholder.png';
 import {Link} from "react-router-dom";
 
-const card = (name, desciption, like, version, author, nbComments, image) => (
+const card = (id,name, desciption, like, version, author, nbComments, image) => (
     <Card>
         <Image src={HOST + '/' + image} height={200} className='no-radius' centered
                onError={i => i.target.src = MyPlaceholderImage}/>
@@ -77,7 +77,7 @@ const Plugins = () => {
                         state.plugins.length &&
                         state.plugins.map((plugin) => (
                             <Grid.Column width={4}>
-                                {card(plugin.name, plugin.description, plugin.likes, plugin.version, plugin.user, plugin.comments.length, plugin.pluginImage.substring(8))}
+                                {card(plugin.id,plugin.name, plugin.description, plugin.likes, plugin.version, plugin.user, plugin.comments.length, plugin.pluginImage.substring(8))}
                             </Grid.Column>
                         ))}
                 </Grid.Row>
