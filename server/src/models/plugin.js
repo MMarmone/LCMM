@@ -70,6 +70,14 @@ pluginSchema.statics.findByName = async (name) => {
     }
     return plugin
 };
+pluginSchema.statics.verifyNameNotUsed = async (name) => {
+    // Search for a user by email.
+    const plugin = await Plugin.findOne({ name} )
+    if (plugin) {
+        throw new Error({ error: 'name already in use' })
+    }
+    return plugin
+};
 
 pluginSchema.statics.findAll = async () => {
     return Plugin.find({});
