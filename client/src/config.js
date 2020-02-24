@@ -24,6 +24,7 @@ const CONFIG_FRONTEND = {
     URL_USER_PROFILE: '/profile',
     URL_ADD_PLUGIN: '/addPlugin',
     URL_PLUGIN: '/Plugin',
+    URL_PLAY_PLUGIN:'/playPlugin',
     URL_CART: '/cart',
     URL_404: '*'
 };

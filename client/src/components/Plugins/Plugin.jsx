@@ -1,12 +1,13 @@
-import {Card, Grid, Icon, Image} from "semantic-ui-react";
+import {Button, Card, Grid, Icon, Image} from "semantic-ui-react";
 import React, {useContext} from "react";
 import {store} from "../StateProvider/StateProvider";
-import {HOST} from "../../config";
+import {CONFIG_FRONTEND, HOST} from "../../config";
 import MyPlaceholderImage from "../../assets/img/placeholder.png";
+import {Link} from "react-router-dom";
 
 const card = (name, desciption, like, version, author, nbComments, image) => (
     <Card style={{
-        width:600
+        width:'100%'
     }}>
         <Card.Content>
             <Card.Header>{name}</Card.Header>
@@ -25,9 +26,9 @@ const card = (name, desciption, like, version, author, nbComments, image) => (
                 }}>
                 {desciption}
             </Card.Description>
-            <Image src={HOST + '/' + image} height={200} className='no-radius' centered
-                   onError={i => i.target.src = MyPlaceholderImage}/>
         </Card.Content>
+        <Image src={HOST + '/' + image} height={200} className='no-radius' centered
+               onError={i => i.target.src = MyPlaceholderImage}/>
         <Card.Content extra>
             <span className="right floated">
               <i className="heart outline like icon"/>
@@ -35,6 +36,16 @@ const card = (name, desciption, like, version, author, nbComments, image) => (
             </span>
             <i className="comment icon"/>
             {nbComments}
+        </Card.Content>
+        <Card.Content>
+            <div className='ui two buttons'>
+                <Button basic color='blue'
+                        as={Link}
+                        to={CONFIG_FRONTEND.URL_PLAY_PLUGIN}>
+                    <Icon name='play'/>
+                    Jouer le plugin
+                </Button>
+            </div>
         </Card.Content>
     </Card>
 );
