@@ -91,6 +91,9 @@ export function pluginsList(){
  * @param {boolean} isOpenSource
  * @required
  *  si le code est open source
+ * @param {number} price
+ * @required
+ * prix du plugin
  * @param {string} category
  * @required
  *  category du plugin
@@ -103,13 +106,14 @@ export function pluginsList(){
  *  image qui représente le plugin
  * @returns {Promise<Response>}
  */
-export function submitPlugin({token, name, version,pluginZip, description, isOpenSource, category, tags, urls, pluginImage}) {
+export function submitPlugin({token, name, version,pluginZip, description, isOpenSource, price, category, tags, urls, pluginImage}) {
 
     const fd = new FormData();
     fd.append('name',name);
     fd.append('version',version);
     fd.append('description',description);
     fd.append('isOpenSource',isOpenSource);
+    fd.append('price',price);
     fd.append('category',category);
     fd.append('tags',tags);
     fd.append('urls',urls);
