@@ -37,8 +37,8 @@ export const PluginCard = (plugin, image) => (
                     Cart
                 </Button>
                 <Button basic color='blue'
-                    as={Link}
-                    to={CONFIG_FRONTEND.URL_PLUGIN + "?plugin=" + plugin._id}>
+                        as={Link}
+                        to={CONFIG_FRONTEND.URL_PLUGIN + "?plugin=" + plugin._id}>
                     <Icon name='zoom'/>
                     Details
                 </Button>
@@ -75,11 +75,13 @@ const Plugins = () => {
 
                     {
                         state.plugins.length &&
-                        state.plugins.map((plugin) => (
-                            <Grid.Column width={4}>
-                                {PluginCard(plugin, plugin.pluginImage.substring(8))}
-                            </Grid.Column>
-                        ))}
+                        state.plugins.map((plugin) => {
+                            if(plugin.isVerified)
+                                return <Grid.Column width={4}>
+                                    {PluginCard(plugin, plugin.pluginImage.substring(8))}
+                                </Grid.Column>
+                        })
+                    }
                 </Grid.Row>
             </Grid>
         </div>
