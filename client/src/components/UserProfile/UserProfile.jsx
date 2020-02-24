@@ -176,7 +176,7 @@ const UserPluginsTab = (props) => {
             state.plugins.map((plugin) => {
               if (plugin.userEmail === state[CONFIG_COOKIE.USER_INFOS_KEY].email && plugin.isVerified)
                 return (<Grid.Column width={4}>
-                  {PluginCard(plugin.name, plugin.description, plugin.likes, plugin.version, plugin.user, plugin.comments.length, plugin.pluginImage.substring(8))}
+                  {PluginCard(plugin, plugin.pluginImage.substring(8))}
                 </Grid.Column>)
             })
           }
@@ -204,7 +204,7 @@ const UserPluginsTab = (props) => {
             state.plugins.map((plugin) => {
               if (plugin.userEmail === state[CONFIG_COOKIE.USER_INFOS_KEY].email && !plugin.isVerified)
                 return (<Grid.Column width={4}>
-                  {PluginCard(plugin.name, plugin.description, plugin.likes, plugin.version, plugin.user, plugin.comments.length, plugin.pluginImage.substring(8))}
+                  {PluginCard(plugin, plugin.pluginImage.substring(8))}
                 </Grid.Column>)
             })
           }

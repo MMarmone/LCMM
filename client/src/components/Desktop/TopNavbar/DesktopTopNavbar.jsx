@@ -20,6 +20,10 @@ const DesktopTopNavbar = function (props) {
             <Container>
                 <Menu.Item
                     color='orange'
+                    className='orange'
+                    style={{
+                        color: '#f2711c'
+                    }}
                     as={Link}
                     active={isHomePage}
                     to={CONFIG_FRONTEND.URL_HOME}>

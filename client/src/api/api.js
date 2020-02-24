@@ -143,7 +143,7 @@ export function getUserInfo({ token }) {
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',
-            'authorization': 'Basic ' + token
+            'authorization': 'Bearer ' + token
         }
     });
 }

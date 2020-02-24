@@ -1,4 +1,4 @@
-import {Button, Card, Icon, Image} from "semantic-ui-react";
+import {Button, Card, Icon, Image, Message} from "semantic-ui-react";
 import React, {useContext} from "react";
 import {store} from "../StateProvider/StateProvider";
 import {CONFIG_FRONTEND, HOST} from "../../config";
@@ -87,9 +87,11 @@ const card = (plugin, nbComments, image) => (
 export default function Plugin() {
     const {state} = useContext(store);
     const plugin = state.plugins.filter(p => p._id === window.location.href.toString().split('=')[1])[0];
+    if (!plugin)
+        return <Message error>Something went wrong</Message>
     return (
         <div>
-            {card(plugin, plugin.comments.length, plugin.pluginImage.substring(8))}
+            {card(plugin, plugin.comments ? plugin.comments.length : 0, plugin.pluginImage.substring(8))}
         </div>
     )
 }
