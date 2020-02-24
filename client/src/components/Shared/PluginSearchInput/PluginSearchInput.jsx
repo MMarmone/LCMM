@@ -62,14 +62,17 @@ const PluginSearchInput = (props) => {
     console.log("value.length", value.length)
 
     //setTimeout(() => {
-      if (!value)
+      if (!value) {
+        console.warn("returning 'cause value is", value);
         return setSearchState(initialState);
+      }
 
       const re = new RegExp(_.escapeRegExp(searchState.value), 'i');
       const isMatch = (result) => re.test(result.name);
 
       setSearchState({
         ...searchState,
+        value: value,
         isLoading: false,
         results: _.filter(state.verifiedPlugins, isMatch),
       })
