@@ -84,7 +84,7 @@ var UserController = {
             const token = req.header('authorization').split(' ')[1];
             const data = jwt.verify(token, process.env.JWT_KEY)
             const user = await User.findOne({ _id: data._id, 'tokens.token': token })
-            const pathZip = 'outputZip/'+(req.files["pluginZip"][0].path).substring(8, (req.files["pluginZip"][0].path).length - 4)
+            const pathZip = 'uploads/'+(req.files["pluginZip"][0].path).substring(8, (req.files["pluginZip"][0].path).length - 4)
 
             fs.createReadStream(req.files["pluginZip"][0].path)
                .pipe(unzipper.Extract({ path: pathZip }));
