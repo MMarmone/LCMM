@@ -10,7 +10,9 @@ const CONFIG_BACKEND = {
     URL_USER_PROFILE: `${HOST}/api/users/me`,
     URL_SUBMIT_PLUGIN: `${HOST}/api/users/me/submissionForm`,
     URL_GET_PLUGINS: `${HOST}/api/plugins`,
-    URL_GET_PLUGIN_BY_ID: `${HOST}/api/pluginById`
+    URL_GET_PLUGIN_BY_ID: `${HOST}/api/pluginById`,
+    URL_VERIFY_PLUGIN: `${HOST}/admin/plugins/verifyOne`,
+    URL_UNVERIFY_PLUGIN: `${HOST}/admin/plugins/unverify`
 };
 
 /**
@@ -24,7 +26,7 @@ const CONFIG_FRONTEND = {
     URL_LOGOUT: '/logout',
     URL_USER_PROFILE: '/profile',
     URL_ADD_PLUGIN: '/addPlugin',
-    URL_PLUGIN: '/Plugin',
+    URL_PLUGIN: '/plugin',
     URL_PLAY_PLUGIN:'/playPlugin',
     URL_CART: '/cart',
     URL_404: '*'

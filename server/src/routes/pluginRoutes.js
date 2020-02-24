@@ -56,18 +56,38 @@ var PluginRoutes = function(app)
                 pluginId,
                 {$set:{isVerified:true}},
                 { new: true},
-                    function(err, model) {
+                function(err, model) {
                     if(err){
                         console.log(err);
                         return res.send(err);
                     }
-                    }
-                );
+                }
+            );
             res.send()
         } catch (error) {
             res.status(500).send({error: error.message})
         }
-     });
+    });
+
+    router.post('/admin/plugins/unverify', adminAuth, async(req, res) => {
+        try {
+            const pluginId = req.body.pluginId;
+            await Plugin.findByIdAndUpdate(
+                pluginId,
+                {$set:{isVerified:false}},
+                { new: true},
+                function(err, model) {
+                    if(err){
+                        console.log(err);
+                        return res.send(err);
+                    }
+                }
+            );
+            res.send()
+        } catch (error) {
+            res.status(500).send({error: error.message})
+        }
+    });
 
 
     /*

@@ -5,7 +5,7 @@ import {CONFIG_FRONTEND, HOST} from '../../config';
 import MyPlaceholderImage from '../../assets/img/placeholder.png';
 import {Link} from "react-router-dom";
 
-export const PluginCard = (plugin, image) => (
+export const PluginCard = (plugin, image, type="shop") => (
     <Card>
         <Image src={HOST + '/' + image} height={200} className='no-radius' centered
                onError={i => i.target.src = MyPlaceholderImage}/>
@@ -32,10 +32,13 @@ export const PluginCard = (plugin, image) => (
 
         <Card.Content>
             <div className='ui two buttons'>
-                <Button basic color='orange'>
-                    <Icon name='cart plus'/>
-                    Cart
-                </Button>
+                {
+                    type === "shop" &&
+                    <Button basic color='orange'>
+                        <Icon name='cart plus'/>
+                        Cart
+                    </Button>
+                }
                 <Button basic color='blue'
                         as={Link}
                         to={CONFIG_FRONTEND.URL_PLUGIN + "?plugin=" + plugin._id}>

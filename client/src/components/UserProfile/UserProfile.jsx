@@ -204,7 +204,7 @@ const UserPluginsTab = (props) => {
             state.plugins.map((plugin) => {
               if (plugin.userEmail === state[CONFIG_COOKIE.USER_INFOS_KEY].email && !plugin.isVerified)
                 return (<Grid.Column width={4}>
-                  {PluginCard(plugin, plugin.pluginImage.substring(8))}
+                  {PluginCard(plugin, plugin.pluginImage.substring(8), "my-unverified")}
                 </Grid.Column>)
             })
           }
@@ -229,11 +229,11 @@ const UserProfile = () => {
     ...state[CONFIG_COOKIE.USER_INFOS_KEY]              // user values from "cache"
   });
 
-  // async live user values
+  // async refresh with live user values
   useEffect(() => {
     tryGetUserInfo({token: getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY)})
       .then(setUserInfos)
-      .catch(console.warn);
+      .catch(console.error);
   }, []);
 
   return (
