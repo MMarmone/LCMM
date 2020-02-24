@@ -5,18 +5,18 @@ import {CONFIG_FRONTEND, HOST} from '../../config';
 import MyPlaceholderImage from '../../assets/img/placeholder.png';
 import {Link} from "react-router-dom";
 
-const card = (id,name, desciption, like, version, author, nbComments, image) => (
+const card = (plugin, image) => (
     <Card>
         <Image src={HOST + '/' + image} height={200} className='no-radius' centered
                onError={i => i.target.src = MyPlaceholderImage}/>
         <Card.Content>
-            <Card.Header>{name}</Card.Header>
+            <Card.Header>{plugin.name}</Card.Header>
             <Card.Meta>
-                <span>{version}</span>
+                <span>{plugin.version}</span>
                 <span className="right floated">
           <a>
           <Icon name='user'/>
-              {author}
+              {plugin.author}
           </a>
         </span>
             </Card.Meta>
@@ -26,7 +26,7 @@ const card = (id,name, desciption, like, version, author, nbComments, image) => 
                     height: '150px',
                     overflow: 'auto'
                 }}>
-                {desciption}
+                {plugin.description}
             </Card.Description>
         </Card.Content>
 
@@ -38,7 +38,7 @@ const card = (id,name, desciption, like, version, author, nbComments, image) => 
                 </Button>
                 <Button basic color='blue'
                     as={Link}
-                    to={CONFIG_FRONTEND.URL_PLUGIN}>
+                    to={CONFIG_FRONTEND.URL_PLUGIN+"?plugin="+plugin._id}>
                     <Icon name='zoom'/>
                     Details
                 </Button>
@@ -47,10 +47,10 @@ const card = (id,name, desciption, like, version, author, nbComments, image) => 
         <Card.Content extra>
     <span className="right floated">
       <i className="heart outline like icon"/>
-        {like}
+        {plugin.likes}
     </span>
             <i className="comment icon"/>
-            {nbComments}
+            {plugin.comments.length}
 
         </Card.Content>
     </Card>
@@ -77,7 +77,7 @@ const Plugins = () => {
                         state.plugins.length &&
                         state.plugins.map((plugin) => (
                             <Grid.Column width={4}>
-                                {card(plugin.id,plugin.name, plugin.description, plugin.likes, plugin.version, plugin.user, plugin.comments.length, plugin.pluginImage.substring(8))}
+                                {card(plugin, plugin.pluginImage.substring(8))}
                             </Grid.Column>
                         ))}
                 </Grid.Row>

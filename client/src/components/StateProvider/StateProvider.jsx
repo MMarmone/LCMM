@@ -15,6 +15,7 @@ import {tryGetUserInfo} from "../../api/apiHandler";
  *  isLoggedIn: boolean,
  *  darkMode: boolean
  *  plugins : list
+ *  plugin : Object
  *  }}
  */
 const initialState = {
@@ -34,7 +35,8 @@ const initialState = {
     password: null,
     gender: 'male'    // oui
   },
-  plugins :[]
+  plugins :[],
+  plugin : null
 };
 
 // Initialiser l'état global à partir des Cookies
@@ -102,6 +104,12 @@ const StateProvider = ( { children } ) => {
           [CONFIG_COOKIE.USER_INFOS_KEY]: action.payload
         };
 
+      case CONFIG_DISPATCH_ACTIONS.SET_PLUGIN:
+          return {
+            ...state,
+            plugin : action.plugin
+          };
+  
       default:
         console.error(new Error("Unknown dispatch action called ('" + action.type + "')"));
         return state;

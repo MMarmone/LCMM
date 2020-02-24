@@ -9,7 +9,8 @@ const CONFIG_BACKEND = {
     URL_LOGIN: `${HOST}/api/users/login`,
     URL_USER_PROFILE: `${HOST}/api/users/me`,
     URL_SUBMIT_PLUGIN: `${HOST}/api/users/me/submissionForm`,
-    URL_GET_PLUGINS: `${HOST}/api/plugins`
+    URL_GET_PLUGINS: `${HOST}/api/plugins`,
+    URL_GET_PLUGIN_BY_ID: `${HOST}/api/pluginById`
 };
 
 /**

@@ -17,6 +17,17 @@ var PluginRoutes = function(app)
         }
     });
 
+    router.get('/pluginById',async(req, res) => {
+        try {
+            console.log("test")
+            const plugin = await Plugin.findByName(req.query.id);
+            res.contentType('json');
+            res.send(plugin)
+        } catch (error) {
+            res.status(500).send({error: error.message})
+        }
+    });
+
     router.get('/plugins',async(req, res) => {
         try {
         const plugins = await Plugin.find({ 'isVerified': true }, function (err, plugin) {
