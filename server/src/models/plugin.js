@@ -19,6 +19,7 @@ var pluginSchema = new Schema({
     },
     isOpensource: {
         type: Boolean,
+        require :true
     },
     category:{
         type : String,
@@ -50,6 +51,9 @@ var pluginSchema = new Schema({
     userEmail : {
         type : String,
         require : true
+    },
+    price : {
+        type :String,
     },
     comments : [{
         author : { type : String},

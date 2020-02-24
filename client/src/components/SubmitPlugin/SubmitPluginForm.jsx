@@ -15,6 +15,7 @@ export default function SubmitPluginForm(props) {
         description: null,
         isOpenSource: null,
         category: null,
+        price : null,
         tags: null,
         urls: null,
         pluginImage: null,
@@ -43,6 +44,7 @@ export default function SubmitPluginForm(props) {
             pluginZip: document.getElementById('pluginZip').files[0],
             description: formState.description,
             isOpenSource: true,
+            price : formState.price,
             category: formState.category,
             tags: formState.tags,
             urls: formState.urls,
@@ -114,7 +116,7 @@ export default function SubmitPluginForm(props) {
                     <Form.Input
                         required
                         fluid
-                        icon='building'
+                        icon='setting'
                         iconPosition='left'
                         placeholder='Version'
                         name='version'
@@ -123,7 +125,16 @@ export default function SubmitPluginForm(props) {
                     <Form.Input
                         required
                         fluid
-                        icon='building'
+                        icon='money'
+                        iconPosition='left'
+                        placeholder='Price'
+                        name='price'
+                        type='number'
+                        onChange={handleChange}/>
+                    <Form.Input
+                        required
+                        fluid
+                        icon='file archive'
                         iconPosition='left'
                         placeholder='Plugin files zip'
                         name='pluginZip'

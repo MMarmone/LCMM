@@ -4,6 +4,7 @@ import {store} from "../StateProvider/StateProvider";
 import {CONFIG_FRONTEND, HOST} from "../../config";
 import MyPlaceholderImage from "../../assets/img/placeholder.png";
 import {Link} from "react-router-dom";
+import ResponsiveContainer from "../Shared/ResponsiveContainer/ResponsiveContainer";
 
 const card = (id, name, description, like, version, author, nbComments, image) => (
     <Card style={{
