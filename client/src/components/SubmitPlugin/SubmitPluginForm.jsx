@@ -40,7 +40,7 @@ export default function SubmitPluginForm(props) {
         APIHandler.trySubmitPlugin({
             token: getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY),
             name: formState.name,
-            version: formState.version, 
+            version: formState.version,
             pluginZip: document.getElementById('pluginZip').files[0],
             description: formState.description,
             isOpenSource: true,
@@ -230,7 +230,7 @@ export default function SubmitPluginForm(props) {
                         name='pluginImage'
                         type='file'
                         id='image'
-                        accept=".png, .jpeg"
+                        accept=".png, .jpeg,.jpg"
                         onChange={handleChange}/>
                     <Button
                         color='orange'

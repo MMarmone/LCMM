@@ -12,6 +12,7 @@ import {ERRORS} from "../config";
 const handleFetch = (resolve, reject) => {
     return {
         UwU_Then: async (response) => {
+            console.log(response);
             if (response.ok) {
                 if (/(application|text)\/json/.test(response.headers.get('content-type')))
                     resolve(response.json());
@@ -57,9 +58,9 @@ export const tryRegister = ({name, email, password, gender}) => {
     });
 };
 
-export const trySubmitPlugin = ({token, name, version,pluginZip, description, isOpenSource, category, tags, urls, pluginImage}) => {
+export const trySubmitPlugin = ({token, name, version,pluginZip, description, isOpenSource, price, category, tags, urls, pluginImage}) => {
     return new Promise((resolve, reject) => {
-        API.submitPlugin({token, name, version,pluginZip, description, isOpenSource, category, tags, urls, pluginImage})
+        API.submitPlugin({token, name, version,pluginZip, description, isOpenSource, price, category, tags, urls, pluginImage})
             .then(handleFetch(resolve, reject).UwU_Then)
             .catch(handleFetch(resolve, reject).UwU_Catch);
     });
