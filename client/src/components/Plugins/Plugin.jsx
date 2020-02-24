@@ -6,18 +6,48 @@ import MyPlaceholderImage from "../../assets/img/placeholder.png";
 import {Link} from "react-router-dom";
 import ResponsiveContainer from "../Shared/ResponsiveContainer/ResponsiveContainer";
 
-const card = (id, name, description, like, version, author, nbComments, image) => (
+const comment = (plugin)=>(
+    <div class="ui comments">
+    <h3 class="ui dividing header">Comments</h3>
+    {plugin.comments.map((comment) => (
+        <div class="comment">
+            <div class="content">
+            <a class="author">{comment.author}</a>
+            <div class="metadata">
+                <span class="date">{comment.posted}</span>
+            </div>
+            <div class="text">
+               {comment.value}
+            </div>
+            <div class="actions">
+                <a class="reply">Reply</a>
+            </div>
+            </div>
+        </div>))}
+    <form class="ui reply form">
+        <div class="field">
+        <textarea></textarea>
+        </div>
+        <div class="ui blue labeled submit icon button">
+        <i class="icon edit"></i> Add Reply
+        </div>
+    </form>
+   </div>
+)
+
+const card = (plugin, nbComments, image) => (
+    <div>
     <Card style={{
         width: '100%'
     }}>
         <Card.Content>
-            <Card.Header>{name}</Card.Header>
+            <Card.Header>{plugin.name}</Card.Header>
             <Card.Meta>
-                <span>{version}</span>
+                <span>{plugin.version}</span>
                 <span className="right floated">
                   <a>
                   <Icon name='user'/>
-                      {author}
+                      {plugin.author}
                   </a>
                 </span>
             </Card.Meta>
@@ -25,7 +55,7 @@ const card = (id, name, description, like, version, author, nbComments, image) =
                 style={{
                     textAlign: 'justify'
                 }}>
-                {description}
+                {plugin.description}
             </Card.Description>
         </Card.Content>
         <Image src={HOST + '/' + image} height={200} className='no-radius' centered
@@ -33,22 +63,24 @@ const card = (id, name, description, like, version, author, nbComments, image) =
         <Card.Content extra>
             <span className="right floated">
               <i className="heart outline like icon"/>
-                {like}
+                {plugin.likes}
             </span>
-            <i className="comment icon"/>
-            {nbComments}
         </Card.Content>
         <Card.Content>
             <div className='ui two buttons'>
                 <Button basic color='blue'
                         as={Link}
-                        to={CONFIG_FRONTEND.URL_PLAY_PLUGIN + "?plugin=" + id}>
+                        to={CONFIG_FRONTEND.URL_PLAY_PLUGIN + "?plugin=" + plugin._id}>
                     <Icon name='play'/>
                     Jouer le plugin
                 </Button>
             </div>
-        </Card.Content>
-    </Card>
+       
+            </Card.Content>
+        </Card>
+         {comment(plugin)}
+        </div>
+       
 );
 
 
@@ -57,7 +89,7 @@ export default function Plugin() {
     const plugin = state.plugins.filter(p => p._id === window.location.href.toString().split('=')[1])[0];
     return (
         <div>
-            {card(plugin._id, plugin.name, plugin.description, plugin.likes, plugin.version, plugin.user, plugin.comments.length, plugin.pluginImage.substring(8))}
+            {card(plugin, plugin.comments.length, plugin.pluginImage.substring(8))}
         </div>
     )
 }
