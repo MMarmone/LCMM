@@ -10,18 +10,14 @@ class MobileContainer extends Component {
         const { home } = this.props;
 
         return (
-            <Responsive
-                as={Sidebar.Pushable}
-                getWidth={getWidth}
-                maxWidth={Responsive.onlyMobile.maxWidth}
-            >
-                <MobileTopNavbar
-                    home={home}
-
-                >
-                    {children}
-                </MobileTopNavbar>
-            </Responsive>
+          <Responsive
+            as={Sidebar.Pushable}
+            getWidth={getWidth}
+            maxWidth={Responsive.onlyMobile.maxWidth}>
+              <MobileTopNavbar home={home}>
+                  {children}
+              </MobileTopNavbar>
+          </Responsive>
         )
     }
 }

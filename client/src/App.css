@@ -26,6 +26,28 @@
 }
 
 .no-radius,
+.no-radius .prompt,
 .no-radius > img {
   border-radius: 0 !important;
+}
+
+.orange .search.icon {
+  background-color: #f2711c !important;
+  color: white;
+}
+.no-icon .search.icon {
+  display: none;
+}
+.no-icon .ui.icon.input>input {
+  padding-right: .67857143em !important;
+}
+
+#search-plugin,
+.ui.fluid.search > div.ui.icon.input {
+  width: 100%
+}
+
+.ui.search > .results {
+  overflow-y: auto;
+  max-height: 420px;
 }

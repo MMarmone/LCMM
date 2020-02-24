@@ -15,7 +15,7 @@ const HomeLayout = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    new Promise(resolve => setTimeout(resolve, 350))
+    new Promise(resolve => setTimeout(resolve, 750))
       .then(() => dispatch({type: 'logout'}))
       .then(() => history.push(CONFIG_FRONTEND.URL_HOME));
 

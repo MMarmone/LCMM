@@ -3,6 +3,7 @@ import React, {useContext} from "react";
 import {Link, useRouteMatch} from "react-router-dom";
 import {store} from "../../StateProvider/StateProvider";
 import {CONFIG_FRONTEND} from "../../../config";
+import PluginSearchInput from "../../Shared/PluginSearchInput/PluginSearchInput";
 
 const DesktopTopNavbar = function (props) {
     // Accès à l'état global (contexte)
@@ -26,18 +27,13 @@ const DesktopTopNavbar = function (props) {
                     Home
                 </Menu.Item>
 
-                {   // todo le search input doit devenir un composant à part qui filtre les résultats d'un dataset donné
+                {
                     isHomePage &&
                     <Menu.Item
                         style={{
                             flexGrow:1
                         }}>
-                        <Input
-                            action={{
-                                icon: 'search',
-                                color: 'orange'
-                            }}
-                            placeholder='Search...'/>
+                        <PluginSearchInput plugins={state.plugins} />
                     </Menu.Item>
                 }
 
