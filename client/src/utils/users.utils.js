@@ -1,4 +1,4 @@
-import {deleteCookieByKey, setCookie} from "./cookies";
+import {deleteCookieByKey, setCookie} from "./cookies.utils";
 import {CONFIG_COOKIE} from "../config";
 
 const disconnectUser = () => {

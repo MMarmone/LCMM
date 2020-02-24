@@ -29,11 +29,8 @@ var PluginRoutes = function(app)
 
     router.get('/plugins',async(req, res) => {
         try {
-        const plugins = await Plugin.find({ 'isVerified': true }, function (err, plugin) {
-            if (err) return handleError(err);
-           
-            res.send(plugin)
-          });
+            const plugins = await Plugin.findAll();
+            res.send(plugins)
         } catch (error) {
             res.status(500).send({error: error.message})
         }

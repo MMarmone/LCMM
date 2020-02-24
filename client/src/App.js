@@ -21,8 +21,6 @@ function App() {
 
   const {state} = useContext(store);
 
-
-
   return (
       <BrowserRouter>
 

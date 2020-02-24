@@ -5,7 +5,7 @@ import * as APIHandler from '../../api/apiHandler'
 import {store} from "../StateProvider/StateProvider";
 import {CONFIG_DISPATCH_ACTIONS, CONFIG_FRONTEND, REGEX_EXPRESSIONS} from "../../config";
 import { useHistory } from "react-router-dom";
-import {saveUserAuthToken} from "../../utils/users";
+import {saveUserAuthToken} from "../../utils/users.utils";
 
 export default function LoginForm(props) {
   const {dispatch} = useContext(store);

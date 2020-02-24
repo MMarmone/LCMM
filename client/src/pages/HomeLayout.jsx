@@ -12,12 +12,14 @@ const HomeLayout = (props) => {
   // Accès à l'état global (contexte)
   const { dispatch } = useContext(store);
 
+  // live refresh de la liste de plugins
   useEffect(() => {APIHandler.tryGetPluginsList()
       .then(response => dispatch({
             type: CONFIG_DISPATCH_ACTIONS.SET_PLUGINS,
             plugins: response
           })
       )
+    .catch(console.error); // histoire de pas péter l'App sur une vieille erreur
   },[]);
 
   return (

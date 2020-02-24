@@ -3,7 +3,7 @@ import {Button, Form, Message, Segment, Select} from 'semantic-ui-react'
 import * as APIHandler from '../../api/apiHandler'
 import {CONFIG_DISPATCH_ACTIONS, CONFIG_FRONTEND, REGEX_EXPRESSIONS} from "../../config";
 import {store} from "../StateProvider/StateProvider";
-import {saveUserAuthToken} from "../../utils/users";
+import {saveUserAuthToken} from "../../utils/users.utils";
 import { useHistory } from "react-router-dom";
 
 // todo refactorer pour ne pas avoir le C/C du code LoginForm

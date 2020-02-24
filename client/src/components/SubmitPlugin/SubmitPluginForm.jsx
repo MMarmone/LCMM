@@ -1,6 +1,6 @@
 import {Button, Form, Message, Segment, Select} from "semantic-ui-react";
 import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS, CONFIG_FRONTEND, REGEX_EXPRESSIONS} from "../../config";
-import {getCookieValueByKey} from "../../utils/cookies";
+import {getCookieValueByKey} from "../../utils/cookies.utils";
 import React, {useContext, useState} from "react";
 import {store} from "../StateProvider/StateProvider";
 import * as APIHandler from "../../api/apiHandler";

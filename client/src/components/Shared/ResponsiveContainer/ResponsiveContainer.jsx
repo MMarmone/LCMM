@@ -3,7 +3,7 @@ import React, {useContext, useEffect} from "react";
 import DesktopContainer from '../../Desktop/Container/DesktopContainer';
 import MobileContainer from '../../Mobile/Container/MobileContainer';
 import { useLocation } from 'react-router-dom';
-import {getCookieValueByKey, refreshCookieExpirationDate} from "../../../utils/cookies";
+import {getCookieValueByKey, refreshCookieExpirationDate} from "../../../utils/cookies.utils";
 import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS} from "../../../config";
 import {store} from "../../StateProvider/StateProvider";
 
