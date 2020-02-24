@@ -1,6 +1,8 @@
 var User = require('../models/user');
 var Plugin = require('../models/plugin');
 const jwt = require('jsonwebtoken');
+var unzipper = require('unzipper');
+var fs = require('fs');
 
 
 //Controller for User
@@ -82,7 +84,10 @@ var UserController = {
             const token = req.header('authorization').split(' ')[1];
             const data = jwt.verify(token, process.env.JWT_KEY)
             const user = await User.findOne({ _id: data._id, 'tokens.token': token })
-          
+            const pathZip = 'outputZip/'+(req.files["pluginZip"][0].path).substring(8, (req.files["pluginZip"][0].path).length - 4)
+
+            fs.createReadStream(req.files["pluginZip"][0].path)
+               .pipe(unzipper.Extract({ path: pathZip }));
             let plugin = new Plugin({
                 name : req.body.name,
                 version : req.body.version,
@@ -91,11 +96,13 @@ var UserController = {
                 category : req.body.category,
                 tags : req.body.tags,
                 urls : req.body.urls,
-                pluginImage : req.file.path,
+                pluginImage : req.files["pluginImage"][0].path,
+                pluginZip : pathZip+'/index.html',
                 isVerified : false,
                 user : user.name,
                 userEmail : user.email
             });
+            console.log("test2")
             plugin.save();
             await User.findByIdAndUpdate(
               data._id,
@@ -107,7 +114,7 @@ var UserController = {
                      return res.send("bad plugin id");
                   }
                });
-
+            
             res.send(plugin);
            
         } catch (error) {

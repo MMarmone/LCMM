@@ -1,6 +1,7 @@
 var express = require('express');
 var UserController = require('../controllers/userController');
 var {auth} = require('../middleware/auth');
+var path =  require('path')
 
 const multer = require('multer');
 
@@ -10,11 +11,22 @@ var storage = multer.diskStorage({
       cb(null, './uploads')
     },
     filename: function (req, file, cb) {
-      cb(null, file.fieldname + '-' + Date.now()+'.png')
+        
+        cb(null, file.fieldname + '-' + Date.now()+ path.extname(file.originalname))
     }
 })
+/*
+var storageZip = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './uploadsZip')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now()+'.png')
+    }
+})*/
 
 const upload = multer({storage : storage});
+//const uploadZip = multer({storage : storageZip});
 
 //Routes for User
 var UserRoutes = function(app)
@@ -33,7 +45,7 @@ var UserRoutes = function(app)
     
     router.post('/users/me/submissionForm',
                 auth,
-                upload.single('pluginImage'),
+                upload.fields([{ name: 'pluginImage', maxCount: 1 }, { name: 'pluginZip', maxCount: 1 }]),
                 UserController.submissionForm);
                 
     router.post('/users/me/updateProfile',

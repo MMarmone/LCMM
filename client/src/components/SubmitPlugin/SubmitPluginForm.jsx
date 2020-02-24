@@ -11,6 +11,7 @@ export default function SubmitPluginForm(props) {
     const [formState, setFormState] = useState({
         name: null,
         version: null,
+        pluginZip: null,
         description: null,
         isOpenSource: null,
         category: null,
@@ -38,7 +39,8 @@ export default function SubmitPluginForm(props) {
         APIHandler.trySubmitPlugin({
             token: getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY),
             name: formState.name,
-            version: document.getElementById('version').files[0],
+            version: formState.version, 
+            pluginZip: document.getElementById('pluginZip').files[0],
             description: formState.description,
             isOpenSource: true,
             category: formState.category,
@@ -116,8 +118,17 @@ export default function SubmitPluginForm(props) {
                         iconPosition='left'
                         placeholder='Version'
                         name='version'
+                        type='text'
+                        onChange={handleChange}/>
+                    <Form.Input
+                        required
+                        fluid
+                        icon='building'
+                        iconPosition='left'
+                        placeholder='Plugin files zip'
+                        name='pluginZip'
                         type='file'
-                        id='version'
+                        id='pluginZip'
                         accept=".zip"
                         onChange={handleChange}/>
                     <Form.TextArea

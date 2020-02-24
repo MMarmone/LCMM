@@ -81,7 +81,10 @@ export function pluginsList(){
  *  Nom du plugin
  * @param {file} version
  * @required
- *  un zip contenant le plugin
+ * string version
+ * @param {file} pluginZip
+ * @required
+ * plugin
  * @param {string} description
  * @required
  *  description du plugin
@@ -100,7 +103,7 @@ export function pluginsList(){
  *  image qui représente le plugin
  * @returns {Promise<Response>}
  */
-export function submitPlugin({token, name, version, description, isOpenSource, category, tags, urls, pluginImage}) {
+export function submitPlugin({token, name, version,pluginZip, description, isOpenSource, category, tags, urls, pluginImage}) {
 
     const fd = new FormData();
     fd.append('name',name);
@@ -111,6 +114,7 @@ export function submitPlugin({token, name, version, description, isOpenSource, c
     fd.append('tags',tags);
     fd.append('urls',urls);
     fd.append('pluginImage', pluginImage);
+    fd.append('pluginZip', pluginZip);
     return axios.post(config.URL_SUBMIT_PLUGIN, fd ,{
 
         headers: {

@@ -38,6 +38,11 @@ var pluginSchema = new Schema({
         require : true
     },
 
+    pluginZip:{
+        type: String,
+        require : true
+    },
+
     user : {
         type : String,
         require : true
