@@ -69,6 +69,9 @@ var UserRoutes = function(app)
                 auth,
                 UserController.likePlugin);
 
+    router.post('/users/me/unLikePlugin', 
+                auth,
+                UserController.unLikePlugin);
 
     router.post('/users/me/addToCart',
             auth,

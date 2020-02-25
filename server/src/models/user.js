@@ -41,10 +41,7 @@ var userSchema = new Schema({
         type: String
     }],
     pluginLiked: [{
-        pluginId: {
-            type: String,
-            required: true
-        }
+        type: String
     }],
     cart: [{
         type: String

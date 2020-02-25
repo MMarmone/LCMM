@@ -7,6 +7,7 @@ import {Link, useHistory} from "react-router-dom";
 import * as APIHandler from '../../api/apiHandler'
 
 
+
 export default function Plugin() {
     const {state,dispatch} = useContext(store);
     const history = useHistory();
@@ -35,6 +36,25 @@ export default function Plugin() {
     const plugin = state.pluginsById[urlParamPluginId];
     const [comments, setComments] = useState(plugin ? plugin.comments : []);
     const [currentComment, setCurrentComment] = useState("");
+    const [likeState, setlikeState] = useState({
+        like : null,
+        pluginId : plugin._id
+    });
+    useEffect(() => {
+        APIHandler.tryGetUserInfo({
+        token : state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]
+    })
+        .then(response => response.pluginLiked.map((like)=>{
+            if(like === plugin._id ){
+                setlikeState({
+                    like : true
+                })
+                return ;
+            }
+            })
+        )
+      .catch(console.error); // histoire de pas péter l'App sur une vieille erreur
+    },[]);
 
     useEffect(() => {
         setComments(plugin ? plugin.comments : []);
@@ -122,9 +142,29 @@ export default function Plugin() {
                         className="right floated"
                         style={{ cursor: "pointer" }}
                         onClick={(e) => {
-                            e.target.classList.toggle("active");
-                            e.target.classList.toggle("outline");
-                            // todo submit Like/Unlike
+                            
+                            
+                            if(likeState.like === true){
+                                APIHandler.tryUnLikePlugin(
+                                    {token : state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
+                                        pluginId : plugin._id}
+                                    
+                                )
+                                e.target.classList.toggle("outline");
+                                setlikeState({
+                                    like : false
+                                })
+                            }else{
+                                setlikeState({
+                                    like : true
+                                })
+                                APIHandler.tryLikePlugin(
+                                    {token : state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
+                                    pluginId : plugin._id}
+                                )
+
+                                e.target.classList.toggle("active");
+                            }
                             console.log("// todo submit Like/Unlike");
                         }}>
                       <i className="heart outline like icon"/>

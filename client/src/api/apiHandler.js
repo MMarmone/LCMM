@@ -67,7 +67,20 @@ export const tryGetPluginsList = ()=>{
             .catch(handleFetch(resolve, reject).UwU_Catch);
     });
 };
-
+export const tryLikePlugin = ({token,pluginId}) => {
+    return new Promise((resolve, reject) => {
+        API.like({token,pluginId})
+            .then(handleFetch(resolve, reject).UwU_Then)
+            .catch(handleFetch(resolve, reject).UwU_Catch);
+    });
+};
+export const tryUnLikePlugin = ({token,pluginId}) => {
+    return new Promise((resolve, reject) => {
+        API.unLike({token,pluginId})
+            .then(handleFetch(resolve, reject).UwU_Then)
+            .catch(handleFetch(resolve, reject).UwU_Catch);
+    });
+};
 export const tryRegister = ({name, email, password, gender}) => {
     return new Promise((resolve, reject) => {
         API.register({name, email, password, gender})

@@ -74,7 +74,34 @@ export function register({name, email, password, gender}) {
         })
     })
 }
+export function like({token,pluginId}) {
 
+    return fetch(config.URL_LIKE_PLUGIN,{
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            pluginId
+        })
+    });
+}
+export function unLike({token,pluginId}) {
+
+    return fetch(config.URL_UNLIKE_PLUGIN,{
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            pluginId
+        })
+    });
+}
 
 export function pluginsList(){
     return fetch(config.URL_GET_PLUGINS,{
