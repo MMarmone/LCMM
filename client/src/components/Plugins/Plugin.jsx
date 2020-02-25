@@ -137,45 +137,45 @@ export default function Plugin() {
             </Card>
 
 
-            <div className="ui comments">
-                <h3 className="ui dividing header">Comments</h3>
-                {comments.map((comment) => (
-                    <div className="comment">
-                        <div className="content">
-                            <a className="author">{comment.author}</a>
-                            <div className="metadata">
-                                <span className="date">{comment.posted}</span>
+            <div style={{textAlign: 'left'}}>
+                <div className="ui comments">
+                    <h3 className="ui dividing header">Comments</h3>
+                    {comments.map((comment) => (
+                        <div className="comment">
+                            <div className="content">
+                                <a className="author">{comment.author}</a>
+                                <div className="metadata" style={{float: 'right'}}>
+                                    <span className="date">{comment.posted}</span>
+                                </div>
+                                <div className="text">
+                                    {comment.value}
+                                </div>
+                                <div className="actions">
+                                    <a className="reply">Reply</a>
+                                </div>
                             </div>
-                            <div className="text">
-                                {comment.value}
-                            </div>
-                            <div className="actions">
-                                <a className="reply">Reply</a>
-                            </div>
+                        </div>))}
+                    <Form size='massive' className="ui reply form" onSubmit={onSubmitHandler}>
+                        <div className="field">
+                            <Segment stacked>
+                                <Form.Input
+                                    required
+                                    fluid
+                                    icon='comment'
+                                    type='comment'
+                                    name='comment'
+                                    iconPosition='left'
+                                    placeholder='comment'
+                                    value={currentComment}
+                                    onChange={(e, {value}) => setCurrentComment(value)}/>
+                                <Button color='blue' fluid size='large'>
+                                    Add Comment
+                                </Button>
+                            </Segment>
                         </div>
-                    </div>))}
-                <Form size='massive'className="ui reply form" onSubmit={onSubmitHandler}>
-                    <div className="field">
-                        <Segment stacked>
-                            <Form.Input
-                                required
-                                fluid
-                                icon='comment'
-                                type='comment'
-                                name='comment'
-                                iconPosition='left'
-                                placeholder='comment'
-                                value={currentComment}
-                                onChange={(e, {value}) => setCurrentComment(value)}/>
-                            <Button color='blue' fluid size='large'>
-                                Add Comment
-                            </Button>
-                        </Segment>
-
-                    </div>
-                </Form>
+                    </Form>
+                </div>
             </div>
-
         </React.Fragment>
     )
 }
