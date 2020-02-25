@@ -14,13 +14,18 @@ const HomeLayout = (props) => {
 
   // live refresh de la liste de plugins
   useEffect(() => {APIHandler.tryGetPluginsList()
-      .then(response => dispatch({
-            type: CONFIG_DISPATCH_ACTIONS.SET_PLUGINS,
-            plugins: response
-          })
-      )
+      .then(response => {
+          dispatch({
+                  type: CONFIG_DISPATCH_ACTIONS.SET_PLUGINS,
+                  plugins: response
+              });
+          dispatch({
+              type: CONFIG_DISPATCH_ACTIONS.SET_FILTERED_PLUGINS,
+              payload: response
+          });
+      })
     .catch(console.error); // histoire de pas péter l'App sur une vieille erreur
-  },[]);
+  },[]);    // Fait seulement à l'initialisation
 
   return (
       <ResponsiveContainer home>
