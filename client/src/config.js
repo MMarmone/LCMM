@@ -12,7 +12,8 @@ const CONFIG_BACKEND = {
     URL_GET_PLUGINS: `${HOST}/api/plugins`,
     URL_GET_PLUGIN_BY_ID: `${HOST}/api/pluginById`,
     URL_VERIFY_PLUGIN: `${HOST}/admin/plugins/verifyOne`,
-    URL_UNVERIFY_PLUGIN: `${HOST}/admin/plugins/unverify`
+    URL_UNVERIFY_PLUGIN: `${HOST}/admin/plugins/unverify`,
+    URL_SEND_COMMENT: `${HOST}/api/users/me/commentPlugin`
 };
 
 /**

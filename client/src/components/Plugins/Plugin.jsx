@@ -1,44 +1,89 @@
-import {Button, Card, Icon, Image, Label, Message} from "semantic-ui-react";
-import React, {useContext} from "react";
+import {Button, Card, Icon, Image, Label,Form, Message,Segment} from "semantic-ui-react";
+import React, {useContext, useState} from "react";
 import {store} from "../StateProvider/StateProvider";
-import {CONFIG_COOKIE, CONFIG_FRONTEND, HOST} from "../../config";
+import {CONFIG_COOKIE, CONFIG_FRONTEND, HOST,CONFIG_DISPATCH_ACTIONS} from "../../config";
 import MyPlaceholderImage from "../../assets/img/placeholder.png";
 import {Link} from "react-router-dom";
-
-const comment = (plugin)=>(
-    <div class="ui comments">
-        <h3 class="ui dividing header">Comments</h3>
-        {plugin.comments.map((comment) => (
-            <div class="comment">
-                <div class="content">
-                    <a class="author">{comment.author}</a>
-                    <div class="metadata">
-                        <span class="date">{comment.posted}</span>
-                    </div>
-                    <div class="text">
-                        {comment.value}
-                    </div>
-                    <div class="actions">
-                        <a class="reply">Reply</a>
-                    </div>
-                </div>
-            </div>))}
-        <form class="ui reply form">
-            <div class="field">
-                <textarea></textarea>
-            </div>
-            <div class="ui blue labeled submit icon button">
-                <i class="icon edit"></i> Add Reply
-            </div>
-        </form>
-    </div>
-);
+import * as APIHandler from '../../api/apiHandler'
 
 
 export default function Plugin() {
-    const {state} = useContext(store);
-
+    const {state,dispatch} = useContext(store);
     const plugin = state.plugins.filter(p => p._id === window.location.href.toString().split('=')[1])[0];
+    
+    const [commentState, setCommentState] = useState({
+        comment : null,
+        pluginId : plugin._id
+      });
+    
+    const onChange = (e, {value}) => setCommentState({
+    ...commentState,
+    comment: value
+    });
+    
+    let onSubmitHandler = function(e) {
+        if (!commentState.comment) {
+            setCommentState({
+            ...commentState,
+            messageHeader: 'Error',
+            success: false,
+            error: true,
+            messageContent: 'comment required'
+            });
+            return false;
+        }
+        
+        e.preventDefault();
+        APIHandler.trySendComment({
+            token : state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
+            value: commentState.comment,
+            pluginId : commentState.pluginId
+        })
+    }
+    const comment = (plugin)=>(
+        <div class="ui comments">
+            <h3 class="ui dividing header">Comments</h3>
+            {plugin.comments.map((comment) => (
+                <div class="comment">
+                    <div class="content">
+                        <a class="author">{comment.author}</a>
+                        <div class="metadata">
+                            <span class="date">{comment.posted}</span>
+                        </div>
+                        <div class="text">
+                            {comment.value}
+                        </div>
+                        <div class="actions">
+                            <a class="reply">Reply</a>
+                        </div>
+                    </div>
+                </div>))}
+            <form class="ui reply form">
+                <div class="field" >
+                <Form size='massive' onSubmit={onSubmitHandler}>
+                    <Segment stacked>
+                        <Form.Input
+                            required
+                            fluid
+                            icon='comment'
+                            type='comment'
+                            name='comment'
+                            iconPosition='left'
+                            placeholder='comment'
+                            
+                            onChange={onChange}
+                        />
+                        <Button color='blue' fluid size='large'>
+                        Add Comment
+                        </Button>
+                    </Segment>
+                </Form>
+
+                </div>
+            </form>
+        </div>
+    );
+    
     if (!plugin)
         return <Message error>Something went wrong</Message>;
 

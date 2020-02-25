@@ -27,6 +27,22 @@ export function login({email, password}) {
     });
 }
 
+
+export function sendComment({token, value,pluginId}) {
+
+    return fetch(config.URL_SEND_COMMENT,{
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            value,
+            pluginId
+        })
+    });
+}
 /**
  * Fetch l'API pour enregistrer un nouvel utilisateur
  *

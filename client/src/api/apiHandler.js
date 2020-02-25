@@ -42,6 +42,13 @@ export const tryLogin = ({email, password}) => {
             .catch(handleFetch(resolve, reject).UwU_Catch);
     });
 };
+export const trySendComment = ({token,value,pluginId}) => {
+    return new Promise((resolve, reject) => {
+        API.sendComment({token,value,pluginId})
+            .then(handleFetch(resolve, reject).UwU_Then)
+            .catch(handleFetch(resolve, reject).UwU_Catch);
+    });
+};
 export const tryGetPluginsList = ()=>{
     return new Promise((resolve, reject) => {
         API.pluginsList()
