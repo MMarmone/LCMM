@@ -1,10 +1,10 @@
 # LCMM
 
 ## To run the project:
-- Open a first terminal in the `server` folder
-- run `npm start`
-- Open a second terminal in the `client` folder
-- run `npm start`
+- Open a first terminal in the `/server` folder
+- run `npm install` then `npm start`
+- Open a second terminal in the `/client` folder
+- run `npm install` then `npm start`
 
 ## Presentation
 
