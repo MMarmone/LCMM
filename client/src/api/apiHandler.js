@@ -124,3 +124,20 @@ export const tryRemoveFromCart = ({token, pluginId}) => {
     });
 };
 
+
+export const tryVerifyPlugin = ({token, pluginId}) => {
+    return new Promise((resolve, reject) => {
+        API.verifyPlugin({token, pluginId})
+            .then(handleFetch(resolve, reject).UwU_Then)
+            .catch(handleFetch(resolve, reject).UwU_Catch);
+    });
+};
+
+
+export const tryUnverifyPlugin = ({token, pluginId}) => {
+    return new Promise((resolve, reject) => {
+        API.verifyPlugin({token, pluginId})
+            .then(handleFetch(resolve, reject).UwU_Then)
+            .catch(handleFetch(resolve, reject).UwU_Catch);
+    });
+};

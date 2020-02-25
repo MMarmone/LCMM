@@ -5,6 +5,7 @@ import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS, CONFIG_FRONTEND, HOST} from "../
 import MyPlaceholderImage from "../../assets/img/placeholder.png";
 import {Link, useHistory} from "react-router-dom";
 import * as APIHandler from '../../api/apiHandler'
+import {tryVerifyPlugin} from "../../api/apiHandler";
 
 
 
@@ -38,7 +39,7 @@ export default function Plugin() {
     const [currentComment, setCurrentComment] = useState("");
     const [likeState, setlikeState] = useState({
         like : null,
-        pluginId : plugin._id
+        pluginId : plugin ? plugin._id : null
     });
     useEffect(() => {
         APIHandler.tryGetUserInfo({
@@ -85,6 +86,24 @@ export default function Plugin() {
 
     if (!plugin)
         return <Message error>Something went wrong</Message>;
+
+    const verifyClickHandler = () => {
+        console.log("verifyClickHandler");
+        console.log("state", state);
+        console.log("plugin", plugin);
+
+        if (!plugin)
+            return;
+
+            APIHandler[plugin.isVerified ? "tryUnverifyPlugin": "tryVerifyPlugin"]({
+                token: state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
+                pluginId: plugin._id
+            })
+                .then(console.log)
+                .catch(console.error)
+
+
+    };
 
     return (
         <React.Fragment>
@@ -197,10 +216,11 @@ export default function Plugin() {
                                 color={plugin.isVerified ? 'red' : 'green'}
                                 onClick={() => {
                                     // todo submit un/verify plugin
-                                    console.log("todo submit un/verify plugin")
+                                    console.log("todo submit un/verify plugin");
+                                    verifyClickHandler();
                                 }}>
-                                <Icon name={plugin.isVerified ? 'lock' : 'unlock'}/>
-                                {plugin.isVerified ? 'Verify' : 'Unverify'}
+                                <Icon name={plugin.isVerified ?  'lock' : 'unlock'}/>
+                                {plugin.isVerified ? 'Unverify' : 'Verify'}
                             </Button>
                         }
                     </div>

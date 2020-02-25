@@ -193,7 +193,7 @@ export function getUserInfo({ token }) {
 
 function somethingFyPlugin({token, pluginId, isVerify}) {
     return fetch(isVerify ? config.URL_VERIFY_PLUGIN : config.URL_UNVERIFY_PLUGIN, {
-        method: 'GET',
+        method: 'POST',
         mode: 'cors',
         headers: {
             'Content-Type': 'application/json',

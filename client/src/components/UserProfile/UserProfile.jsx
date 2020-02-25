@@ -18,10 +18,6 @@ const UserInfosTab = (props) => {
     errorMessage: "Something went wrong"
   });
 
-  console.log("props", props);
-  console.log("state", state);
-  console.log("formState", formState);
-
   const handleChange = (e, {name, value}) => {
     setFormState({
       ...formState,
@@ -265,7 +261,7 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <Tab menu={{fluid: true, vertical: true, tabular: true}} panes={
+    <Tab className="MAKE-ME-ORANGE" menu={{fluid: true, vertical: true, tabular: true}} panes={
       userInfos.isAdmin
         ? [{
           menuItem: { key: 'my-infos', icon: 'address card', content: 'My infos' },

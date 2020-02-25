@@ -21,7 +21,10 @@
   height: 100%;
 }
 
-.ui.menu .ui.dropdown .menu>.item.orange {
+.ui.menu .ui.dropdown .menu>.item.orange,
+.MAKE-ME-ORANGE div > a.item,
+.MAKE-ME-ORANGE div.field > label,
+.MAKE-ME-ORANGE .ui.header{
   color: #f2711c !important;
 }
 
