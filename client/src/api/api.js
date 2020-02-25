@@ -147,3 +147,18 @@ export function getUserInfo({ token }) {
         }
     });
 }
+
+export function addToCart({ token,pluginId }) {
+    return fetch(config.URL_ADD_TO_CART, {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({
+            pluginId
+        })
+    });
+}
+

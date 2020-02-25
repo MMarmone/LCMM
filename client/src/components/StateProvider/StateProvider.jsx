@@ -32,7 +32,8 @@ const initialState = {
     name: null,
     email: null,
     password: null,
-    gender: 'male'    // oui
+    gender: 'male',    // oui
+    cart: []
   },
   plugins :[]
 };
