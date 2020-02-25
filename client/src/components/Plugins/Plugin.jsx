@@ -74,11 +74,19 @@ export default function Plugin() {
                 <Card.Content>
                     <Card.Header>{plugin.name}</Card.Header>
                     <Card.Meta>
-                        <span className="left floated">v.{plugin.version}</span>
+                        <span className="left floated">
+                            v.{plugin.version}&nbsp;-&nbsp;
+                            <span
+                                style={{
+                                    color: 'green'
+                                }}>
+                                {plugin.price || "0.00"}€
+                            </span>
+                        </span>
                         <span className="right floated">
                             <a>
+                                {plugin.user}
                                 <Icon name='user'/>
-                                {plugin.author || plugin.user}
                             </a>
                         </span>
                     </Card.Meta>
@@ -126,11 +134,14 @@ export default function Plugin() {
 
                 <Card.Content>
                     <div className='ui three buttons'>
-                        <Button basic color='orange'
+                        {
+                            plugin.isVerified &&
+                            <Button basic color='orange'
                                 onClick={() => addToCart(plugin._id)}>
                             <Icon name='cart plus'/>
                             Cart
                         </Button>
+                        }
 
                         <Button basic color='blue'
                                 as={Link}

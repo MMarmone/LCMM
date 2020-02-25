@@ -22,10 +22,17 @@ function App() {
 
   const {state} = useContext(store);
 
+  console.log("[App] state", state);
+
   return (
       <BrowserRouter>
 
-        <Dimmer active={state.isLoading}>
+        <Dimmer
+            active={state.isLoading}
+            style={{
+              bottom: 0,
+              position: "fixed"
+            }}>
           <Loader size='massive'>{state.loadingMessage || "Loading..."}</Loader>
         </Dimmer>
 

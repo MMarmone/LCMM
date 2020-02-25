@@ -33,11 +33,20 @@ export const PluginCard = (plugin, image, type="shop") => {
             <Card.Content>
                 <Card.Header>{plugin.name}</Card.Header>
                 <Card.Meta>
-                    <span>v.{plugin.version}</span>
+                    <span
+                        className="left floated">
+                            v.{plugin.version}&nbsp;-&nbsp;
+                        <span
+                            style={{
+                                color: 'green'
+                            }}>
+                                {plugin.price || "0.00"}€
+                            </span>
+                        </span>
                     <span className="right floated">
           <a>
-          <Icon name='user'/>
-              {plugin.author}
+              {plugin.name}
+              <Icon name='user'/>
           </a>
         </span>
                 </Card.Meta>

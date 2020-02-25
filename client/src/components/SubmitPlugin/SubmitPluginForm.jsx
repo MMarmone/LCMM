@@ -15,14 +15,14 @@ export default function SubmitPluginForm(props) {
         description: null,
         isOpenSource: null,
         category: null,
-        price : null,
-        tags: null,
+        price : "0",
+        tags: "",
         urls: null,
         pluginImage: null,
     });
 
     let onSubmitHandler = function (e) {
-        if (!formState.name || !formState.version || !formState.description || !formState.isOpenSource || !formState.category || !formState.pluginImage || formState.price) {
+        if (!formState.name || !formState.version || !formState.description || !formState.isOpenSource || !formState.category || !formState.pluginImage || !formState.price) {
             setFormState({
                 ...formState,
                 messageHeader: 'Error',
@@ -44,9 +44,9 @@ export default function SubmitPluginForm(props) {
             pluginZip: document.getElementById('pluginZip').files[0],
             description: formState.description,
             isOpenSource: true,
-            price : formState.price,
+            price : "" + formState.price, // le back attend un String...
             category: formState.category,
-            tags: formState.tags,
+            tags: formState.tags.split(" "),
             urls: formState.urls,
             pluginImage: document.getElementById('image').files[0],
         })
@@ -59,7 +59,7 @@ export default function SubmitPluginForm(props) {
                     messageContent: 'You will be redirected shortly...'
                 });
                 // Redirection à la page d'accueil //todo à changer après la création de l'url détail plugin
-                history.push(CONFIG_FRONTEND.URL_USER_PROFILE);
+                history.push(CONFIG_FRONTEND.URL_HOME);
             })
             .catch(error => {
                 // Afficher le message d'erreur renvoyé par l'API

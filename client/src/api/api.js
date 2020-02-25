@@ -122,7 +122,7 @@ export function pluginsList(){
  *  image qui représente le plugin
  * @returns {Promise<Response>}
  */
-export function submitPlugin({token, name, version,pluginZip, description, isOpenSource, price, category, tags, urls, pluginImage}) {
+export function submitPlugin({token, name, version,pluginZip, description, isOpenSource, price, category, tags= "", urls, pluginImage}) {
 
     const fd = new FormData();
     fd.append('name',name);
@@ -131,7 +131,7 @@ export function submitPlugin({token, name, version,pluginZip, description, isOpe
     fd.append('isOpenSource',isOpenSource);
     fd.append('price',price);
     fd.append('category',category);
-    fd.append('tags',tags);
+    fd.append('tags', JSON.stringify(tags));
     fd.append('urls',urls);
     fd.append('pluginImage', pluginImage);
     fd.append('pluginZip', pluginZip);
