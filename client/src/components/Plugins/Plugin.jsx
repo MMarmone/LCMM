@@ -74,7 +74,7 @@ export default function Plugin() {
                 <Card.Content>
                     <Card.Header>{plugin.name}</Card.Header>
                     <Card.Meta>
-                        <span className="left floated">{plugin.version}</span>
+                        <span className="left floated">v.{plugin.version}</span>
                         <span className="right floated">
                             <a>
                                 <Icon name='user'/>
@@ -160,7 +160,7 @@ export default function Plugin() {
 
             <div style={{textAlign: 'left'}}>
                 <div className="ui comments">
-                    <h3 className="ui dividing header">Comments</h3>
+                    <h3 className="ui dividing header" style={{textAlign: 'center'}}>Comments</h3>
                     {comments.map((comment) => (
                         <div className="comment">
                             <div className="content">
@@ -172,7 +172,7 @@ export default function Plugin() {
                                     {comment.value}
                                 </div>
                                 <div className="actions">
-                                    <a className="reply">Reply</a>
+                                    <a style={{color: 'blue'}} className="reply">Reply</a>
                                 </div>
                             </div>
                         </div>))}
@@ -186,7 +186,7 @@ export default function Plugin() {
                                     type='comment'
                                     name='comment'
                                     iconPosition='left'
-                                    placeholder='comment'
+                                    placeholder='Leave a comment here'
                                     value={currentComment}
                                     onChange={(e, {value}) => setCurrentComment(value)}/>
                                 <Button color='blue' fluid size='large'>

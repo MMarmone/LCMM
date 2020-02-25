@@ -33,7 +33,7 @@ export const PluginCard = (plugin, image, type="shop") => {
             <Card.Content>
                 <Card.Header>{plugin.name}</Card.Header>
                 <Card.Meta>
-                    <span>{plugin.version}</span>
+                    <span>v.{plugin.version}</span>
                     <span className="right floated">
           <a>
           <Icon name='user'/>

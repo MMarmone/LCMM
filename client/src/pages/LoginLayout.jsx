@@ -11,7 +11,9 @@ export default function LoginLayout(props) {
             <Grid textAlign='center' style={{paddingTop: '5vh'}} verticalAlign='middle'>
                 <Grid.Column style={{maxWidth: 600}}>
                     <Header as='h2' color='orange' textAlign='center'>
-                        <Image src={process.env.PUBLIC_URL + '/logo192.png'}/> Log-in to your account
+                        <Image
+                            style={{ width: "8.5em" }}
+                            src={process.env.PUBLIC_URL + 'logo_d.png'} />&nbsp;Log-in to your account
                     </Header>
 
                     <LoginForm/>
