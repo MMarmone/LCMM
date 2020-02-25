@@ -1,14 +1,34 @@
 import {Button, Card, Icon, Image, Label,Form, Message,Segment} from "semantic-ui-react";
 import React, {useContext, useEffect, useState} from "react";
 import {store} from "../StateProvider/StateProvider";
-import {CONFIG_COOKIE, CONFIG_FRONTEND, HOST} from "../../config";
+import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS, CONFIG_FRONTEND, HOST} from "../../config";
 import MyPlaceholderImage from "../../assets/img/placeholder.png";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import * as APIHandler from '../../api/apiHandler'
 
 
 export default function Plugin() {
     const {state,dispatch} = useContext(store);
+    const history = useHistory();
+
+    const addToCart = (_id) => {
+        if (!state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]){
+            history.push(CONFIG_FRONTEND.URL_LOGIN)
+        } else {
+            APIHandler.tryAddToCart({
+                token: state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
+                pluginId: _id
+            })
+                .then(response => {
+                    history.push(CONFIG_FRONTEND.URL_CART);
+                })
+                .catch(error => {
+                    return <Message error>Something went wrong</Message>
+                })
+                .finally(() => dispatch({type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING}));
+        }
+    }
+
     let urlParamPluginId = window.location.search.split("plugin=")
         ? window.location.search.split("plugin=")[1]
         : null;
@@ -106,7 +126,8 @@ export default function Plugin() {
 
                 <Card.Content>
                     <div className='ui three buttons'>
-                        <Button basic color='orange'>
+                        <Button basic color='orange'
+                                onClick={() => addToCart(plugin._id)}>
                             <Icon name='cart plus'/>
                             Cart
                         </Button>

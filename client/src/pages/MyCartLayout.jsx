@@ -1,15 +1,20 @@
 import ResponsiveContainer from "../components/Shared/ResponsiveContainer/ResponsiveContainer";
 import {Grid, Header} from "semantic-ui-react";
 import React, {useContext, useEffect, useState} from "react";
-import MyCart from "../components/Cart/MyCart";
 import {store} from "../components/StateProvider/StateProvider";
 import {PluginCard} from "../components/Plugins/Plugins";
 import {tryGetUserInfo} from "../api/apiHandler";
 import {getCookieValueByKey} from "../utils/cookies.utils";
-import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS} from "../config";
+import {CONFIG_COOKIE, CONFIG_FRONTEND} from "../config";
+import { useHistory } from "react-router-dom";
 
 export default function MyCartLayout() {
     const {state, dispatch} = useContext(store);
+    const history = useHistory();
+
+    if (!state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY])
+        history.push(CONFIG_FRONTEND.URL_LOGIN);
+
     const [userInfos, setUserInfos] = useState({
         ...state[CONFIG_COOKIE.USER_INFOS_KEY]              // user values from "cache"
     });

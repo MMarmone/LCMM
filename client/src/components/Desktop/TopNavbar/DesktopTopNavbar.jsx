@@ -37,7 +37,7 @@ const DesktopTopNavbar = function (props) {
                         style={{
                             flexGrow:1
                         }}>
-                        <PluginSearchInput plugins={state.plugins} />
+                        <PluginSearchInput plugins={state.verifiedPlugins} />
                     </Menu.Item>
                 }
 
