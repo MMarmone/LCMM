@@ -12,7 +12,7 @@ export default function PlayPlugin() {
         <div>
             <iframe style={{
                 width: '100%'
-            }} src={HOST + '/' + plugin.pluginZip.substring(12)}></iframe>
+            }} src={HOST + '/' + plugin.pluginZip.substring(8)}></iframe>
         </div>
     )
 }
