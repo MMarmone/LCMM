@@ -7,7 +7,6 @@ var fs = require('fs');
 
 //Controller for User
 var UserController = {
-
   login : async(req, res)=>{
     try {
       const { email, password } = req.body
@@ -113,9 +112,9 @@ var UserController = {
                      return res.send("bad plugin id");
                   }
                });
-            
+
             res.send(plugin);
-           
+
         } catch (error) {
             res.status(500).send(error)
         }
@@ -184,7 +183,30 @@ var UserController = {
       }catch (error){
           res.status(500).send(error)
       }
-  }
+  },
+
+  addToCart : async(req, res) => {
+        try {
+            const pluginId = req.body.pluginId;
+            const token = req.header('authorization').split(' ')[1];
+            const data = jwt.verify(token, process.env.JWT_KEY)
+            const user = await User.findOne({_id: data._id, 'tokens.token': token})
+            await User.findByIdAndUpdate(
+                user._id,
+                {$addToSet: {"cart":  pluginId}},
+                {new: true},
+                function (err, model) {
+                    if (err) {
+                        console.log(err);
+                        return res.send(err);
+                    }
+                }
+            );
+            res.send()
+        } catch (error) {
+            res.status(500).send({error: error.message})
+        }
+    }
 }
 
 module.exports = UserController;

@@ -6,7 +6,7 @@ import {store} from "../StateProvider/StateProvider";
 import * as APIHandler from "../../api/apiHandler";
 import {useHistory} from "react-router-dom";
 export default function SubmitPluginForm(props) {
-    const {dispatch} = useContext(store);
+    const {state,dispatch} = useContext(store);
     const history = useHistory();
     const [formState, setFormState] = useState({
         name: null,
@@ -38,7 +38,7 @@ export default function SubmitPluginForm(props) {
         });
         e.preventDefault();
         APIHandler.trySubmitPlugin({
-            token: getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY),
+            token: state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
             name: formState.name,
             version: formState.version,
             pluginZip: document.getElementById('pluginZip').files[0],
