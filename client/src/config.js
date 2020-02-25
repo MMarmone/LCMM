@@ -14,6 +14,7 @@ const CONFIG_BACKEND = {
     URL_VERIFY_PLUGIN: `${HOST}/admin/plugins/verifyOne`,
     URL_UNVERIFY_PLUGIN: `${HOST}/admin/plugins/unverify`,
     URL_ADD_TO_CART: `${HOST}/api/users/me/addToCart`,
+    URL_REMOVE_PLUGIN_CART: `${HOST}/api/users/me/removePluginCart`,
     URL_USER_CART: `${HOST}/api/users/me/cart`,
     URL_SEND_COMMENT: `${HOST}/api/users/me/commentPlugin`,
     URL_LIKE_PLUGIN: `${HOST}/api/users/me/likePlugin`,

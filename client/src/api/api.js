@@ -239,7 +239,7 @@ export function addToCart({ token,pluginId }) {
 }
 
 export function removeFromCart({ token,pluginId }) {
-    return fetch(config.URL_ADD_TO_CART, {
+    return fetch(config.URL_REMOVE_PLUGIN_CART, {
         method: 'POST',
         mode: 'cors',
         headers: {

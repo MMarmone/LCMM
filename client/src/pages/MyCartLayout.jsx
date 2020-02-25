@@ -41,7 +41,7 @@ export default function MyCartLayout() {
                     {
                         state.plugins.length &&
                         state.plugins.map((plugin) => {
-                            if(userInfos!=undefined)
+                            if(userInfos!=undefined || userInfos.cart !=undefined)
                             if (userInfos.cart.some((pluginID)=> pluginID=== plugin._id)){
                                 return <Grid.Column width={4}>
                                     {PluginCard(plugin, plugin.pluginImage.substring(8), "cart")}

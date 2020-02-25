@@ -5,6 +5,7 @@ import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS, CONFIG_FRONTEND, HOST} from '../
 import MyPlaceholderImage from '../../assets/img/placeholder.png';
 import {Link, useHistory} from "react-router-dom";
 import * as APIHandler from "../../api/apiHandler";
+import {removeFromCart} from "../../api/api";
 
 export const PluginCard = (plugin, image, type="shop") => {
     const {state, dispatch} = useContext(store);
@@ -19,6 +20,23 @@ export const PluginCard = (plugin, image, type="shop") => {
             })
                 .then(response => {
                     history.push(CONFIG_FRONTEND.URL_CART);
+                })
+                .catch(error => {
+                    return <Message error>Something went wrong</Message>
+                })
+                .finally(() => dispatch({type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING}));
+        }
+    }
+    const removeFromCart = (_id) => {
+        if (!state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]){
+            history.push(CONFIG_FRONTEND.URL_LOGIN)
+        } else {
+            APIHandler.tryRemoveFromCart({
+                token: state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
+                pluginId: _id
+            })
+                .then(response => {
+                    document.location.reload(true);
                 })
                 .catch(error => {
                     return <Message error>Something went wrong</Message>
@@ -69,6 +87,15 @@ export const PluginCard = (plugin, image, type="shop") => {
                                 onClick={() => addToCart(plugin._id)}>
                             <Icon name='cart plus'/>
                             Cart
+                        </Button>
+                    }
+                    {
+                        type === "cart" &&
+                        <Button basic color='orange'
+                                content='Click'
+                                onClick={() => removeFromCart(plugin._id)}>
+                            <Icon name='cart less'/>
+                            Remove
                         </Button>
                     }
                     <Button basic color='blue'
