@@ -96,3 +96,11 @@ export const tryAddToCart = ({token, pluginId}) => {
     });
 };
 
+export const tryRemoveFromCart = ({token, pluginId}) => {
+    return new Promise((resolve, reject) => {
+        API.removeFromCart({token, pluginId})
+            .then(handleFetch(resolve, reject).UwU_Then)
+            .catch(handleFetch(resolve, reject).UwU_Catch);
+    });
+};
+
