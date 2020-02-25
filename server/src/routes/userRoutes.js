@@ -11,7 +11,7 @@ var storage = multer.diskStorage({
       cb(null, './uploads')
     },
     filename: function (req, file, cb) {
-        
+
         cb(null, file.fieldname + '-' + Date.now()+ path.extname(file.originalname))
     }
 })
@@ -42,12 +42,12 @@ var UserRoutes = function(app)
     router.get('/users/me', auth, async(req, res) => {
         res.send(req.user)
     });
-    
+
     router.post('/users/me/submissionForm',
                 auth,
                 upload.fields([{ name: 'pluginImage', maxCount: 1 }, { name: 'pluginZip', maxCount: 1 }]),
                 UserController.submissionForm);
-                
+
     router.post('/users/me/updateProfile',
                 auth,
                 UserController.updateProfile);
@@ -55,21 +55,26 @@ var UserRoutes = function(app)
     router.post('/users/me/logout',
                 auth,
                 UserController.logout);
-    
-    router.post('/users/me/logoutall', 
+
+    router.post('/users/me/logoutall',
                 auth,
                 UserController.logoutall);
-    
 
-    router.post('/users/me/commentPlugin', 
+
+    router.post('/users/me/commentPlugin',
                 auth,
                 UserController.commentPlugin);
 
-    router.post('/users/me/likePlugin', 
+    router.post('/users/me/likePlugin',
                 auth,
                 UserController.likePlugin);
 
-    /*router.get('/users/me/isPluginLiked', 
+
+    router.post('/users/me/addToCart',
+            auth,
+            UserController.addToCart);
+
+    /*router.get('/users/me/isPluginLiked',
                 auth,
                 UserController.logoutall);*/
     return router;

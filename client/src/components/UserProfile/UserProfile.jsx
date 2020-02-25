@@ -216,10 +216,38 @@ const UserPluginsTab = (props) => {
   );
 };
 
-// todo page Admin
-const AdminTab = (props) => {
+const AdminTab = () => {
+  const {state} = useContext(store);
   return (<Tab.Pane>
-    <p>Pas fait.</p>
+      <Grid columns={3} doubling container verticalAlign='middle'>
+        <Grid.Row>
+        <Grid.Column width={16}>
+          <Header
+              as='h1'
+              color='red'
+              icon='plug'>
+            <Icon.Group>
+              <Icon name='plug' />
+              <Icon corner name='xbox' />
+            </Icon.Group>
+            &nbsp;Unverified plugins
+          </Header>
+        </Grid.Column>
+      </Grid.Row>
+
+        <Grid.Row>
+          {
+            // liste de plugins NON vérifiés
+            (!!state.plugins && !!state.plugins.length) &&
+            state.plugins.map((plugin) => {
+              if (!plugin.isVerified)
+                return (<Grid.Column width={4}>
+                  {PluginCard(plugin, plugin.pluginImage.substring(8))}
+                </Grid.Column>)
+            })
+          }
+        </Grid.Row>
+      </Grid>
   </Tab.Pane>);
 };
 

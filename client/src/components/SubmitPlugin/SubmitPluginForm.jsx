@@ -6,7 +6,7 @@ import {store} from "../StateProvider/StateProvider";
 import * as APIHandler from "../../api/apiHandler";
 import {useHistory} from "react-router-dom";
 export default function SubmitPluginForm(props) {
-    const {dispatch} = useContext(store);
+    const {state,dispatch} = useContext(store);
     const history = useHistory();
     const [formState, setFormState] = useState({
         name: null,
@@ -22,7 +22,7 @@ export default function SubmitPluginForm(props) {
     });
 
     let onSubmitHandler = function (e) {
-        if (!formState.name || !formState.version || !formState.description || !formState.isOpenSource || !formState.category || !formState.pluginImage) {
+        if (!formState.name || !formState.version || !formState.description || !formState.isOpenSource || !formState.category || !formState.pluginImage || formState.price) {
             setFormState({
                 ...formState,
                 messageHeader: 'Error',
@@ -38,7 +38,7 @@ export default function SubmitPluginForm(props) {
         });
         e.preventDefault();
         APIHandler.trySubmitPlugin({
-            token: getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY),
+            token: state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
             name: formState.name,
             version: formState.version,
             pluginZip: document.getElementById('pluginZip').files[0],
@@ -59,7 +59,7 @@ export default function SubmitPluginForm(props) {
                     messageContent: 'You will be redirected shortly...'
                 });
                 // Redirection à la page d'accueil //todo à changer après la création de l'url détail plugin
-                history.push(CONFIG_FRONTEND.URL_HOME);
+                history.push(CONFIG_FRONTEND.URL_USER_PROFILE);
             })
             .catch(error => {
                 // Afficher le message d'erreur renvoyé par l'API
@@ -153,19 +153,18 @@ export default function SubmitPluginForm(props) {
                         onChange={handleChange}/>
                     <Select
                         required
-                        Select
                         className='field'
                         name='isOpenSource'
                         fluid
                         placeholder='Is it open source?'
                         options={[
                             {
-                                key: 'True',
+                                key: 'Yes',
                                 value: 'True',
                                 text: 'Yes'
                             },
                             {
-                                key: 'False',
+                                key: 'No',
                                 value: 'False',
                                 text: 'No'
                             },
@@ -215,7 +214,7 @@ export default function SubmitPluginForm(props) {
                         onChange={handleChange}/>
                     <Form.Input
                         fluid
-                        icon='video icon'
+                        icon='video'
                         iconPosition='left'
                         placeholder='url Tuto video'
                         name='urls'
@@ -224,7 +223,7 @@ export default function SubmitPluginForm(props) {
                     <Form.Input
                         required
                         fluid
-                        icon='image outline icon'
+                        icon='image outline'
                         iconPosition='left'
                         placeholder='Plugins Image'
                         name='pluginImage'

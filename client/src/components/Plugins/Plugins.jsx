@@ -1,63 +1,84 @@
 import {store} from "../StateProvider/StateProvider";
 import React, {useContext} from 'react';
-import {Button, Card, Grid, Header, Icon, Image} from 'semantic-ui-react';
-import {CONFIG_FRONTEND, HOST} from '../../config';
+import {Button, Card, Grid, Header, Icon, Image, Message} from 'semantic-ui-react';
+import {CONFIG_COOKIE, CONFIG_DISPATCH_ACTIONS, CONFIG_FRONTEND, HOST} from '../../config';
 import MyPlaceholderImage from '../../assets/img/placeholder.png';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import * as APIHandler from "../../api/apiHandler";
 
-export const PluginCard = (plugin, image, type="shop") => (
-    <Card>
-        <Image src={HOST + '/' + image} height={200} className='no-radius' centered
-               onError={i => i.target.src = MyPlaceholderImage}/>
-        <Card.Content>
-            <Card.Header>{plugin.name}</Card.Header>
-            <Card.Meta>
-                <span>{plugin.version}</span>
-                <span className="right floated">
+export const PluginCard = (plugin, image, type="shop") => {
+    const {state, dispatch} = useContext(store);
+    const history = useHistory();
+    const addToCart = (_id) => {
+        APIHandler.tryAddToCart({
+            token: state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
+            pluginId: _id
+        })
+            .then(response => {
+                history.push(CONFIG_FRONTEND.URL_CART);
+            })
+            .catch(error => {
+                return <Message error>Something went wrong</Message>
+            })
+            .finally(() => dispatch({type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING}));
+    }
+    return (
+        <Card>
+            <Image src={HOST + '/' + image} height={200} className='no-radius' centered
+                   onError={i => i.target.src = MyPlaceholderImage}/>
+            <Card.Content>
+                <Card.Header>{plugin.name}</Card.Header>
+                <Card.Meta>
+                    <span>{plugin.version}</span>
+                    <span className="right floated">
           <a>
           <Icon name='user'/>
               {plugin.author}
           </a>
         </span>
-            </Card.Meta>
-            <Card.Description
-                style={{
-                    textAlign: 'justify',
-                    height: '150px',
-                    overflow: 'auto'
-                }}>
-                {plugin.description}
-            </Card.Description>
-        </Card.Content>
+                </Card.Meta>
+                <Card.Description
+                    style={{
+                        textAlign: 'justify',
+                        height: '150px',
+                        overflow: 'auto'
+                    }}>
+                    {plugin.description}
+                </Card.Description>
+            </Card.Content>
 
-        <Card.Content>
-            <div className='ui two buttons'>
-                {
-                    type === "shop" &&
-                    <Button basic color='orange'>
-                        <Icon name='cart plus'/>
-                        Cart
+            <Card.Content>
+                <div className='ui two buttons'>
+                    {
+                        type === "shop" &&
+                        <Button basic color='orange'
+                                attached='bottom'
+                                content='Click'
+                                onClick={() => addToCart(plugin._id)}>
+                            <Icon name='cart plus'/>
+                            Cart
+                        </Button>
+                    }
+                    <Button basic color='blue'
+                            as={Link}
+                            to={CONFIG_FRONTEND.URL_PLUGIN + "?plugin=" + plugin._id}>
+                        <Icon name='zoom'/>
+                        Details
                     </Button>
-                }
-                <Button basic color='blue'
-                        as={Link}
-                        to={CONFIG_FRONTEND.URL_PLUGIN + "?plugin=" + plugin._id}>
-                    <Icon name='zoom'/>
-                    Details
-                </Button>
-            </div>
-        </Card.Content>
-        <Card.Content extra>
+                </div>
+            </Card.Content>
+            <Card.Content extra>
     <span className="right floated">
       <i className="heart outline like icon"/>
         {plugin.likes}
     </span>
-            <i className="comment icon"/>
-            {plugin.comments ? plugin.comments.length : 0}
+                <i className="comment icon"/>
+                {plugin.comments ? plugin.comments.length : 0}
 
-        </Card.Content>
-    </Card>
-);
+            </Card.Content>
+        </Card>
+    );
+}
 
 const Plugins = () => {
     const {state} = useContext(store);
@@ -79,7 +100,7 @@ const Plugins = () => {
                     {
                         state.filteredPlugins.length &&
                         state.filteredPlugins.map((plugin) => {
-                            if(plugin.isVerified)
+                            if (plugin.isVerified)
                                 return <Grid.Column width={4}>
                                     {PluginCard(plugin, plugin.pluginImage.substring(8))}
                                 </Grid.Column>
