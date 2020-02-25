@@ -35,7 +35,8 @@ const initialState = {
     gender: 'male',    // oui
     cart: []
   },
-  plugins :[]
+  plugins :[],
+  filteredPlugins: []
 };
 
 
@@ -90,6 +91,12 @@ const StateProvider = ( { children } ) => {
           [CONFIG_COOKIE.USER_INFOS_KEY]: action.payload
         };
 
+      case CONFIG_DISPATCH_ACTIONS.SET_FILTERED_PLUGINS:
+        return {
+          ...state,
+          filteredPlugins: action.payload
+        };
+
       default:
         console.error(new Error("Unknown dispatch action called ('" + action.type + "')"));
         return state;
@@ -112,7 +119,7 @@ const StateProvider = ( { children } ) => {
           dispatch({
             type: CONFIG_DISPATCH_ACTIONS.SET_PLUGINS,
             plugins: _plugins
-          })
+          });
         })
         .catch(reject)
         .then(() => {
@@ -148,11 +155,9 @@ const StateProvider = ( { children } ) => {
         dispatch({
           type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING
         });
-        console.log("INITIALUU STATEOVU SMASH", state)
       });
 
-    console.log("bonjour from StateProvider", state);
-  }, []);
+  }, []); // ne s'execute qu'une seule fois
 
   return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };

@@ -98,8 +98,8 @@ const Plugins = () => {
                 <Grid.Row>
 
                     {
-                        state.plugins.length &&
-                        state.plugins.map((plugin) => {
+                        state.filteredPlugins.length &&
+                        state.filteredPlugins.map((plugin) => {
                             if (plugin.isVerified)
                                 return <Grid.Column width={4}>
                                     {PluginCard(plugin, plugin.pluginImage.substring(8))}
