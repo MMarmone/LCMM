@@ -36,7 +36,10 @@ const initialState = {
     cart: []
   },
   plugins :[],
-  filteredPlugins: []
+  filteredPlugins: [],
+  verifiedPlugins: [],
+  unverifiedPlugins: [],
+  pluginsById: {}
 };
 
 
@@ -82,7 +85,11 @@ const StateProvider = ( { children } ) => {
           ...state,
           plugins : action.plugins,
           verifiedPlugins: action.plugins.filter(plugin => plugin.isVerified),
-          unverifiedPlugins: action.plugins.filter(plugin => !plugin.isVerified)
+          unverifiedPlugins: action.plugins.filter(plugin => !plugin.isVerified),
+          pluginsById: action.plugins.reduce((obj, item) => {
+            obj[item._id] = item;
+            return obj;
+          }, {})
         };
 
       case CONFIG_DISPATCH_ACTIONS.SET_USER_INFO:
@@ -115,47 +122,47 @@ const StateProvider = ( { children } ) => {
 
       // GET PLUGINS
       tryGetPluginsList()
-        .then((_plugins) => {
-          dispatch({
-            type: CONFIG_DISPATCH_ACTIONS.SET_PLUGINS,
-            plugins: _plugins
-          });
-        })
-        .catch(reject)
-        .then(() => {
-          // Demander les informations du compte connecté
-          const authCookie = getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY);
-          if (authCookie) {
+          .then((_plugins) => {
             dispatch({
-              type: CONFIG_DISPATCH_ACTIONS.LOGIN,
-              payload: authCookie
+              type: CONFIG_DISPATCH_ACTIONS.SET_PLUGINS,
+              plugins: _plugins
             });
+          })
+          .catch(reject)
+          .then(() => {
+            // Demander les informations du compte connecté
+            const authCookie = getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY);
+            if (authCookie) {
+              dispatch({
+                type: CONFIG_DISPATCH_ACTIONS.LOGIN,
+                payload: authCookie
+              });
 
-            refreshCookieExpirationDate({key: CONFIG_COOKIE.USER_AUTH_TOKEN_KEY});
+              refreshCookieExpirationDate({key: CONFIG_COOKIE.USER_AUTH_TOKEN_KEY});
 
-            // si l'utilisateur est loggé, on sauvegarde ses userInfos
-            tryGetUserInfo({ token: getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY) })
-              .then((_userInfos) => {
-                dispatch({
-                  type: CONFIG_DISPATCH_ACTIONS.SET_USER_INFO,
-                  payload: _userInfos
-                });
-              })
-              .catch(reject);
-          }
-        })
-        .catch(reject)
-        .finally(() => { resolve("Bootstrap done.") } )
+              // si l'utilisateur est loggé, on sauvegarde ses userInfos
+              tryGetUserInfo({ token: getCookieValueByKey(CONFIG_COOKIE.USER_AUTH_TOKEN_KEY) })
+                  .then((_userInfos) => {
+                    dispatch({
+                      type: CONFIG_DISPATCH_ACTIONS.SET_USER_INFO,
+                      payload: _userInfos
+                    });
+                  })
+                  .catch(reject);
+            }
+          })
+          .catch(reject)
+          .finally(() => { resolve("Bootstrap done.") } )
     })
-      .catch((err) => {
-        console.error("Error during App bootstrap", err); // on l'ignore
-      })
-      .finally(() => {
-        // Masquer le Loading
-        dispatch({
-          type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING
+        .catch((err) => {
+          console.error("Error during App bootstrap", err); // on l'ignore
+        })
+        .finally(() => {
+          // Masquer le Loading
+          dispatch({
+            type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING
+          });
         });
-      });
 
   }, []); // ne s'execute qu'une seule fois
 
