@@ -13,6 +13,7 @@ import SubmitPluginLayout from "./pages/SubmitPluginLayout";
 import UserProfileLayout from "./pages/UserProfileLayout";
 import PluginLayout from "./pages/PluginLayout";
 import PlayPluginLayout from "./pages/PlayPluginLayout";
+import MyCartLayout from "./pages/MyCartLayout";
 
 function App() {
   // todo darkmode configurable
@@ -59,6 +60,10 @@ function App() {
 
           <Route path={config.URL_PLAY_PLUGIN}>
             <PlayPluginLayout />
+          </Route>
+
+          <Route path={config.URL_CART}>
+            <MyCartLayout />
           </Route>
 
           <Route path={config.URL_USER_PROFILE}>

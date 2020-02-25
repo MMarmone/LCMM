@@ -4,7 +4,6 @@ import {store} from "../StateProvider/StateProvider";
 import {CONFIG_FRONTEND, HOST} from "../../config";
 import MyPlaceholderImage from "../../assets/img/placeholder.png";
 import {Link} from "react-router-dom";
-import ResponsiveContainer from "../Shared/ResponsiveContainer/ResponsiveContainer";
 
 const comment = (plugin)=>(
     <div class="ui comments">
@@ -75,12 +74,12 @@ const card = (plugin, nbComments, image) => (
                     Jouer le plugin
                 </Button>
             </div>
-       
+
             </Card.Content>
         </Card>
          {comment(plugin)}
         </div>
-       
+
 );
 
 
