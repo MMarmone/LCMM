@@ -10,6 +10,9 @@ export const PluginCard = (plugin, image, type="shop") => {
     const {state, dispatch} = useContext(store);
     const history = useHistory();
     const addToCart = (_id) => {
+        if (!state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]){
+            history.push(CONFIG_FRONTEND.URL_REGISTER)
+        }else{
         APIHandler.tryAddToCart({
             token: state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
             pluginId: _id
@@ -21,7 +24,7 @@ export const PluginCard = (plugin, image, type="shop") => {
                 return <Message error>Something went wrong</Message>
             })
             .finally(() => dispatch({type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING}));
-    }
+    }}
     return (
         <Card>
             <Image src={HOST + '/' + image} height={200} className='no-radius' centered
