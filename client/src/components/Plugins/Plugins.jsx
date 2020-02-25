@@ -11,20 +11,21 @@ export const PluginCard = (plugin, image, type="shop") => {
     const history = useHistory();
     const addToCart = (_id) => {
         if (!state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]){
-            history.push(CONFIG_FRONTEND.URL_REGISTER)
-        }else{
-        APIHandler.tryAddToCart({
-            token: state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
-            pluginId: _id
-        })
-            .then(response => {
-                history.push(CONFIG_FRONTEND.URL_CART);
+            history.push(CONFIG_FRONTEND.URL_LOGIN)
+        } else {
+            APIHandler.tryAddToCart({
+                token: state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
+                pluginId: _id
             })
-            .catch(error => {
-                return <Message error>Something went wrong</Message>
-            })
-            .finally(() => dispatch({type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING}));
-    }}
+                .then(response => {
+                    history.push(CONFIG_FRONTEND.URL_CART);
+                })
+                .catch(error => {
+                    return <Message error>Something went wrong</Message>
+                })
+                .finally(() => dispatch({type: CONFIG_DISPATCH_ACTIONS.HIDE_LOADING}));
+        }
+    }
     return (
         <Card>
             <Image src={HOST + '/' + image} height={200} className='no-radius' centered
@@ -55,7 +56,6 @@ export const PluginCard = (plugin, image, type="shop") => {
                     {
                         type === "shop" &&
                         <Button basic color='orange'
-                                attached='bottom'
                                 content='Click'
                                 onClick={() => addToCart(plugin._id)}>
                             <Icon name='cart plus'/>
