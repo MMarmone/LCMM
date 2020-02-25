@@ -180,7 +180,7 @@ var UserController = {
         const pluginId = req.body.pluginId;
         const token = req.header('authorization').split(' ')[1];
         const data = jwt.verify(token, process.env.JWT_KEY);
-        const user = await User.findByIdAndUpdate(
+       /* const user = await User.findByIdAndUpdate(
             data._id,
             {$addToSet :{"pluginLiked" : pluginId}},
             {  safe: true, upsert: true},
@@ -191,28 +191,23 @@ var UserController = {
                 }
 
             }
-        );
-       /* const user =User.pluginLiked(function(value, index, arr){
+        );*/
+        /*const user =User.pluginLiked(function(value, index, arr){
           return value === pluginId
         })
         user.save()*/
-        /*await User.update( 
+        const user = await User.update( 
           {_id : data._id},
-          { $pull: 
-              { pluginLiked : { $in: [pluginId, ""]} }},
-          { safe: true, upsert: true},
-            function(err, model) {
-                if(err){
-                   return res.send(err);
-                }
-            }
-          )*/
+          { $pull:{ pluginLiked: { $in: [ pluginId ] }}},
+          
+          )
 
         await Plugin.findByIdAndUpdate(
             pluginId,
             {$inc:{likes:-1}})
         res.send(user);
     }catch (error){
+      console.log(error)
         res.status(500).send(error)
     }
   },
