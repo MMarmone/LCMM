@@ -2,6 +2,7 @@ import {Button, Card, Icon, Image, Label,Form, Message,Segment} from "semantic-u
 import React, {useContext, useEffect, useState} from "react";
 import {store} from "../StateProvider/StateProvider";
 import {CONFIG_COOKIE, CONFIG_FRONTEND, HOST,CONFIG_DISPATCH_ACTIONS} from "../../config";
+import {CONFIG_COOKIE, CONFIG_FRONTEND, HOST} from "../../config";
 import MyPlaceholderImage from "../../assets/img/placeholder.png";
 import {Link} from "react-router-dom";
 import * as APIHandler from '../../api/apiHandler'

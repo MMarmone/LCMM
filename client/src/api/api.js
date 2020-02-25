@@ -197,6 +197,7 @@ export function unverifyPlugin({token, pluginId}) {
     return somethingFyPlugin({token, pluginId, isVerify: false});
 }
 
+
 export function addToCart({ token,pluginId }) {
     return fetch(config.URL_ADD_TO_CART, {
         method: 'POST',

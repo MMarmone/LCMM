@@ -9,9 +9,8 @@ export default function PlayPlugin() {
     if (!plugin)
         return <Message error>Something went wrong</Message>
     return (
-        <div>
+        
              <object data={HOST + '/' + plugin.pluginZip.substring(8)}width="100%"height="1000" type="text/html">
-    </object>
-    </div>
-    )
+    </object>)
+  
 }
