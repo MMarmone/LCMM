@@ -12,7 +12,6 @@ import {ERRORS} from "../config";
 const handleFetch = (resolve, reject) => {
     return {
         UwU_Then: async (response) => {
-            console.log(response);
             if (response.ok) {
                 if (/(application|text)\/json/.test(response.headers.get('content-type')))
                     resolve(response.json());
