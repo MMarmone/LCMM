@@ -12,7 +12,6 @@ import {ERRORS} from "../config";
 const handleFetch = (resolve, reject) => {
     return {
         UwU_Then: async (response) => {
-            console.log(response);
             if (response.ok) {
                 if (/(application|text)\/json/.test(response.headers.get('content-type')))
                     resolve(response.json());
@@ -27,7 +26,19 @@ const handleFetch = (resolve, reject) => {
                 );
                 throw error;
             }
-
+        },
+        Awios_Then: async (response) => {
+            if (response.status==200) {
+                resolve(response);
+            }
+            else {
+                const serverError = await response;
+                const error = new Error(serverError.error ?
+                    (serverError.error)
+                    : ("Request did not return OK (got: " + response.status + " - " + response.statusText + ")")
+                );
+                throw error;
+            }
         },
         UwU_Catch: (errorResponse) => {
             return reject(errorResponse);
@@ -61,7 +72,7 @@ export const tryRegister = ({name, email, password, gender}) => {
 export const trySubmitPlugin = ({token, name, version,pluginZip, description, isOpenSource, price, category, tags, urls, pluginImage}) => {
     return new Promise((resolve, reject) => {
         API.submitPlugin({token, name, version,pluginZip, description, isOpenSource, price, category, tags, urls, pluginImage})
-            .then(handleFetch(resolve, reject).UwU_Then)
+            .then(handleFetch(resolve, reject).Awios_Then)
             .catch(handleFetch(resolve, reject).UwU_Catch);
     });
 };
