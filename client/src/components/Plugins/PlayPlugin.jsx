@@ -8,7 +8,8 @@ export default function PlayPlugin() {
     //todo insérer index.html du plugin
     return (
         <div>
-            <iframe src={HOST + '/' + plugin.pluginZip.substring(8)}></iframe>
-        </div>
+             <object data={HOST + '/' + plugin.pluginZip.substring(8)}width="100%"height="1000" type="text/html">
+    </object>
+    </div>
     )
 }
