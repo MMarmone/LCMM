@@ -36,7 +36,7 @@ export const PluginCard = (plugin, image, type="shop") => {
                 pluginId: _id
             })
                 .then(response => {
-                    document.location.reload(true);
+                    history.push(CONFIG_FRONTEND.URL_USER_PROFILE)
                 })
                 .catch(error => {
                     return <Message error>Something went wrong</Message>
@@ -91,10 +91,10 @@ export const PluginCard = (plugin, image, type="shop") => {
                     }
                     {
                         type === "cart" &&
-                        <Button basic color='orange'
+                        <Button basic color='red'
                                 content='Click'
                                 onClick={() => removeFromCart(plugin._id)}>
-                            <Icon name='cart less'/>
+                            <Icon name='delete'/>
                             Remove
                         </Button>
                     }

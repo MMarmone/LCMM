@@ -35,6 +35,7 @@ const CONFIG_FRONTEND = {
     URL_PLUGIN: '/plugin',
     URL_PLAY_PLUGIN:'/playPlugin',
     URL_CART: '/cart',
+    URL_PING: '/ping',
     URL_404: '*'
 };
 
