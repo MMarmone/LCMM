@@ -4,17 +4,24 @@ var express = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
     request = require('request');
-
+let morgan = require('morgan');
 //Import custom modules
 var userRoutes = require('./routes/userRoutes');
 var pluginRoutes = require('./routes/pluginRoutes');
 var config = require('./configs/config');
 
 //Connect to Mongo DB
-const conn = mongoose.connect(process.env.MONGODB_URL,{ 
-    useNewUrlParser: true,
-    useCreateIndex: true,
-});
+if(process.env.NODE_ENV !== 'test') {
+    const conn = mongoose.connect(process.env.MONGODB_URL,{ 
+        useNewUrlParser: true,
+        useCreateIndex: true,
+    });
+}else{
+    const conn = mongoose.connect("mongodb+srv://LCMM:azerty@clusterlcmm-mgzj7.mongodb.net/TEST?retryWrites=true&w=majority",{ 
+        useNewUrlParser: true,
+        useCreateIndex: true,
+    });
+}
 mongoose.set('useFindAndModify', false);
 
 //Create a new Express application and Configure it
@@ -36,5 +43,9 @@ app.use(config.API_PATH, userRoutes());
 app.use(config.API_PATH, pluginRoutes());
 
 //Start the server
-app.listen(config.PORT); 
+
+app.listen(config.PORT);
 console.log('Server started at - '+ config.URL+ ":" +config.PORT)
+
+
+module.exports = app; //FOR TESTING 
