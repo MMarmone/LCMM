@@ -22,6 +22,11 @@ export default function Plugin() {
 
 
     let onSubmitHandler = function(e) {
+        if (!state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]) {
+            alert("You must be connected to leave a message");
+            return false;
+        }
+
         if (!currentComment)
             return false;
 
