@@ -77,6 +77,10 @@ var UserRoutes = function(app)
             auth,
             UserController.addToCart);
 
+    router.post('/users/me/removePluginCart',
+            auth,
+            UserController.removePluginCart);
+
     /*router.get('/users/me/isPluginLiked',
                 auth,
                 UserController.logoutall);*/

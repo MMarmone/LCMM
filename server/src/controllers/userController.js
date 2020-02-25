@@ -180,22 +180,7 @@ var UserController = {
         const pluginId = req.body.pluginId;
         const token = req.header('authorization').split(' ')[1];
         const data = jwt.verify(token, process.env.JWT_KEY);
-       /* const user = await User.findByIdAndUpdate(
-            data._id,
-            {$addToSet :{"pluginLiked" : pluginId}},
-            {  safe: true, upsert: true},
-            function(err, model) {
-                if(err){
-                   console.log(err);
-                   return res.send(err);
-                }
-
-            }
-        );*/
-        /*const user =User.pluginLiked(function(value, index, arr){
-          return value === pluginId
-        })
-        user.save()*/
+       
         const user = await User.update( 
           {_id : data._id},
           { $pull:{ pluginLiked: { $in: [ pluginId ] }}},
@@ -233,6 +218,22 @@ var UserController = {
         } catch (error) {
             res.status(500).send({error: error.message})
         }
+    },
+    removePluginCart : async(req, res) => {
+      try {
+          const pluginId = req.body.pluginId;
+          const token = req.header('authorization').split(' ')[1];
+          const data = jwt.verify(token, process.env.JWT_KEY);
+         
+          const user = await User.update( 
+            {_id : data._id},
+            { $pull:{ cart: { $in: [ pluginId ] }}},
+            )
+  
+          res.send(user);
+      }catch (error){
+          res.status(500).send(error)
+      }
     }
 }
 
