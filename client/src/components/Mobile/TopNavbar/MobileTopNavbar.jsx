@@ -1,4 +1,4 @@
-import {Button, Container, Icon, Input, Menu, Sidebar} from "semantic-ui-react";
+import {Button, Container, Dropdown, Icon, Input, Menu, Sidebar} from "semantic-ui-react";
 import React, {useContext, useState} from "react";
 import {store} from "../../StateProvider/StateProvider";
 import {Link, useRouteMatch} from "react-router-dom";
@@ -21,6 +21,11 @@ const MobileTopNavbar = function (props) {
         vertical
         visible={sidebarOpened}>
         <Menu.Item
+            color='orange'
+            className='orange'
+            style={{
+                color: '#f2711c'
+            }}
           as={Link}
           active={useRouteMatch(CONFIG_FRONTEND.URL_HOME)}
           to={CONFIG_FRONTEND.URL_HOME}>
@@ -44,12 +49,17 @@ const MobileTopNavbar = function (props) {
         dimmed={sidebarOpened}>
         <Container className='no-margin'>
           <Menu
-
             size='large'
             style={{
               borderRadius: 0
             }}>
-            <Menu.Item onClick={() => setSidebarOpened(true)}>
+            <Menu.Item
+                color='orange'
+                className='orange'
+                style={{
+                    color: '#f2711c'
+                }}
+                onClick={() => setSidebarOpened(true)}>
               <Icon name='sidebar' />
             </Menu.Item>
 
@@ -87,6 +97,11 @@ const ConnectedUserMenuItems = (props) => {
   return (
     <React.Fragment>
       <Menu.Item
+          color='orange'
+          className='orange'
+          style={{
+              color: '#f2711c'
+          }}
         active={useRouteMatch(CONFIG_FRONTEND.URL_USER_PROFILE)}
         as={Link}
         to={CONFIG_FRONTEND.URL_USER_PROFILE}>
@@ -95,8 +110,11 @@ const ConnectedUserMenuItems = (props) => {
       </Menu.Item>
 
       <Menu.Item
-        inverted
-        color='orange'
+          color='orange'
+          className='orange'
+          style={{
+              color: '#f2711c'
+          }}
         active={useRouteMatch(CONFIG_FRONTEND.URL_ADD_PLUGIN)}
         as={Link}
         to={CONFIG_FRONTEND.URL_ADD_PLUGIN}>
@@ -105,6 +123,11 @@ const ConnectedUserMenuItems = (props) => {
       </Menu.Item>
 
       <Menu.Item
+          color='orange'
+          className='orange'
+          style={{
+              color: '#f2711c'
+          }}
         active={useRouteMatch(CONFIG_FRONTEND.URL_LOGOUT)}
         as={Link}
         to={CONFIG_FRONTEND.URL_LOGOUT}>
@@ -120,6 +143,11 @@ const DisconnectedUserMenuItems = (props) => {
   return (
     <React.Fragment>
       <Menu.Item
+          color='orange'
+          className='orange'
+          style={{
+              color: '#f2711c'
+          }}
         position='right'
         active={useRouteMatch(CONFIG_FRONTEND.URL_LOGIN)}
         as={Link}
@@ -129,6 +157,11 @@ const DisconnectedUserMenuItems = (props) => {
       </Menu.Item>
 
       <Menu.Item
+          color='orange'
+          className='orange'
+          style={{
+              color: '#f2711c'
+          }}
         active={useRouteMatch(CONFIG_FRONTEND.URL_REGISTER)}
         as={Link}
         inverted
