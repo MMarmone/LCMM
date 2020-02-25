@@ -10,7 +10,9 @@ const CONFIG_BACKEND = {
     URL_USER_PROFILE: `${HOST}/api/users/me`,
     URL_SUBMIT_PLUGIN: `${HOST}/api/users/me/submissionForm`,
     URL_GET_PLUGINS: `${HOST}/api/plugins`,
-    URL_GET_PLUGIN_BY_ID: `${HOST}/api/pluginById`
+    URL_GET_PLUGIN_BY_ID: `${HOST}/api/pluginById`,
+    URL_ADD_TO_CART: `${HOST}/api/users/me/addToCart`,
+    URL_USER_CART: `${HOST}/api/users/me/cart`
 };
 
 /**

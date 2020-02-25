@@ -46,6 +46,9 @@ var userSchema = new Schema({
             required: true
         }
     }],
+    cart: [{
+        type: String
+    }],
     tokens: [{
         token: {
             type: String,

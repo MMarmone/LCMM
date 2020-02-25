@@ -87,3 +87,12 @@ export const tryGetUserInfo = ({ token }) => {
             .catch(handleFetch(resolve, reject).UwU_Catch);
     });
 };
+
+export const tryAddToCart = ({token, pluginId}) => {
+    return new Promise((resolve, reject) => {
+        API.addToCart({token, pluginId})
+            .then(handleFetch(resolve, reject).UwU_Then)
+            .catch(handleFetch(resolve, reject).UwU_Catch);
+    });
+};
+
