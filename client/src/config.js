@@ -42,7 +42,8 @@ const CONFIG_DISPATCH_ACTIONS = {
     DISPLAY_LOADING: 'display-loading',
     HIDE_LOADING: 'hide-loading',
     SET_PLUGINS: 'set-plugins',
-    SET_USER_INFO: 'set-user-infos'
+    SET_USER_INFO: 'set-user-infos',
+    SET_FILTERED_PLUGINS: 'set-search-filtered-plugins'
 };
 
 const REGEX_EXPRESSIONS = {

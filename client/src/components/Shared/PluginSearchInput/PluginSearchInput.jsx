@@ -1,8 +1,9 @@
 import _ from 'lodash';
-import React, {Component} from 'react';
+import React, {Component, useContext, useEffect} from 'react';
 import {Search, Image, Label, Icon, Button} from 'semantic-ui-react';
 import {HOST} from "../../../config";
 import MyPlaceholderImage from "../../../assets/img/placeholder.png";
+import {store} from "../../StateProvider/StateProvider";
 
 const resultRenderer = ({ name, description, pluginImage, tags, price, isOpensource }) =>
   <React.Fragment>
@@ -33,6 +34,19 @@ const resultRenderer = ({ name, description, pluginImage, tags, price, isOpensou
     </div>
 
   </React.Fragment>;
+
+/**
+ * JE SAIS PAS UTILISER LE CONTEXTE (et surtout le dispatch) EN MODE CLASSE COMPONENT
+ */
+const ArnaqueContexte = ({props}) => {
+  const {state, dispatch} = useContext(store);
+
+  useEffect(() => {
+      console.log("Arnaque props", props);
+  }, [props]);
+
+  return <i/>
+};
 
 const initialState = { isLoading: false, results: [], value: '' };
 
@@ -92,6 +106,7 @@ export default class PluginSearchInput extends Component {
               this.submitSearchHandler();
           }}
         />
+        <ArnaqueContexte props={this.state.results} />
         <Button
           icon
           className="orange no-radius"
