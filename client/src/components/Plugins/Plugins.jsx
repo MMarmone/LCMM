@@ -63,7 +63,7 @@ export const PluginCard = (plugin, image, type="shop") => {
                         </span>
                     <span className="right floated">
           <a>
-              {plugin.name}
+              {plugin.user}
               <Icon name='user'/>
           </a>
         </span>

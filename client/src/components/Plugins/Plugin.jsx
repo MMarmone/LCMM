@@ -38,9 +38,10 @@ export default function Plugin() {
     const [comments, setComments] = useState(plugin ? plugin.comments : []);
     const [currentComment, setCurrentComment] = useState("");
     const [likeState, setlikeState] = useState({
-        like : null,
+        like: (state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked && state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked.indexOf(plugin._id) !== -1),
         pluginId : plugin ? plugin._id : null
     });
+    /*
     useEffect(() => {
         APIHandler.tryGetUserInfo({
         token : state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY]
@@ -55,10 +56,13 @@ export default function Plugin() {
             })
         )
       .catch(console.error); // histoire de pas péter l'App sur une vieille erreur
-    },[]);
+    },[]); //*/
 
     useEffect(() => {
         setComments(plugin ? plugin.comments : []);
+        setlikeState({
+            like: (state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked && state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked.filter((pId) => pId === plugin._id))
+        })
     }, [state.pluginsById]);
 
 
@@ -88,10 +92,6 @@ export default function Plugin() {
         return <Message error>Something went wrong</Message>;
 
     const verifyClickHandler = () => {
-        console.log("verifyClickHandler");
-        console.log("state", state);
-        console.log("plugin", plugin);
-
         if (!plugin)
             return;
             console.log(plugin.isVerified)
@@ -101,8 +101,6 @@ export default function Plugin() {
             })
                 .then(console.log)
                 .catch(console.error)
-
-
     };
 
     return (
@@ -158,12 +156,12 @@ export default function Plugin() {
                     }
                     </span>
                     <span
-                        className="right floated"
+                        className={"right floated " + (likeState.like ? "active" : "")}
                         style={{ cursor: "pointer" }}
                         onClick={(e) => {
                             
                             
-                            if(likeState.like === true){
+                            if(likeState.like){
                                 APIHandler.tryUnLikePlugin(
                                     {token : state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
                                         pluginId : plugin._id}
