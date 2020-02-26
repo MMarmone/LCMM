@@ -94,7 +94,7 @@ export default function Plugin() {
 
         if (!plugin)
             return;
-
+            console.log(plugin.isVerified)
             APIHandler[plugin.isVerified ? "tryUnverifyPlugin": "tryVerifyPlugin"]({
                 token: state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
                 pluginId: plugin._id
