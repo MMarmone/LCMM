@@ -1,5 +1,6 @@
 import {CONFIG_BACKEND as config} from "../config";
 import axios from "axios";
+import Plugin from "../components/Plugins/Plugin";
 
 /**
  * Fetch l'API pour se connecter en tant qu'utilisateur
@@ -192,6 +193,7 @@ export function getUserInfo({ token }) {
 }
 
 function somethingFyPlugin({token, pluginId, isVerify}) {
+    console.log(pluginId + "++++++++++++" + isVerify +"*********** "+token)
     return fetch(isVerify ? config.URL_VERIFY_PLUGIN : config.URL_UNVERIFY_PLUGIN, {
         method: 'POST',
         mode: 'cors',
@@ -199,9 +201,9 @@ function somethingFyPlugin({token, pluginId, isVerify}) {
             'Content-Type': 'application/json',
             'authorization': 'Bearer ' + token
         },
-        body: {
+        body: JSON.stringify({
             pluginId
-        }
+        })
     });
 }
 
