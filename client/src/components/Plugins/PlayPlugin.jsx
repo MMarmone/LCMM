@@ -10,6 +10,7 @@ export default function PlayPlugin() {
         return <Message error>Something went wrong</Message>
     return (
         <div>
+             <iframe style={{width:'100%'}} src={HOST + '/'+ plugin.pluginZip.substring(8)}></iframe>
            <object data={HOST + '/' + plugin.pluginZip.substring(8)}width="100%"height="1000" type="text/html">
     </object>
         </div>
