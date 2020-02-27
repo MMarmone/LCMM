@@ -38,7 +38,8 @@ export default function Plugin() {
     const [comments, setComments] = useState(plugin ? plugin.comments : []);
     const [currentComment, setCurrentComment] = useState("");
     const [likeState, setlikeState] = useState({
-        like: (state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked && state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked.indexOf(plugin._id) !== -1),
+        
+        like: (state[CONFIG_COOKIE.USER_INFOS_KEY] && state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked && state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked.indexOf(plugin._id) !== -1),
         pluginId : plugin ? plugin._id : null
     });
     /*
@@ -160,8 +161,8 @@ export default function Plugin() {
                         style={{ cursor: "pointer" }}
                         onClick={(e) => {
                             
-                            
-                            if(likeState.like){
+                            console.log(likeState.like)
+                            if(likeState.like === true || likeState.like){
                                 APIHandler.tryUnLikePlugin(
                                     {token : state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
                                         pluginId : plugin._id}
@@ -171,6 +172,7 @@ export default function Plugin() {
                                 setlikeState({
                                     like : false
                                 })
+                                plugin.likes--
                             }else{
                                 setlikeState({
                                     like : true
@@ -179,7 +181,7 @@ export default function Plugin() {
                                     {token : state[CONFIG_COOKIE.USER_AUTH_TOKEN_KEY],
                                     pluginId : plugin._id}
                                 )
-
+                                plugin.likes++
                                 e.target.classList.toggle("active");
                             }
                             console.log("// todo submit Like/Unlike");
@@ -239,9 +241,6 @@ export default function Plugin() {
                                 </div>
                                 <div className="text">
                                     {comment.value}
-                                </div>
-                                <div className="actions">
-                                    <a style={{color: 'blue'}} className="reply">Reply</a>
                                 </div>
                             </div>
                         </div>))}
