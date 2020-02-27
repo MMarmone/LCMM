@@ -62,7 +62,7 @@ export default function Plugin() {
     useEffect(() => {
         setComments(plugin ? plugin.comments : []);
         setlikeState({
-            like: (state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked && state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked.filter((pId) => pId === plugin._id))
+            like: (state[CONFIG_COOKIE.USER_INFOS_KEY] && state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked && state[CONFIG_COOKIE.USER_INFOS_KEY].pluginLiked.filter((pId) => pId === plugin._id))
         })
     }, [state.pluginsById]);
 
