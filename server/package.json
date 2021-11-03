@@ -29,6 +29,6 @@
     "multer-gridfs-storage": "^4.0.2",
     "request": "^2.88.0",
     "unzipper": "^0.10.9",
-    "validator": "^12.2.0"
+    "validator": "^13.7.0"
   }
 }
